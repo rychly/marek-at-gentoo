@@ -1,0 +1,17 @@
+[Unit]
+Description=Oracle Database 11g Express Edition Instance
+After=syslog.target oracle-xe-bin-11-listener.service
+Requires=oracle-xe-bin-11-listener.service
+
+[Service]
+Type=forking
+User=oracle
+Group=dba
+EnvironmentFile=/etc/env.d/50oracle-xe-bin-11
+ExecStart=/opt/oracle-xe-bin-11/xe/bin/sqlplus -s /nolog @/opt/oracle-xe-bin-11/xe/config/scripts/startdb.sql
+ExecStop=/opt/oracle-xe-bin-11/xe/bin/sqlplus -s /nolog @/opt/oracle-xe-bin-11/xe/config/scripts/stopdb.sql
+GuessMainPID=no
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+diff -urN dwg2dxf/Makefile.old dwg2dxf/Makefile
+--- dwg2dxf/Makefile.old	2008-08-06 23:44:28.000000000 +0200
++++ dwg2dxf/Makefile	2008-08-06 23:45:56.000000000 +0200
+@@ -101,6 +101,11 @@
+ SOURCES = $(dwg2dxf_SOURCES)
+ OBJECTS = $(dwg2dxf_OBJECTS)
+ 
++CPPFLAGS = $(old_CPPFLAGS) -m32 -Wno-deprecated
++LDFLAGS = $(old_LDFLAGS) -m32
++dwg2dxf_LDFLAGS = $(old_dwg2dxf_LDFLAGS) -m32
++CXXFLAGS = $(old_CXXFLAGS) -g -O2 -m32 -Wno-deprecated
++
+ all: all-redirect
+ .SUFFIXES:
+ .SUFFIXES: .S .c .cpp .o .s

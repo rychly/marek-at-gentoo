@@ -1,0 +1,11 @@
+#!/bin/sh
+
+FORBIDDEN_REGEXP="mplayerplug-in"
+PLUGIN_FILES=$(ls /usr/lib32/nsbrowser/plugins/*.so | grep -v "${FORBIDDEN_REGEXP}")
+
+# uninstall all plugins
+nspluginwrapper --verbose --auto --remove && echo '--- OK ---'
+# install all available 32-bit plugins
+nspluginwrapper --verbose --install ${PLUGIN_FILES} && echo '--- OK ---'
+# list installed plugins
+nspluginwrapper --list && echo '--- OK ---'

@@ -1,0 +1,3 @@
+# Nice Priority: -20 (most favorable scheduling) to 19 (least favorable)
+NICENESS=5
+DROPBOX_USERS="root"

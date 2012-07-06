@@ -1,0 +1,16 @@
+diff -urN dwg2dxf/main.cpp.old dwg2dxf/main.cpp
+--- dwg2dxf/main.cpp.old	2008-08-07 00:52:49.000000000 +0200
++++ dwg2dxf/main.cpp	2008-08-07 00:56:21.000000000 +0200
+@@ -158,11 +158,7 @@
+  }
+ 
+ //	try to find adinit.dat, if we can't display a message and exit
+-  if (!constructinitfilepath(argv[0],initfilepath))
+- {
+-    printf("invalid argv[0] -- can't open init file\n");
+-    exit(1);
+-  }
++  strcpy(initfilepath,"/usr/share/dwg2dxf/adinit.dat");
+ 
+ //	define error handlers, try to initialize TookKit.  If we
+ //	can't display a message and exit

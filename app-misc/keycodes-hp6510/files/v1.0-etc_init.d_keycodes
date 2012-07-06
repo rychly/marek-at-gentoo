@@ -1,0 +1,14 @@
+#!/sbin/runscript
+
+depend() {
+	need localmount
+}
+
+start() {
+	# Load scan code to key code mappings
+	if [ -n "$KEYCODES" -a -x /usr/bin/setkeycodes ]; then
+		ebegin "Loading scan code to key code mappings"
+		/usr/bin/setkeycodes $KEYCODES
+		eend $? "Error loading key code mappings"
+	fi
+}

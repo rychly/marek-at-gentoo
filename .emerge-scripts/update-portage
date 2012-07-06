@@ -1,0 +1,7 @@
+#!/bin/sh
+# updatuje lokalni overlay
+UIMP=/var/portage/imported/update.sh
+[ -x "${UIMP}" ] && "${UIMP}"
+# updatuje portage overlays spravovane Laymanem a cely portage strom vc. eix-cache
+# viz konfigurace v /etc/eix-sync.conf
+exec eix-sync

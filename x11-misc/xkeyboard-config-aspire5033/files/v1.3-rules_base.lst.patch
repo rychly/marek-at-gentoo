@@ -1,0 +1,11 @@
+diff -urN usr/share/X11/xkb/rules/base.lst.old usr/share/X11/xkb/rules/base.lst
+--- usr/share/X11/xkb/rules/base.lst.old	2008-03-24 21:34:02.000000000 +0100
++++ usr/share/X11/xkb/rules/base.lst	2008-03-24 21:35:24.000000000 +0100
+@@ -67,6 +67,7 @@
+   hp500fa         Hewlett-Packard Omnibook 500 FA
+   hp5xx           Hewlett-Packard Omnibook 5xx
+   hp6000          Hewlett-Packard Omnibook 6000/6100
++  aspire5033      Acer Aspire 5033 Series Laptop
+   honeywell_euroboard Honeywell Euroboard
+   rapidaccess     IBM Rapid Access
+   rapidaccess2    IBM Rapid Access II

@@ -1,0 +1,25 @@
+#!/sbin/runscript
+
+GLASSFISH_HOME="${GLASSFISH_HOME:-%%%DEST%%%}"
+GLASSFISH_DOMAIN="${GLASSFISH_DOMAIN:-domain1}"
+if [ "${SVCNAME#*.}" != "${SVCNAME}" ]; then
+	GLASSFISH_DOMAIN="${SVCNAME#*.}"
+fi
+
+depend() {
+	use net
+}
+
+start() {
+	ebegin "Starting GlassFish instance ${GLASSFISH_DOMAIN}"
+	${GLASSFISH_HOME}/bin/asadmin start-domain ${GLASSFISH_OPTS} ${GLASSFISH_DOMAIN}
+	eend $?
+}
+
+stop() {
+	ebegin "Shutting down GlassFish instance ${GLASSFISH_DOMAIN}"
+	${GLASSFISH_HOME}/bin/asadmin stop-domain ${GLASSFISH_OPTS} ${GLASSFISH_DOMAIN}
+	eend $?
+}
+
+# vim:ts=4

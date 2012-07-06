@@ -1,0 +1,12 @@
+diff -urN winefish-999/Makefile.in.old winefish-999/Makefile.in
+--- winefish-999/Makefile.in.old	2011-01-06 12:53:24.000000000 +0100
++++ winefish-999/Makefile.in	2011-01-06 12:53:52.000000000 +0100
+@@ -89,7 +89,7 @@
+ 	$(INSTALL_DIR) $(DESTDIR)$(pkgdatadir)
+ 	$(INSTALL_DATA) images/winefish_splash.png $(DESTDIR)$(pkgdatadir)
+ 	$(INSTALL_DIR) $(DESTDIR)$(docdir)
+-	$(INSTALL_DATA) doc/winefish.html $(DESTDIR)$(docdir)
++#	$(INSTALL_DATA) doc/winefish.html $(DESTDIR)$(docdir)
+ #	$(INSTALL_DATA) doc/winefish.txt $(DESTDIR)$(docdir)
+ 	@cd icons/ && $(MAKE) install
+ 	@cd src/ && $(MAKE) install

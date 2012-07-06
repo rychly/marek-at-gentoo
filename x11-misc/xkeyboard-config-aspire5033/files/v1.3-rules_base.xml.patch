@@ -1,0 +1,43 @@
+diff -urN usr/share/X11/xkb/rules/base.xml.old usr/share/X11/xkb/rules/base.xml
+--- usr/share/X11/xkb/rules/base.xml.old	2008-03-24 21:36:29.000000000 +0100
++++ usr/share/X11/xkb/rules/base.xml	2008-03-24 21:39:40.000000000 +0100
+@@ -2050,6 +2050,39 @@
+     </model>
+     <model>
+       <configItem>
++        <name>aspire5033</name>
++        <description>Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="af">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="az">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="bg">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="cs">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="da">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="en_GB">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="es">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="fi">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="fr">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="hu">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="it">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="ka">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="ko">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="nl">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="ru">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="sk">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="sl">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="sq">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="sr">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="sr@Latn">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="sv">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="tr">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="uk">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="vi">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="zh_CN">Acer Aspire 5030 Series Laptop</description>
++        <description xml:lang="zh_TW">Acer Aspire 5030 Series Laptop</description>
++        <vendor>Acer</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
+         <name>honeywell_euroboard</name>
+         <description>Honeywell Euroboard</description>
+         <description xml:lang="af">Honeywell Euroboard</description>

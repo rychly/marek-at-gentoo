@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deviceinfo version="0.2">
+	<device>
+		<match key="@input.originating_device:info.linux.driver" string="atkbd">
+		<match key="/org/freedesktop/Hal/devices/computer:system.hardware.vendor" prefix="Hewlett-Packard">
+		<match key="/org/freedesktop/Hal/devices/computer:system.formfactor" string="laptop">
+		<match key="/org/freedesktop/Hal/devices/computer:system.hardware.product" contains_outof="6510b;6710b">
+			<!-- "merge" inits, "append" expands; debug via "lshal -m" and "xev" -->
+			<merge key="input.keymap.data" type="strlist">e001:coffee</merge>
+			<append key="input.keymap.data" type="strlist">e008:prog2</append>
+			<append key="input.keymap.data" type="strlist">e009:battery</append>
+			<append key="input.keymap.data" type="strlist">e00a:config</append>
+			<append key="input.keymap.data" type="strlist">e012:brightnessdown</append>
+			<append key="input.keymap.data" type="strlist">e017:brightnessup</append>
+			<append key="input.keymap.data" type="strlist">e033:media</append>
+			<append key="input.keymap.data" type="strlist">e057:wlan</append>
+			<append key="input.keymap.data" type="strlist">e059:prog1</append>
+			<append key="input.keymap.data" type="strlist">e06e:switchvideomode</append>
+		</match></match></match></match>
+	</device>
+</deviceinfo>

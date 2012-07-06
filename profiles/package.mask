@@ -1,0 +1,6 @@
+
+# Marek Rychly <marek.rychly@gmail.com> (27 Feb 2010)
+# "General I/O error" while openning *.doc files. I don't know how to
+# fix it, so migrate to (vanilla) openoffice-bin from Portage.
+=app-office/go-oo-bin-3.2.0_p9483
+

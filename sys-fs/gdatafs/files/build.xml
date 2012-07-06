@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="gdatafuse">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="JUnit4.libraryclasspath">
+        <pathelement location="lib/junit.jar"/>
+    </path>
+    <path id="gdatafuse.classpath">
+        <pathelement location="bin"/>
+        <path refid="JUnit4.libraryclasspath"/>
+        <pathelement location="lib/activation.jar"/>
+        <pathelement location="lib/commons-logging-1.1.1.jar"/>
+        <pathelement location="lib/fuse-j-2.4-prelease.jar"/>
+        <pathelement location="lib/gdata-analytics-2.1.jar"/>
+        <pathelement location="lib/gdata-analytics-meta-2.1.jar"/>
+        <pathelement location="lib/gdata-appsforyourdomain-1.0.jar"/>
+        <pathelement location="lib/gdata-appsforyourdomain-meta-1.0.jar"/>
+        <pathelement location="lib/gdata-base-1.0.jar"/>
+        <pathelement location="lib/gdata-blogger-2.0.jar"/>
+        <pathelement location="lib/gdata-blogger-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-books-1.0.jar"/>
+        <pathelement location="lib/gdata-books-meta-1.0.jar"/>
+        <pathelement location="lib/gdata-calendar-2.0.jar"/>
+        <pathelement location="lib/gdata-calendar-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-client-1.0.jar"/>
+        <pathelement location="lib/gdata-client-meta-1.0.jar"/>
+        <pathelement location="lib/gdata-codesearch-2.0.jar"/>
+        <pathelement location="lib/gdata-codesearch-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-contacts-3.0.jar"/>
+        <pathelement location="lib/gdata-contacts-meta-3.0.jar"/>
+        <pathelement location="lib/gdata-core-1.0.jar"/>
+        <pathelement location="lib/gdata-docs-3.0.jar"/>
+        <pathelement location="lib/gdata-docs-meta-3.0.jar"/>
+        <pathelement location="lib/gdata-finance-2.0.jar"/>
+        <pathelement location="lib/gdata-finance-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-gtt-2.0.jar"/>
+        <pathelement location="lib/gdata-gtt-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-health-2.0.jar"/>
+        <pathelement location="lib/gdata-health-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-maps-2.0.jar"/>
+        <pathelement location="lib/gdata-maps-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-media-1.0.jar"/>
+        <pathelement location="lib/gdata-photos-2.0.jar"/>
+        <pathelement location="lib/gdata-photos-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-projecthosting-2.1.jar"/>
+        <pathelement location="lib/gdata-projecthosting-meta-2.1.jar"/>
+        <pathelement location="lib/gdata-sidewiki-2.0.jar"/>
+        <pathelement location="lib/gdata-sidewiki-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-sites-2.0.jar"/>
+        <pathelement location="lib/gdata-sites-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-spreadsheet-3.0.jar"/>
+        <pathelement location="lib/gdata-spreadsheet-meta-3.0.jar"/>
+        <pathelement location="lib/gdata-webmastertools-2.0.jar"/>
+        <pathelement location="lib/gdata-webmastertools-meta-2.0.jar"/>
+        <pathelement location="lib/gdata-youtube-2.0.jar"/>
+        <pathelement location="lib/gdata-youtube-meta-2.0.jar"/>
+        <pathelement location="lib/jsr305.jar"/>
+        <pathelement location="lib/mail.jar"/>
+        <pathelement location="lib/commons-codec-1.4.jar"/>
+        <pathelement location="lib/httpclient-4.1.jar"/>
+        <pathelement location="lib/httpclient-cache-4.1.jar"/>
+        <pathelement location="lib/httpcore-4.1.jar"/>
+        <pathelement location="lib/httpmime-4.1.jar"/>
+        <pathelement location="lib/google-collect-1.0-rc1.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src" excludes="**/*.launch, **/*.java"/>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src_test" excludes="**/*.launch, **/*.java"/>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="init" name="build">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="gdatafuse.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="src_test"/>
+            <classpath refid="gdatafuse.classpath"/>
+        </javac>
+        <jar jarfile="gdatafs.jar" basedir="bin"/>
+    </target>
+</project>

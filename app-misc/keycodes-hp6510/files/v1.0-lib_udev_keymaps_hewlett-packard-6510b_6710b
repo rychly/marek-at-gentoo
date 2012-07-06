@@ -1,0 +1,11 @@
+# key	xorg-key		kernel	description					also-in-udev-package-as
+0x81	screenlock		# e001: Fn+Esc						hewlett-packard
+0x88	prog2			# e008: M button (Presentation)		hewlett-packard-compaq_elitebook
+0x89	battery			# e009: Fn+F8						hewlett-packard
+0x8A	config			# e00a: Fn+F6						hewlett-packard
+0x92	brightnessdown	# e012: Fn+F9						hewlett-packard
+0x97	brightnessup	# e017: Fn+F10						hewlett-packard
+0xB3	media			# e033: Fn+F11						hewlett-packard
+0xD7	wlan			# e057: ((^)) button (WiFi)			hewlett-packard
+0xD9	prog1			# e059: (i) button (Help)			hewlett-packard-compaq_elitebook
+0xEE	switchvideomode	# e06e: Fn+F4						hewlett-packard

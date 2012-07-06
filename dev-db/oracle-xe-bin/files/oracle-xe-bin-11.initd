@@ -1,0 +1,51 @@
+#!/sbin/runscript
+
+export LC_ALL=C
+SU=/bin/su
+PS=/bin/ps
+LOGR=log/initd.log
+CNFD=/etc/conf.d/oracle-xe-bin-11
+ENVD=/etc/env.d/50oracle-xe-bin-11
+
+depend() {
+	need net
+}
+
+checkconfig() {
+	if [ "${CONFIGURE_RUN}" != "true" -o ! -f "${ENFD}" ] ; then
+		eerror "Missing file ${ENFD} with environment variables. Reemerge the ebuild."
+		return 1
+	fi
+	if [ "${CONFIGURE_RUN}" != "true" -o ! -f "${CNFD}" ] ; then
+		eerror "You need to configure Oracle Database 11g Express Edition before you can start it. Run:"
+		eerror "  emerge --config =oracle-xe-bin-11.2.0.1.0"
+		return 2
+	fi
+	return 0
+}
+
+start() {
+	checkconfig || return 1
+	source "${ENFD}"
+	ebegin "Starting Oracle Net Listener"
+	[ -z "$(${PS} U ${ORACLE_OWNER} | grep tns)" -a -f "${ORACLE_HOME}/bin/lsnrctl" ] && \
+		${SU} -s /bin/bash -c "${ORACLE_HOME}/bin/lsnrctl start" ${ORACLE_OWNER} >"${ORACLE_HOME}/${LOGR}" 2>&1
+	eend $?
+	ebegin "Starting Oracle Database 11g Express Edition Instance"
+	${SU} -s /bin/bash -c "${ORACLE_HOME}/bin/sqlplus -s /nolog @${ORACLE_HOME}/config/scripts/startdb.sql" ${ORACLE_OWNER} >>"${ORACLE_HOME}/${LOGR}" 2>&1
+	eend $?
+}
+
+stop() {
+	source "${ENFD}"
+	ebegin "Shutting down Oracle Database 11g Express Edition Instance"
+	${SU} -s /bin/bash -c "${ORACLE_HOME}/bin/sqlplus -s /nolog @${ORACLE_HOME}/config/scripts/stopdb.sql" ${ORACLE_OWNER} >>"${ORACLE_HOME}/${LOGR}" 2>&1
+	RETVAL=$?
+	[ ${RETVAL} -eq 0 ] && rm -f "/var/lock/subsys/database" >/dev/null 2>&1
+	eend ${RETVAL}
+	ebegin "Stopping Oracle Net Listener"
+	${SU} -s /bin/bash -c "${ORACLE_HOME}/bin/lsnrctl stop" ${ORACLE_OWNER} >"${ORACLE_HOME}/${LOGR}" 2>&1
+	RETVAL=$?
+	[ ${RETVAL} -eq 0 ] && rm -f "/var/lock/subsys/listener" >/dev/null 2>&1
+	eend ${RETVAL}
+}

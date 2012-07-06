@@ -1,0 +1,20 @@
+aes2501-wy (0.1-5) unstable; urgency=low
+   * Added recommends for imagemagick.
+
+aes2501-wy (0.1-4) unstable; urgency=low
+   * Added more supported models to list
+   * Changed Maintainer/uploaders to fingerforce-devel list mail.
+   * Moved Homepage tag in control
+   * Updated Policy version
+
+aes2501-wy (0.1-3) unstable; urgency=low
+   * Added  HP Compaq nx6320 to list of supported models. (Closes: #426926)
+   * removed linux/compiler.h header in usb.c file. Now builds ok.
+   (Closes: #427259)
+
+aes2501-wy (0.1-2) unstable; urgency=low
+   * Spelling changes in control and aes2501.sgml files (Thanks to Frank
+     Lichtenheld). Closes: #422565
+
+aes2501-wy (0.1-1) unstable; urgency=low
+   * Initial release (Closes: #412566)

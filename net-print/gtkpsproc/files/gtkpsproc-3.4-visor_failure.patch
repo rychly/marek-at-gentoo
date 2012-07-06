@@ -1,0 +1,12 @@
+--- main.c.orig	2006-11-06 00:18:37.000000000 +0100
++++ main.c	2007-04-05 14:52:32.115700859 +0200
+@@ -271,7 +271,8 @@
+ 
+ 	configuracion=0;
+ 	margen=8;
+-		
++	
++	visor_ps=g_string_new("");
+ 	if(!check_visor("evince"))
+ 		visor_ps=g_string_new("evince");
+ 	else if(!check_visor("ggv"))

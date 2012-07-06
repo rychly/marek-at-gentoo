@@ -1,0 +1,1 @@
+SUBSYSTEM=="input", ATTRS{name}=="AT Translated Set 2 keyboard", RUN+="keymap $name hewlett-packard-6510b_6710b"

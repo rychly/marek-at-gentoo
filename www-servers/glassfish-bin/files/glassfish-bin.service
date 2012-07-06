@@ -1,0 +1,11 @@
+[Unit]
+Description=GlassFish (SUN Java EE 5 application server), domain $GLASSFISH_DOMAIN
+
+[Service]
+Type=forking
+EnvironmentFile=/etc/conf.d/%%%NAME%%%
+ExecStart=%%%DEST%%%/bin/asadmin start-domain $GLASSFISH_OPTS $GLASSFISH_DOMAIN
+ExecStop=%%%DEST%%%/bin/asadmin stop-domain $GLASSFISH_OPTS $GLASSFISH_DOMAIN
+
+[Install]
+WantedBy=multi-user.target

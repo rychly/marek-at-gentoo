@@ -1,0 +1,73 @@
+diff -urN acerhk.c.old acerhk.c
+--- acerhk.c.old	2007-02-25 11:24:55.000000000 +0100
++++ acerhk.c	2007-02-25 12:24:36.000000000 +0100
+@@ -550,67 +550,12 @@
+  */
+ static asmlinkage void call_bios_6xx(struct register_buffer *buf)
+ {
+-  if (bios_routine) {
+-      local_irq_disable();
+-	__asm__ __volatile__(
+-						 "movl %1,%%edx\n\t"
+-						 "pusha\n\t"
+-						 "movl %%edx,%%ebp\n\t"
+-						 "movl (%%ebp),%%eax\n\t"
+-						 "movl 4(%%ebp),%%ebx\n\t"
+-						 "movl 8(%%ebp),%%ecx\n\t"
+-						 "movl 12(%%ebp),%%edx\n\t"
+-						 "movl 16(%%ebp),%%edi\n\t"
+-						 "movl 20(%%ebp),%%esi\n\t"
+-						 "pushl %%ebp\n\t"
+-						 "call *%0\n\t"
+-						 "popl %%ebp\n\t"
+-						 "movl %%eax, (%%ebp)\n\t"
+-						 "movl %%ebx, 4(%%ebp)\n\t"
+-						 "movl %%ecx, 8(%%ebp)\n\t"
+-						 "movl %%edx, 12(%%ebp)\n\t"
+-						 "movl %%edi, 16(%%ebp)\n\t"
+-						 "movl %%esi, 20(%%ebp)\n\t"
+-						 "popa\n\t"
+-						 :
+-						 :"m" (bios_routine), "m" (buf)
+-						 :"%eax", "%ebx", "%ecx", "%edx", "%edi", "%esi", "%ebp"
+-						 );
+-      local_irq_enable();
+-  }
++  /* not supported on amd64 */
+ }
+ 
+ static asmlinkage void call_bios_52x(struct register_buffer *buf)
+ {
+-  if (bios_routine) {
+-      local_irq_disable();
+-	__asm__ __volatile__(
+-						 "movl %2,%%edx\n\t" 
+-						 "pusha\n\t"
+- 						 "movl %%edx,%%ebp\n\t"
+-						 "movl (%%ebp),%%eax\n\t"
+-						 "movl 4(%%ebp),%%ebx\n\t"
+-						 "movl 8(%%ebp),%%ecx\n\t"
+-						 "movl 12(%%ebp),%%edx\n\t"
+-						 "movl 16(%%ebp),%%edi\n\t"
+-						 "movl 20(%%ebp),%%esi\n\t"
+-						 "pushl %%ebp\n\t"
+-						 "movl %1, %%ebp\n\t"
+-						 "call *%0\n\t"
+-						 "popl %%ebp\n\t"
+-						 "movl %%eax, (%%ebp)\n\t"
+-						 "movl %%ebx, 4(%%ebp)\n\t"
+-						 "movl %%ecx, 8(%%ebp)\n\t"
+-						 "movl %%edx, 12(%%ebp)\n\t"
+-						 "movl %%edi, 16(%%ebp)\n\t"
+-						 "movl %%esi, 20(%%ebp)\n\t"
+-						 "popa\n\t"
+-						 :
+-						 :"m" (bios_routine), "m" (preg400), "m" (buf)
+-						 :"%eax", "%ebx", "%ecx", "%edx", "%edi", "%esi", "%ebp"
+-						 );
+-      local_irq_enable();
+-  }
++  /* not supported on amd64 */
+ }
+ 
+ #define PRINT_BUFFER(x) \

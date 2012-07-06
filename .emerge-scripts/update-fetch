@@ -1,0 +1,5 @@
+#!/bin/sh
+# smazeme zbytecne distribucni balicky
+eclean --destructive --interactive $* distfiles
+# smazeme zbytecne binarni balicky
+eclean --destructive --interactive $* packages

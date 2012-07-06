@@ -1,0 +1,26 @@
+diff -urN usr/share/X11/xkb/symbols/inet.old usr/share/X11/xkb/symbols/inet
+--- usr/share/X11/xkb/symbols/inet.old	2008-03-24 21:22:53.000000000 +0100
++++ usr/share/X11/xkb/symbols/inet	2008-03-24 21:26:24.000000000 +0100
+@@ -215,6 +215,22 @@
+  
+ };
+ 
++// Hewlett-Packard Compaq 6510/6710 (kernel 2.6.31, xkeyboard-config 1.6)
++// From Marek Rychly <marek.rychly@gmail.com>
++partial alphanumeric_keys
++xkb_symbols "hp6510" {
++	include "pc(pc105)"	// based on pc105 (and its modifier_maps)
++	include "inet(media_common)"	// <I20|113/160>=XF86AudioMute, <I2E|114/174>=XF86AudioLowerVolume, <I30|115/176>=XF86AudioRaiseVolume
++	include "inet(acpi_common)"	// <I5F|142/223>=XF86Standby, <I5E|e009-116/222>=XF86PowerOff
++	key <I1F>	{	[	XF86LaunchA	]	};	// "(i)" button, e059, 148/159
++	key <I17>	{	[	XF86LaunchB	]	};	// "(w)" button, e008, 149/151
++	key <I12>	{	[	XF86Clear	]	};	// Fn+Esc, keycode 152/146
++	key <XFER>	{	[	XF86Xfer	]	};	// Fn+F6, keycode 171/129
++	key <I6D>	{	[	XF86AudioMedia	]	};	// Fn+F11, keycode 226/237
++	// recommended XkbOptions = grp:alt_shift_toggle,grp_led:scroll,lv3:ralt_switch,terminate:ctrl_alt_bksp
++	key <MENU>	{	[	Hyper_R		]	};
++	modifier_map Mod3	{	Hyper_R	};
++};
+ 
+ // Acer AirKey V
+ partial alphanumeric_keys

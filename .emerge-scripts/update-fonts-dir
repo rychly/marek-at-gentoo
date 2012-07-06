@@ -1,0 +1,4 @@
+#!/bin/bash
+mkfontdir -- `cat /etc/X11/xorg.conf | grep '^[^#]*FontPath' | sed 's/^.*"\(.*\)"$/\1/' | sed 's/:unscaled//' | tr '\n' ' '`
+fc-cache -fsv
+xset fp rehash

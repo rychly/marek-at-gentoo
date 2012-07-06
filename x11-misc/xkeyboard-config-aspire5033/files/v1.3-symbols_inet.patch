@@ -1,0 +1,48 @@
+diff -urN usr/share/X11/xkb/symbols/inet.old usr/share/X11/xkb/symbols/inet
+--- usr/share/X11/xkb/symbols/inet.old	2008-03-24 21:22:53.000000000 +0100
++++ usr/share/X11/xkb/symbols/inet	2008-03-24 21:26:24.000000000 +0100
+@@ -20,6 +20,47 @@
+ // All keyboards listed here should be also mentioned in
+ // xc/programs/xkbcomp/rules/xfree86, xfree86.lst and xfree86.xml.
+ 
++//
++// Acer Aspire 5033
++//
++partial alphanumeric_keys
++xkb_symbols "aspire5033" {
++    // Top Buttons
++    key <I6C>	{ [ XF86Mail	] };	// "mail" button
++    key <I32>	{ [ XF86WWW	] };	// "www" button
++    key <I1F>	{ [ XF86LaunchA	] };	// "e" button
++    key <I17>	{ [ XF86LaunchB ] };	// "P" button
++    // Function Keys
++    key <I75>	{ [ XF86Launch1		] };	// "help" key, Fn+F1
++    key <K66>	{ [ XF86Launch2		] };	// "setup" key, Fn+F2
++    key <I5E>	{ [ XF86Launch3		] };	// "power" key, Fn+F3
++    key <I5F>	{ [ XF86Launch4		] };	// "standby" key, Fn+F4
++    key <I56>	{ [ XF86Video		] };	// "lvds/crt" key, Fn+F5
++    key <I59>	{ [ XF86RockerUp	] };	// "touch" key/1, Fn+F7
++    key <I58>	{ [ XF86RockerDown	] };	// "touch" key/0, Fn+F7
++    key <I20>	{ [ XF86AudioMute	] };	// "mute" key, Fn+F8
++    // Audio control keys
++    key <I22>	{ [ XF86AudioPlay	] };	// "play" key, Fn+Home
++    key <I24>	{ [ XF86AudioStop	] };	// "stop" key, Fn+PgUp
++    key <I10>	{ [ XF86AudioPrev	] };	// "prev" key, Fn+PgDn
++    key <I19>	{ [ XF86AudioNext	] };	// "next" key, Fn+End
++    // Volume/Brightness control keys
++    key <I30>	{ [ XF86AudioRaiseVolume	] };	// "volUp" key, Fn+Up
++    key <I2E>	{ [ XF86AudioLowerVolume	] };	// "volDn" key, Fn+Dn
++    key <K68>	{ [ SunVideoRaiseBrightness	] };	// "lightUp" key, Fn+Rg
++    key <I6F>	{ [ SunVideoLowerBrightness	] };	// "lightDn" key, Fn+Lf
++    // Extra chars keys
++    key <I78>	{ [ EuroSign	] };	// "euro" key, E
++    key <K65>	{ [ dollar	] };	// "dolar" key, $
++    // Windows keys
++    key <LWIN>	{ [ Super_L	] };	// "winlogo" key
++    key <MENU>	{ [ Menu	] };	// "winmenu" key
++    // Bottom Buttons
++    key <I13>	{ [ XF86Xfer	] };	// "wireless" button/1
++    key <I12>	{ [ XF86Away	] };	// "wireless" button/0
++    key <K63>	{ [ XF86Phone	] };	// "bluetooth" button
++};
++

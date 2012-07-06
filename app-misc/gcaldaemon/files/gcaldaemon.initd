@@ -1,0 +1,21 @@
+#!/sbin/runscript
+
+[ -z "${PIDFILE}" ] && PIDFILE=/var/run/gcaldaemon
+
+depend() {
+	use net
+}
+
+start() {
+	ebegin "Starting GCALDaemon"
+	start-stop-daemon --start --quiet --background \
+	--make-pidfile --pidfile ${PIDFILE} \
+	--exec (INSTALLDIR)/bin/gcaldaemon-standalone-start
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping GCALDaemon"
+	start-stop-daemon --stop --quiet --pidfile ${PIDFILE}
+	eend $?
+}

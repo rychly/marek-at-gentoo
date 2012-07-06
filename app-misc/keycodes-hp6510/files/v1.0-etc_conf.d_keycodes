@@ -1,0 +1,33 @@
+#
+# Extra keys for HP 6710/6510 (kernel 2.6.29)
+#
+# direct scan-codes: showkey -s
+# interpret. scan-codes: xev
+# Xfree-codes: /usr/share/X11/xkb/keycodes/xfree86
+# kernel constants: /usr/src/linux/include/linux/input.h
+#
+# info
+# keycode direct/interpreted scan-codes
+# <Xfree-codes from interpreted scan-code>
+# kernel constant
+# driver
+#
+
+KEYCODES=""
+
+# "(i)" button		e059 == 148/159 <I1F>	KEY_PROG1		kernel
+KEYCODES="$KEYCODES e059 148"
+# "|w|" button		e008 == 149/151 <I17>	KEY_PROG2		kernel
+KEYCODES="$KEYCODES e008 149"
+# "mute" button		keycode 113/160 <I20>	KEY_MUTE		kernel
+# "volDn" button	keycode 114/174 <I2E>	KEY_VOLUMEDOWN		kernel
+# "volUp" button	keycode 115/176 <I30>	KEY_VOLUMEUP		kernel
+# ??? key, Fn+Esc	keycode 152/146 <I12>	KEY_COFFE		kernel
+KEYCODES="$KEYCODES e001 152"
+# "standby" key, Fn+F3	keycode 142/223 <I5F>	KEY_???			kernel
+# ??? key, Fn+F6	keycode 171/129 <XFER>	KEY_CONFIG		kernel
+KEYCODES="$KEYCODES e00a 171"
+# "batt." key, Fn+F8	e009 == 116/222 <I5E>	KEY_POWER		kernel
+KEYCODES="$KEYCODES e009 116"
+# ??? key, Fn+F11	keycode 226/237 <I6D>	KEY_MEDIA		kernel
+KEYCODES="$KEYCODES e033 226"

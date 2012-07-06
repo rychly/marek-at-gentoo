@@ -1,0 +1,16 @@
+#!/bin/sh
+
+UPDATE=/usr/bin/updatedb
+CONF=/etc/updatedb.conf
+
+if [ -x ${UPDATE} ]; then
+	echo -n "Updating locate database ... "
+	if [ -f ${CONF} ]; then
+		nice ${UPDATE}
+	else
+		nice ${UPDATE} -f proc
+	fi
+	echo "done"
+else
+	echo "Cannot find ${UPDATE}" >&2
+fi

@@ -1,0 +1,11 @@
+diff -urN usr/share/X11/xkb/rules/base.old usr/share/X11/xkb/rules/base
+--- usr/share/X11/xkb/rules/base.old	2008-03-24 21:29:00.000000000 +0100
++++ usr/share/X11/xkb/rules/base	2008-03-24 21:32:35.000000000 +0100
+@@ -47,6 +47,7 @@
+               genius geniuscomfy geniuscomfy2 geniuskb19e \
+               gyration honeywell_euroboard \
+               hp2501 hp2505 hp5xx hp500fa hp5181 hp5185 \
++              aspire5033 \
+               hpi6 hpxe3gc hpxe3gf hpxe4xxx hpxt1000 hpzt11xx \
+               ipaq inspiron intel latitude \
+               logiaccess logicd logicda logicink \

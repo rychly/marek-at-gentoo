@@ -1,0 +1,10 @@
+diff -urN winefish-999/configure.ac.old winefish-999/configure.ac
+--- winefish-999/configure.ac.old	2011-01-06 12:40:42.000000000 +0100
++++ winefish-999/configure.ac	2011-01-06 12:40:51.000000000 +0100
+@@ -613,5 +613,5 @@
+ AC_SUBST(INSTALLMAIN)
+ AC_SUBST(MAKEMAIN)
+ 
+-AC_CONFIG_FILES(Makefile icons/Makefile src/Makefile data/Makefile po/Makefile man/Makefile man/winefish.1)
++AC_CONFIG_FILES(Makefile icons/Makefile src/Makefile data/Makefile po/Makefile man/Makefile)
+ AC_OUTPUT

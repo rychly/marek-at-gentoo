@@ -1,0 +1,92 @@
+#!/bin/sh
+# http://predvolby-operatoru.letem.cz/
+
+if [ $# != 1 ]; then
+	echo "Usage:	${0} <mobile-number>" >&2
+	echo >&2
+	echo "Search for a mobile operator for the given mobile number." >&2
+	exit 1
+fi
+
+OP_O2="[CZ]O2 (registrace)"
+OP_Tmobile="[CZ]T-mobile"
+OP_Vodafone="[CZ]Vodafone park"
+
+case "${1}" in
+
++420601*)	O=${OP_O2}
+		;;
++420602*)	O=${OP_O2}
+		;;
++420606*)	O=${OP_O2}
+		;;
++420607*)	O=${OP_O2}
+		;;
++420720*)	O=${OP_O2}
+		;;
++420721*)	O=${OP_O2}
+		;;
++420722*)	O=${OP_O2}
+		;;
++420723*)	O=${OP_O2}
+		;;
++420724*)	O=${OP_O2}
+		;;
++420725*)	O=${OP_O2}
+		;;
++420726*)	O=${OP_O2}
+		;;
++420727*)	O=${OP_O2}
+		;;
++420728*)	O=${OP_O2}
+		;;
++420729*)	O=${OP_O2}
+		;;
+
++420603*)	O=${OP_Tmobile}
+		;;
++420604*)	O=${OP_Tmobile}
+		;;
++420605*)	O=${OP_Tmobile}
+		;;
++420730*)	O=${OP_Tmobile}
+		;;
++420731*)	O=${OP_Tmobile}
+		;;
++420732*)	O=${OP_Tmobile}
+		;;
++420733*)	O=${OP_Tmobile}
+		;;
++420734*)	O=${OP_Tmobile}
+		;;
++420735*)	O=${OP_Tmobile}
+		;;
++420736*)	O=${OP_Tmobile}
+		;;
++420737*)	O=${OP_Tmobile}
+		;;
++420738*)	O=${OP_Tmobile}
+		;;
++420739*)	O=${OP_Tmobile}
+		;;
+
++420608*)	O=${OP_Vodafone}
+		;;
++420773*)	O=${OP_Vodafone}
+		;;
++420774*)	O=${OP_Vodafone}
+		;;
++420775*)	O=${OP_Vodafone}
+		;;
++420776*)	O=${OP_Vodafone}
+		;;
++420777*)	O=${OP_Vodafone}
+		;;
+
+*)	echo "Cannot match the mobile prefix!" >&2
+	exit 2
+	;;
+
+esac
+
+echo "${O}"

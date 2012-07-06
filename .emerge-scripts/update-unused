@@ -1,0 +1,3 @@
+#!/bin/sh
+# odinstalujeme zbytecne ebuildy
+emerge --depclean --verbose --ask
