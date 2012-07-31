@@ -44,10 +44,12 @@ update() {
 		|| echo "Error $?" >&2
 	done
 	# Shell Scripts
-	[ -z "${NO_SCRIPT}" -a -d "$(dirname $0)/$SCRIPT_PROJECTS" ] && for PROJ in "$(dirname $0)/${SCRIPT_PROJECTS}"/*; do
-		echo "${UV} Script: ${PROJ} ${UV}"
-		. $PROJ \
-		|| echo "Error $?" >&2
+	[ -z "${NO_SCRIPT}" -a -d "$(dirname $0)/$SCRIPT_PROJECTS" ] && for PROJ in "$(dirname $0)/${SCRIPT_PROJECTS}"/*.sh; do
+		if [ -f "${PROJ}" ]; then
+			echo "${UV} Script: ${PROJ} ${UV}"
+			. $PROJ \
+			|| echo "Error $?" >&2
+		fi
 	done
 }
 

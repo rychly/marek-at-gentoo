@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://github.com/viettug/${PN} http://github.com/viettug/${PN}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~ppc ~sparc ~x86"
 IUSE="spell"
 
 RDEPEND=">=x11-libs/gtk+-2.4

@@ -1,6 +1,9 @@
 ## The fprint project aims to plug a gap in the Linux desktop: support for consumer fingerprint reader devices.
 # http://reactivated.net/fprint/wiki/Main_Page
 
+# It is already in the gentoo's portage tree.
+exit 1
+
 dir2portage() {
 	TDIR=$1
 	PDIR=$2
