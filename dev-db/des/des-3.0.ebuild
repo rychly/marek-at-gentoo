@@ -1,6 +1,8 @@
-# Copyright 1999-2010 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v3
 # $Header: $
+
+EAPI=2
 
 inherit eutils
 
@@ -56,9 +58,11 @@ src_install() {
 	# Install base
 	cp "${S}"/*.pl "${D}/usr/share/${P}" || die "Failed to install files"
 	# Install examples
-	use examples && mv "${S}"/examples "${D}/usr/share/doc/${P}"
+	if use examples; then
+		mv "${S}"/examples "${D}/usr/share/doc/${P}" || die "Failed to install examples"
+	fi
 	# Install documentation
-	dodoc doc/* license/* readmeDES${PV%.*}.txt
+	dodoc doc/* license/* readmeDES${PV}.txt || die "Failed to install documentation"
 	# Integration binaries/scripts
-	dobin des
+	dobin des || die "Failed to install executable"
 }

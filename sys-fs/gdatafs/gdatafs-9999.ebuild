@@ -1,5 +1,5 @@
 # Copyright 1999-2012 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
+# Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
 EAPI=2
@@ -9,12 +9,6 @@ inherit subversion java-pkg-2 java-ant-2
 
 DESCRIPTION="Gdatafs is a FUSE implemtation that mount your account at google's picassa web to your filesystem. The filesystem support ful read/write and delete of album and photos."
 HOMEPAGE="http://sourceforge.net/projects/gdatafs/"
-SRC_URI=""
-# https://bugs.gentoo.org/show_bug.cgi?id=366875
-
-# 1.0.2: 2011-02-02
-#SRC_URI="mirror://sourceforge/gdatafs/${PN}%20${PV}.tar.gz"
-#RESTRICT="nomirror"
 
 ESVN_REPO_URI="https://gdatafs.svn.sourceforge.net/svnroot/gdatafs/trunk"
 ESVN_PROJECT="gdatafs"

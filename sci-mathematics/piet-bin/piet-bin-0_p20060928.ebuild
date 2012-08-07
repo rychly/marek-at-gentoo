@@ -1,5 +1,5 @@
-# Copyright 1999-2009 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
 EAPI=2
@@ -8,8 +8,8 @@ inherit eutils
 
 DESCRIPTION="Pi Calculus Equivalences Tester of types of behavioural equivalences (binary version)."
 HOMEPAGE="http://piet.sourceforge.net/"
-SRC_URI="mirror://sourceforge/piet/binaries_linux.zip
-	-> ${PN}.zip"
+# the unversioned download, patch level set according to "updated" information on http://piet.sourceforge.net/#download
+SRC_URI="mirror://sourceforge/piet/binaries_linux.zip -> ${P}.zip"
 
 LICENSE="LGPL"
 SLOT="0"

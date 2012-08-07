@@ -1,5 +1,5 @@
-# Copyright 1999-2008 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
 NAMES="cs-ascii"
@@ -31,25 +31,24 @@ src_unpack() {
 	done
 	i="czech.alias" && mv -v "${S}/${i}" "${S}/${i//czech/${NAMEL}}" || die "Cannot rename '${i}' to ${NAMES}"
 	# replace
-	i="info" && sed \
-	-e "s/Czech/${DESCI}/" \
-	-e "s/Čeština/${DESCL}/" \
-	-e "s/cs/${NAMES}/g" \
-	-e "s/czech/${NAMEL}/" \
-	"${S}/${i}" > "${S}/${i}.new" && mv "${S}/${i}.new" "${S}/${i}" || die "Cannot replace in '${i}' to ${NAMES}"
+	i="info" && sed -i \
+		-e "s/Czech/${DESCI}/" \
+		-e "s/Čeština/${DESCL}/" \
+		-e "s/cs/${NAMES}/g" \
+		-e "s/czech/${NAMEL}/" \
+		"${S}/${i}" || die "Cannot replace in '${i}' to ${NAMES}"
 	for i in ${REPLACELIST}; do
-		sed "s/cs/${NAMES}/g" "${S}/${i}" > "${S}/${i}.new" \
-		&& mv "${S}/${i}.new" "${S}/${i}" || die "Cannot replace in '${i}' to ${NAMES}"
+		sed -i "s/cs/${NAMES}/g" "${S}/${i}" || die "Cannot replace in '${i}' to ${NAMES}"
 	done
-	i="Makefile.pre" && sed \
-	-e "s/cs/${NAMES}/g" \
-	-e "s/czech/${NAMEL}/" \
-	"${S}/${i}" > "${S}/${i}.new" && mv "${S}/${i}.new" "${S}/${i}" || die "Cannot replace in '${i}' to ${NAMES}"
+	i="Makefile.pre" && sed -i \
+		-e "s/cs/${NAMES}/g" \
+		-e "s/czech/${NAMEL}/" \
+		"${S}/${i}" || die "Cannot replace in '${i}' to ${NAMES}"
 	# recode
-	i="Makefile.pre" && sed \
-	's/\( | ${ASPELL} ${ASPELL_FLAGS} --lang='"${NAMES}"' create master .\/\$@\)/ | iconv -f iso8859-2 -t ASCII\/\/TRANSLIT | sort | uniq\1/' \
-	"${S}/${i}" > "${S}/${i}.new" && mv "${S}/${i}.new" "${S}/${i}" || die "Cannot include recoding in '${i}' to ${NAMES}"
+	i="Makefile.pre" && sed -i \
+		's/\( | ${ASPELL} ${ASPELL_FLAGS} --lang='"${NAMES}"' create master .\/\$@\)/ | iconv -f iso8859-2 -t ASCII\/\/TRANSLIT | sort | uniq\1/' \
+		"${S}/${i}" || die "Cannot include recoding in '${i}' to ${NAMES}"
 	i="${NAMES}_affix.dat" \
-	&& iconv -f iso8859-2 -t ASCII\/\/TRANSLIT "${S}/${i}" > "${S}/${i}.new" \
-	&& mv "${S}/${i}.new" "${S}/${i}" || die "Cannot recode '${i}' to ${NAMES}"
+		&& iconv -f iso8859-2 -t ASCII\/\/TRANSLIT "${S}/${i}" > "${S}/${i}.new" \
+		&& mv "${S}/${i}.new" "${S}/${i}" || die "Cannot recode '${i}' to ${NAMES}"
 }

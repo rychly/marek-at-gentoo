@@ -1,5 +1,5 @@
-# Copyright 1999-2007 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
 DESCRIPTION="GCALDaemon offers two-way synchronization between Google Calendar and various iCalendar compatible calendar applications."
@@ -12,13 +12,13 @@ RESTRICT="nomirror"
 
 IUSE="doc source"
 SLOT="0"
-RDEPEND="java? ( >=virtual/jre-1.5 )"
+RDEPEND="virtual/jre"
 
 S="${WORKDIR}/GCALDaemon"
 INSTALLDIR="/opt/${PN}"
 
 src_unpack() {
-        unpack ${A}
+	unpack ${A}
 	use doc || rm -rf "${S}/docs" "${S}/license"
 	use source || rm -rf "${S}/dev"
 	rm "${S}/bin"/reload-calendar.*

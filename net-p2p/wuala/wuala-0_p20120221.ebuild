@@ -2,9 +2,12 @@
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
+EAPI=2
+
 DESCRIPTION="Wuala, your free online hard-disk"
 HOMEPAGE="http://wuala.com/"
-SRC_URI="http://cdn.wuala.com/repo/other/wuala.tar.gz"
+# the unversioned download, patch level set to Last-Modified as it has been get by curl -I <URI>
+SRC_URI="http://cdn.wuala.com/repo/other/wuala.tar.gz -> ${P}.tgz"
 
 LICENSE="wuala"
 SLOT="0"

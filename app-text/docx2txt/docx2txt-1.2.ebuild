@@ -1,5 +1,5 @@
-# Copyright 1999-2009 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
 DESCRIPTION="A perl based utility to convert Microsoft Office Docx documents to equivalent text documents."
@@ -19,5 +19,5 @@ src_compile() {
 }
 
 src_install() {
-	make INSTALLDIR=${D}/usr/bin install || die
+	make BINDIR=${D}/usr/bin CONFIGDIR=${D}/etc install || die
 }
