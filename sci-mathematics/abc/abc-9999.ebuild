@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=2
+
 inherit eutils
 
 DESCRIPTION="Advanced/Another Bisimulation Checker is a tool that checks open-equivalence in the pi-calculus."
