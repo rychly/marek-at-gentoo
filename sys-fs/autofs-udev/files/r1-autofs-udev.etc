@@ -1,0 +1,16 @@
+#!/bin/bash
+
+MOUNTPOINT_BASE=/media
+AUTOFS_MAP=/var/run/autofs-udev
+
+declare -A MOUNTOPTS
+MOUNTOPTS[ext2]="-fstype=ext2,check=none,noatime,noexec,nosuid,nodev"
+MOUNTOPTS[ext3]="-fstype=ext3,check=none,noatime,nodiratime,noexec,nosuid,nodev,data=journal,user"
+MOUNTOPTS[ext4]="-fstype=ext4,check=none,noatime,nodiratime,noexec,nosuid,nodev,data=journal,user"
+MOUNTOPTS[ntfs]="-fstype=ntfs-3g,uid=1000,gid=users"
+MOUNTOPTS[exfat]="-fstype=exfat,uid=1000,gid=users"
+MOUNTOPTS[vfat]="-fstype=vfat,flush,nonumtail,utf8,quiet,gid=users,dmask=000,fmask=111"
+MOUNTOPTS[reiserfs]="-fstype=reiserfs,notail,noatime,noexec,nosuid,nodev"
+MOUNTOPTS[iso9660]="-fstype=iso9660,ro,sync,nodev,nosuid"
+MOUNTOPTS[udf]="-fstype=udf,sync,nodev,nosuid"
+MOUNTOPTS[unknown]="-fstype=auto,ro"

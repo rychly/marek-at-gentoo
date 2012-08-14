@@ -4,9 +4,9 @@
 
 EAPI=2
 
-inherit eutils
+inherit eutils toolchain-funcs
 
-DESCRIPTION="Hewlett-Packard Compaq 6510b/6710b keycodes for kernel, HAL and udev."
+DESCRIPTION="Hewlett-Packard Compaq 6510b/6710b keymap for kernel, HAL, and udev."
 HOMEPAGE="https://rychly.homeip.net/wiki/notebook*keyboard"
 
 KEYWORDS="alpha amd64 arm hppa ia64 m68k mips ppc ppc64 s390 sh sparc x86 x86-fbsd"
@@ -29,9 +29,10 @@ src_install() {
 	fi
 	# udev
 	if use udev; then
-		dodir "/lib/udev/rules.d"
-		cp "${FILESDIR}/${PR}-${PN}.rulesd" "${D}/${INSTALLDIR}/lib/udev/rules.d/99-${PN}.rules"
-		dodir "/lib/udev/keymaps"
-		cp "${FILESDIR}/${PR}-${PN}.keymaps" "${D}/${INSTALLDIR}/lib/udev/keymaps/${PN}"
+		local udevdir="$($(tc-getPKG_CONFIG) --variable=udevdir udev)"
+		dodir "${udevdir}/keymaps"
+		cp "${FILESDIR}/${PR}-${PN}.keymaps" "${D}/${INSTALLDIR}/${udevdir}/keymaps/hewlett-packard-6510_6710"
+		dodir "${udevdir}/rules.d"
+		cp "${FILESDIR}/${PR}-${PN}.rulesd" "${D}/${INSTALLDIR}/${udevdir}/rules.d/96-${PN}.rules"
 	fi
 }

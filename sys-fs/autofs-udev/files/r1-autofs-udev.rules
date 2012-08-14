@@ -1,0 +1,5 @@
+ENV{DEVTYPE}=="partition", IMPORT{parent}="ID_*"
+ACTION=="add", ENV{DEVTYPE}=="partition", ENV{ID_FS_USAGE}=="filesystem", RUN+="autofs-udev-mount.sh"
+ACTION=="remove", ENV{DEVTYPE}=="partition", ENV{ID_FS_USAGE}=="filesystem", ENV{REMOVE_CMD}="autofs-udev-umount.sh"
+ACTION=="change", ENV{DEVTYPE}=="disk", ENV{ID_FS_USAGE}=="filesystem", RUN+="autofs-udev-mount.sh"
+ACTION=="change", ENV{DEVTYPE}=="disk", ENV{DISK_EJECT_REQUEST}=="?*", RUN+="autofs-udev-umount.sh"

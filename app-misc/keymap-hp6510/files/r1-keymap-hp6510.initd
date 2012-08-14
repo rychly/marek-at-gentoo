@@ -1,0 +1,14 @@
+#!/sbin/runscript
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v3
+# $Header: $
+
+description="Sets keycodes for Hewlett-Packard Compaq 6510b/6710b."
+
+depend() {
+	need localmount
+}
+
+start() {
+	[ -n "${KEYMAP_HP6510}" -a -x /usr/bin/setkeycodes ] && /usr/bin/setkeycodes ${KEYMAP_HP6510}
+}
