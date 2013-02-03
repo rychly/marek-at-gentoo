@@ -222,6 +222,7 @@ pkg_config() {
 	fi
 	# run configure
 	sh -c "/usr/share/${P}/oracle-xe configure"
+	echo "CONFIGURE_RUN=true" > "/etc/conf.d/oracle-xe-bin-11"
 }
 
 pkg_postinst() {

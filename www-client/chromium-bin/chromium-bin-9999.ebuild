@@ -47,8 +47,7 @@ src_unpack() {
 	if use amd64; then
 		arch_suffix="_x64"
 	fi
-	#wget -c "https://download-chromium.appspot.com/dl/Linux${arch_suffix}" -O "${T}/${PN}.zip" || die "Download failed"
-	cp /tmp/${PN}.zip "${T}"/${PN}.zip
+	wget -c "https://download-chromium.appspot.com/dl/Linux${arch_suffix}" -O "${T}/${PN}.zip" || die "Download failed"
 	unzip -qo "${T}/${PN}.zip" -d "${S}" || die "Unpack failed"
 	chmod -fR a+rX,u+w,g-w,o-w "${S}/chrome-linux" || die "chmod failed"
 }

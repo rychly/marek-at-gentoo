@@ -12,8 +12,8 @@ depend() {
 }
 
 checkconfig() {
-	if [ "${CONFIGURE_RUN}" != "true" -o ! -f "${ENFD}" ] ; then
-		eerror "Missing file ${ENFD} with environment variables. Reemerge the ebuild."
+	if [ "${CONFIGURE_RUN}" != "true" -o ! -f "${ENVD}" ] ; then
+		eerror "Missing file ${ENVD} with environment variables. Reemerge the ebuild."
 		return 1
 	fi
 	if [ "${CONFIGURE_RUN}" != "true" -o ! -f "${CNFD}" ] ; then
@@ -26,7 +26,7 @@ checkconfig() {
 
 start() {
 	checkconfig || return 1
-	source "${ENFD}"
+	OLDPATH=${PATH}; source "${ENVD}"; PATH=${OLDPATH}:${PATH}
 	ebegin "Starting Oracle Net Listener"
 	[ -z "$(${PS} U ${ORACLE_OWNER} | grep tns)" -a -f "${ORACLE_HOME}/bin/lsnrctl" ] && \
 		${SU} -s /bin/bash -c "${ORACLE_HOME}/bin/lsnrctl start" ${ORACLE_OWNER} >"${ORACLE_HOME}/${LOGR}" 2>&1
@@ -37,7 +37,7 @@ start() {
 }
 
 stop() {
-	source "${ENFD}"
+	OLDPATH=${PATH}; source "${ENVD}"; PATH=${OLDPATH}:${PATH}
 	ebegin "Shutting down Oracle Database 11g Express Edition Instance"
 	${SU} -s /bin/bash -c "${ORACLE_HOME}/bin/sqlplus -s /nolog @${ORACLE_HOME}/config/scripts/stopdb.sql" ${ORACLE_OWNER} >>"${ORACLE_HOME}/${LOGR}" 2>&1
 	RETVAL=$?

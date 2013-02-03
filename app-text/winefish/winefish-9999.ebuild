@@ -18,7 +18,7 @@ IUSE="spell"
 
 RDEPEND=">=x11-libs/gtk+-2.4
 	>=dev-libs/libpcre-6.3
-	spell? ( virtual/aspell-dict )"
+	spell? ( app-text/aspell )"
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig"
 
