@@ -1,0 +1,2 @@
+#!/bin/sh
+exec emerge -1av $(eix -Icn | grep '(9999[@-]' | cut -d ' ' -f 2 | tr '\n' ' ')

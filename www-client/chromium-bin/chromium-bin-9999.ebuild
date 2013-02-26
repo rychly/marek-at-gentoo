@@ -87,11 +87,16 @@ src_install() {
 	insinto "/etc/chromium"
 	newins "${FILESDIR}/chromium.default" "default" || die
 
-	pushd "${S}/chrome-linux/locales" > /dev/null || die
+	pushd "${S}/chrome-linux/locales" >/dev/null || die
 	chromium_remove_language_paks
-	popd
+	popd >/dev/null
 
 	mv "${S}/chrome-linux" "${D}${CHROMIUM_HOME}" || die "Unable to install chrome-linux folder"
+
+	# https://code.google.com/p/chromium/wiki/LinuxSUIDSandboxDevelopment
+	fperms 4755 "${CHROMIUM_HOME}/chrome-linux/chrome_sandbox"
+	dodir "/etc/env.d"
+	echo "CHROME_DEVEL_SANDBOX=${CHROMIUM_HOME}/chrome-linux/chrome_sandbox" > "${D}/etc/env.d/50${PN}"
 
 	local mime_types="text/html;text/xml;application/xhtml+xml;"
 	mime_types+="x-scheme-handler/http;x-scheme-handler/https;" # bug #360797

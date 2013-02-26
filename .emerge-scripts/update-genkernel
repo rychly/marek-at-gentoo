@@ -1,0 +1,10 @@
+#!/bin/sh
+
+KERNEL_CONFIG=./.config
+
+if [ ! -f "${KERNEL_CONFIG}" ]; then
+	echo "Current working directory needs to be the one with a kernel sources!" >&2
+	exit 1
+fi
+
+exec genkernel "--kernel-config=${KERNEL_CONFIG}" --luks --lvm all
