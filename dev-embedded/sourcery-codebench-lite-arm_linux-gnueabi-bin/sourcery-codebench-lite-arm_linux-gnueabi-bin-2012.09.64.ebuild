@@ -4,8 +4,8 @@
 
 EAPI=2
 
-RELEASE=2322
-PACKAGE=10926
+RELEASE=2323
+PACKAGE=10931
 T1=${PN#*-*-*-} T2=${T1%-*} TARGETOS=${T2/_/-none-}
 TARGETARCH=${TARGETOS%%-*}
 HOSTOS=i686-pc-linux-gnu
@@ -18,7 +18,7 @@ SRC_URI="https://sourcery.mentor.com/public/gnu_toolchain/${TARGETOS}/${TARGETAR
 #SRC_URI="https://sourcery.mentor.com/GNUToolchain/package${PACKAGE}/public/${TARGETOS}/${TARGETARCH}-${VER}-${TARGETOS}-${HOSTOS}.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE=""
-KEYWORDS="~x86 ~amd64" # GCC >v4.5 is incompatible with STM's Contiki
+KEYWORDS="~x86 ~amd64"
 RESTRICT="nomirror strip binchecks"
 
 SLOT="0"
@@ -28,7 +28,7 @@ INSTALLDIR="/opt/${PN}"
 
 src_install() {
 	dodir "${INSTALLDIR}"
-	mv "${S}/${TARGETOS}" "${S}/bin" "${S}/lib" "${S}/libexec" "${S}/${HOSTOS}" "${D}/${INSTALLDIR}/" || die "Cannot install"
+	mv "${S}/${TARGETOS}" "${S}/bin" "${S}/lib" "${S}/libexec" "${D}/${INSTALLDIR}/" || die "Cannot install"
 	dodoc "${S}/share/doc/${TARGETARCH}-${TARGETOS}"/*.txt "${S}/share/doc/${TARGETARCH}-${TARGETOS}/pdf"/*.pdf "${S}/share/doc/${TARGETARCH}-${TARGETOS}/pdf/gcc"/*.pdf
 	doman "${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man1"/*.1 #"${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man7"/*.7 # do not install man-pages for licences
 	doinfo "${S}/share/doc/${TARGETARCH}-${TARGETOS}/info"/*.info

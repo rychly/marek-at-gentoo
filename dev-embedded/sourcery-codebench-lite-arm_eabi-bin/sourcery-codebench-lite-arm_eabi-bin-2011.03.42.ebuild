@@ -30,7 +30,7 @@ src_install() {
 	dodir "${INSTALLDIR}"
 	mv "${S}/${TARGETOS}" "${S}/bin" "${S}/lib" "${S}/libexec" "${D}/${INSTALLDIR}/" || die "Cannot install"
 	dodoc "${S}/share/doc/${TARGETARCH}-${TARGETOS}"/*.txt "${S}/share/doc/${TARGETARCH}-${TARGETOS}/pdf"/*.pdf "${S}/share/doc/${TARGETARCH}-${TARGETOS}/pdf/gcc"/*.pdf
-	doman "${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man1"/*.1 "${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man7"/*.7
+	doman "${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man1"/*.1 #"${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man7"/*.7 # do not install man-pages for licences
 	doinfo "${S}/share/doc/${TARGETARCH}-${TARGETOS}/info"/*.info
 	# env
 	dodir /etc/env.d
