@@ -21,5 +21,5 @@ DEPEND="!app-mobilephone/esmska"
 src_install() {
 	dobin "${FILESDIR}/${PN%-*}" "${FILESDIR}/${PN%-*}-gw-for-contacts" "${FILESDIR}/${PN%-*}-gw-for-number" || die "dobin failed"
 	doicon "${FILESDIR}/${PN%-*}.png"
-	make_desktop_entry "${PN%-*}" "Esmska" "${PN%-*}" "Network;InstantMessaging;Java;Application"
+	make_desktop_entry "${PN%-*}" "Esmska" "${PN%-*}" "Network;InstantMessaging;Java"
 }

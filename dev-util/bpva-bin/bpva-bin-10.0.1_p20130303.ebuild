@@ -5,8 +5,8 @@
 inherit eutils
 
 BPVA_MIRROR="eu3"
-#BPVA_SRCD="archives"
-BPVA_SRCD="visual-paradigm"
+BPVA_SRCD="archives"
+#BPVA_SRCD="visual-paradigm"
 BPVA_MAIN=${PV%%.?_*}
 BPVA_FULL=${PV%%_*} BPVA_SPNO=${BPVA_FULL##*.}
 BPVA_PTCH=${PV##*_p}

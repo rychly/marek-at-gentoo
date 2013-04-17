@@ -24,5 +24,5 @@ src_compile() {
 src_install() {
 	insinto "/usr/$(get_libdir)/keepass"
 	doins "${S}/KeePassHttp.plgx" || die "Cannot install the plugin file."
-	dodoc "README"
+	dodoc "README.md"
 }

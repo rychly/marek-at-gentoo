@@ -55,7 +55,11 @@ src_unpack() {
 src_prepare() {
 	# Fix required libudev.so.0 by a symlink to libudev.so.1 for >sys-fs/udev-182
 	if use libudev1hack; then
-		ln -s "/usr/$(get_libdir)/libudev.so.1" "${S}/chrome-linux/libudev.so.0"
+		( [[ -e "/usr/$(get_libdir)/libudev.so.1" ]] \
+			&& ln -s "/usr/$(get_libdir)/libudev.so.1" "${S}/chrome-linux/libudev.so.0" ) \
+		|| ( [[ -e "/$(get_libdir)/libudev.so.1" ]] \
+			&& ln -s "/$(get_libdir)/libudev.so.1" "${S}/chrome-linux/libudev.so.0" ) \
+		|| die "Cannot find libudev.so.1 to be symlinked to libudev.so.0!"
 		ewarn "Required libudev.so.0 hacked by a symlink to libudev.so.1, this solution may cause serious instabilities!"
 	fi
 }

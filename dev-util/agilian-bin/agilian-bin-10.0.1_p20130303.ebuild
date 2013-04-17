@@ -5,8 +5,8 @@
 inherit eutils
 
 AG_MIRROR="eu3"
-#AG_SRCD="archives"
-AG_SRCD="visual-paradigm"
+AG_SRCD="archives"
+#AG_SRCD="visual-paradigm"
 AG_MAIN=${PV%%.?_*}
 AG_FULL=${PV%%_*} AG_SPNO=${AG_FULL##*.}
 AG_PTCH=${PV##*_p}

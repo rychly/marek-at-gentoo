@@ -5,8 +5,8 @@
 inherit eutils
 
 VPUML_MIRROR="eu3"
-#VPUML_SRCD="archives"
-VPUML_SRCD="visual-paradigm"
+VPUML_SRCD="archives"
+#VPUML_SRCD="visual-paradigm"
 VPUML_MAIN=${PV%%.?_*}
 VPUML_FULL=${PV%%_*} VPUML_SPNO=${VPUML_FULL##*.}
 VPUML_PTCH=${PV##*_p}
