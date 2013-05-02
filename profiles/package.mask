@@ -4,3 +4,6 @@
 # fix it, so migrate to (vanilla) openoffice-bin from Portage.
 =app-office/go-oo-bin-3.2.0_p9483
 
+# Marek Rychly <marek.rychly@gmail.com> (2 May 2013)
+# app-dicts/stardict-tools[tools] is deprecated, use app-text/stardict[tools]
+=app-dicts/stardict-tools-3.0.1

@@ -221,7 +221,9 @@ pkg_config() {
 		die "existing '/var/tmp/.oracle'"
 	fi
 	# run configure
-	sh -c "/usr/share/${P}/oracle-xe configure"
+	einfo "In the case of 'already configured' message, remove file /etc/default/${MY_PM}"
+	mkdir -p /var/lock/subsys
+	sh -c "/usr/share/${P}/oracle-xe configure" && \
 	echo "CONFIGURE_RUN=true" > "/etc/conf.d/oracle-xe-bin-11"
 }
 

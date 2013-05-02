@@ -1,3 +1,5 @@
 #!/bin/sh
-# zkontrolujem zavislosti a vypisem, co je chybne
+# deprecated
 exec revdep-rebuild --verbose --ignore -- --pretend --verbose $*
+# new method that will be supported in future
+#exec emerge --ask --verbose --oneshot @preserved-rebuild $*
