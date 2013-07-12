@@ -38,6 +38,7 @@ src_install() {
 	rm -r "${WORKDIR}/gui"
 	mv "${WORKDIR}"/* "${D}/${INSTALLDIR}/" || die "Cannot install Shell!"
 	# fix permissions
+	chmod 644 "${D}/${INSTALLDIR}/libprotobuf.so.7" "${D}/${INSTALLDIR}/imageformats"/* "${D}/${INSTALLDIR}/plugins"/*
 	find "${D}/${INSTALLDIR}" -type d -exec chmod a+rx {} \;
 	find "${D}/${INSTALLDIR}" -type f -exec chmod a+r {} \;
 	find "${D}/${INSTALLDIR}" -type f -perm /u=x -exec chmod a+x {} \;
