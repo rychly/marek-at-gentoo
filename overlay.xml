@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+	<repo quality="experimental" status="unofficial">
+		<name>marek-at-gentoo</name>
+		<description>Marek's Gentoo Overlay</description>
+		<homepage>https://code.google.com/p/marek-at-gentoo/</homepage>
+		<owner type="project">
+			<email>marek.rychly at gmail.com</email>
+			<name>Marek Rychly</name>
+		</owner>
+		<source type="svn">http://marek-at-gentoo.googlecode.com/svn/trunk/</source>
+		<feed>https://code.google.com/feeds/p/marek-at-gentoo/svnchanges/basic</feed>
+		<!-- layman -f -a marek-at-gentoo -o https://marek-at-gentoo.googlecode.com/svn/trunk/overlay.xml -->
+	</repo>
+</repositories>

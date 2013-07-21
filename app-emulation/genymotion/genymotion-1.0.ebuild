@@ -46,4 +46,7 @@ src_install() {
 	dodir "/etc/env.d"
 	echo -e "PATH=${INSTALLDIR}\nROOTPATH=${INSTALLDIR}" > "${D}/etc/env.d/10${PN}"
 	make_desktop_entry "${INSTALLDIR}/genymotion" "Genymotion" "${INSTALLDIR}/icons/icon.png" "Development"
+	# prevent revdep-rebuild from attempting to rebuild all the time
+	dodir "/etc/revdep-rebuild"
+	echo "SEARCH_DIRS_MASK=\"${INSTALLDIR}\"" > "${D}/etc/revdep-rebuild/50${PN}"
 }
