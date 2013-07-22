@@ -4,9 +4,9 @@
 
 inherit eutils
 
-VPUML_MIRROR="eu3"
-VPUML_SRCD="archives"
-#VPUML_SRCD="visual-paradigm"
+VPUML_MIRROR="eu2"
+#VPUML_SRCD="archives"
+VPUML_SRCD="visual-paradigm"
 VPUML_MAIN=${PV%%.?_*}
 VPUML_FULL=${PV%%_*} VPUML_SPNO=${VPUML_FULL##*.}
 VPUML_PTCH=${PV##*_p}
@@ -44,14 +44,14 @@ src_install() {
 	mv "${S}"/* "${S}/.install4j" "${D}/${INSTALLDIR}"
 	dodir /etc/env.d
 	echo -e "PATH=${INSTALLDIR}/bin\nROOTPATH=${INSTALLDIR}" > "${D}/etc/env.d/10${PN}"
-	make_desktop_entry "${INSTALLDIR}/bin/Visual_Paradigm_for_UML_${VPUML_MAIN}" "Visual Paradigm for UML ${VPUML_MAIN}" "${INSTALLDIR}/resources/vpuml.png" "Development;IDE"
+	make_desktop_entry "${INSTALLDIR}/bin/Visual_Paradigm_for_UML" "Visual Paradigm for UML ${VPUML_MAIN}" "${INSTALLDIR}/resources/vpuml.png" "Development;IDE"
 	make_desktop_entry "${INSTALLDIR}/bin/Visual_Paradigm_Shape_Editor" "Visual Paradigm Shape Editor for VPUML ${VPUML_MAIN}" "${INSTALLDIR}/resources/vpuml.png" "Development;IDE"
 }
 
 pkg_postinst() {
 	einfo ""
 	einfo "To finish the Visual Paradigm for UML ${VPUML_MAIN} installation you need to execute:"
-	ewarn "    ${INSTALLDIR}/bin/VP-UML_Product_Edition_Manager"
+	ewarn "    ${INSTALLDIR}/bin/VP-UML_Product_Selector"
 	einfo "and select installed installed product version and licence keys."
 	einfo ""
 }

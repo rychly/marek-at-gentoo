@@ -4,9 +4,9 @@
 
 inherit eutils
 
-AG_MIRROR="eu3"
-AG_SRCD="archives"
-#AG_SRCD="visual-paradigm"
+AG_MIRROR="eu2"
+#AG_SRCD="archives"
+AG_SRCD="visual-paradigm"
 AG_MAIN=${PV%%.?_*}
 AG_FULL=${PV%%_*} AG_SPNO=${AG_FULL##*.}
 AG_PTCH=${PV##*_p}
@@ -44,14 +44,14 @@ src_install() {
 	mv "${S}"/* "${S}/.install4j" "${D}/${INSTALLDIR}"
 	dodir /etc/env.d
 	echo -e "PATH=${INSTALLDIR}/bin\nROOTPATH=${INSTALLDIR}" > "${D}/etc/env.d/10${PN}"
-	make_desktop_entry "${INSTALLDIR}/bin/Agilian_${AG_MAIN}" "Agilian ${AG_MAIN}" "${INSTALLDIR}/resources/ag.png" "Development;IDE"
+	make_desktop_entry "${INSTALLDIR}/bin/Agilian" "Agilian ${AG_MAIN}" "${INSTALLDIR}/resources/ag.png" "Development;IDE"
 	make_desktop_entry "${INSTALLDIR}/bin/Visual_Paradigm_Shape_Editor" "Visual Paradigm Shape Editor for Agilian ${AG_MAIN}" "${INSTALLDIR}/resources/ag.png" "Development;IDE"
 }
 
 pkg_postinst() {
 	einfo ""
 	einfo "To finish the Agilian ${AG_MAIN} installation you need to execute:"
-	ewarn "    ${INSTALLDIR}/bin/AG_Product_Edition_Manager"
+	ewarn "    ${INSTALLDIR}/bin/AG_Product_Selector"
 	einfo "and select installed installed product version and licence keys."
 	einfo ""
 }
