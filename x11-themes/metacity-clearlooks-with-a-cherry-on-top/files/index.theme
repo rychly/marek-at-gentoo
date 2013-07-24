@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=ClearlooksWithACherryOnTop
+Comment=Clearlooks With a Cherry on Top theme for MetaCity/Mutter
+Encoding=UTF-8
+
+Name[en_US]=ClearlooksWithACherryOnTop
+
+[X-GNOME-Metatheme]
+MetacityTheme=ClearlooksWithACherryOnTop
+ButtonLayout=menu:minimize,maximize,spacer,close
