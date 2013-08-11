@@ -12,6 +12,6 @@
 		<source type="git">https://bitbucket.org/rychly/marek-at-gentoo.git</source>
 		<source type="git">git+ssh://git@bitbucket.org/rychly/marek-at-gentoo.git</source>
 		<feed>https://bitbucket.org/rychly/marek-at-gentoo/rss</feed>
-		<!-- layman -f -a marek-at-gentoo -o file://$(realpath <source-dir>/overlay.xml) -->
+		<!-- layman -f -a marek-at-gentoo -o https://bitbucket.org/rychly/marek-at-gentoo/raw/master/overlay.xml -->
 	</repo>
 </repositories>
