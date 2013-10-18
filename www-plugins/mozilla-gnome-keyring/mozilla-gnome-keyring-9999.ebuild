@@ -4,7 +4,7 @@
 
 EAPI=2
 
-inherit git mozextension
+inherit git-2 mozextension
 
 DESCRIPTION="A firefox extension that enables Gnome Keyring integration."
 HOMEPAGE="https://github.com/infinity0/mozilla-gnome-keyring/blob/master/README"
