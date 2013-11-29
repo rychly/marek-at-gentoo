@@ -24,9 +24,11 @@ for LNG in ${LANGS}; do
 done
 
 RDEPEND=">=dev-qt/qtcore-4.5:4
-		 >=dev-qt/qtgui-4.5:4[dbus]
-		 app-text/poppler[qt4]
-		 >=app-text/hunspell-1.2.8"
+		|| ( >=dev-qt/qtgui-4.5:4[dbus]
+			( >=dev-qt/qtgui-4.8:4 >=dev-qt/qtdbus-4.8:4 )
+		)
+		app-text/poppler[qt4]
+		>=app-text/hunspell-1.2.8"
 DEPEND="${RDEPEND}"
 PDEPEND="latex? ( dev-texlive/texlive-latex )
 	!latex? ( app-text/texlive-core )"

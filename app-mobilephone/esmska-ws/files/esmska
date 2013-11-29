@@ -1,8 +1,12 @@
 #!/bin/sh
+
 # Disable IPv6 because it breaks Java networking on Ubuntu and Debian
 # http://code.google.com/p/esmska/issues/detail?id=252
 # http://code.google.com/p/esmska/issues/detail?id=233
 #OPTS="-JDjava.net.preferIPv4Stack=true"
 
-URL=http://ripper.profitux.cz/esmska/webstart/launch.jnlp
+DIR=~/".config/esmska"
+URL="http://ripper.profitux.cz/esmska/webstart/launch.jnlp"
+
+cd ${DIR}
 exec javaws -verbose -wait ${OPTS} "${URL}"
