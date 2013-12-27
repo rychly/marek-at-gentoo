@@ -4,7 +4,7 @@
 
 EAPI=2
 
-inherit java-pkg-2
+inherit java-pkg-2 eutils
 
 OPN="${PN%-bin}"
 OPNUP="SweetHome3D"
@@ -24,6 +24,11 @@ RDEPEND=">=virtual/jre-1.6"
 
 S="${WORKDIR}/${OPNUP}-${PV}"
 
+src_unpack() {
+	unpack "${A}"
+	unzip "${S}/lib/SweetHome3D.jar" "com/eteks/sweethome3d/resources/frameIcon32x32.png" || die "Cannot unpack icon!"
+}
+
 src_install() {
 	cd "${S}"
 	dodoc "${S}"/*.TXT
@@ -33,4 +38,6 @@ src_install() {
 	java-pkg_dolauncher ${PN} \
 		--java_args "-Xmx1024m" \
 		--main "com.eteks.sweethome3d.SweetHome3D"
+	newicon -s 32 "${WORKDIR}/com/eteks/sweethome3d/resources/frameIcon32x32.png" "${PN}.png"
+	make_desktop_entry "/usr/bin/${PN}" "Sweet Home 3D" "/usr/share/icons/hicolor/32x32/apps/${PN}.png" "Graphics;Engineering"
 }
