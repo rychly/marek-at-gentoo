@@ -8,8 +8,8 @@ inherit eutils
 
 DESCRIPTION="Genymotion is a complete set of tools that provides a virtual environment for Android."
 HOMEPAGE="http://www.genymotion.com/"
-SRC_URI="x86? ( https://genymotion-genymobile.netdna-ssl.com/launchpad/genymotion-${PV}_x86.bin )
-	amd64? ( https://genymotion-genymobile.netdna-ssl.com/launchpad/genymotion-${PV}_x64.bin )"
+SRC_URI="x86? ( https://ssl-files.genymotion.com/genymotion/genymotion-${PV}/genymotion-${PV}_x86.bin )
+	amd64? ( https://ssl-files.genymotion.com/genymotion/genymotion-${PV}/genymotion-${PV}_x64.bin )"
 
 RESTRICT="mirror"
 LICENSE=""
@@ -17,7 +17,12 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 
 RDEPEND="|| ( >=app-emulation/virtualbox-4.1 >=app-emulation/virtualbox-bin-4.1 )
-	media-libs/libpng:1.2"
+	media-libs/libpng:1.2
+	=dev-qt/qtcore-4.8*
+	=dev-qt/qtgui-4.8*
+	=dev-qt/qtscript-4.8*
+	=dev-qt/qtsvg-4.8*
+	=dev-qt/qtwebkit-4.8*"
 
 DEPEND="${RDEPEND}"
 
@@ -28,15 +33,15 @@ src_unpack() {
 	[ $? -ne 0 ] && die "Unable to locate tar.bzip2 content!"
 	# Untar following archive
 	tail -n +$skip "${dist}" | tar -xj -C "${WORKDIR}" || die "Unable to extract tar.bzip2 content!"
+	# Remove bundled Qt
+	rm -v "${WORKDIR}"/libQt*.so.4 || die "Unable to remove bundled Qt!"
 }
 
 src_install() {
 	local INSTALLDIR=/opt/${PN}
 	dodir "${INSTALLDIR}"
 	# move files
-	mv "${WORKDIR}"/gui/* "${D}/${INSTALLDIR}/" || die "Cannot install GUI!"
-	rm -r "${WORKDIR}/gui"
-	mv "${WORKDIR}"/* "${D}/${INSTALLDIR}/" || die "Cannot install Shell!"
+	mv "${WORKDIR}"/* "${D}/${INSTALLDIR}/" || die "Cannot install!"
 	# fix permissions
 	chmod 644 "${D}/${INSTALLDIR}/libprotobuf.so.7" "${D}/${INSTALLDIR}/imageformats"/* "${D}/${INSTALLDIR}/plugins"/*
 	find "${D}/${INSTALLDIR}" -type d -exec chmod a+rx {} \;

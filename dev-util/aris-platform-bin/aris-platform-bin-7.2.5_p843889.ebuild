@@ -6,7 +6,7 @@ EAPI="3"
 
 inherit eutils
 
-## Service Release 2013_04e (809876)
+## Service Release 2013_05 (843889)
 TMP=${PV%_*} MY_VER=${TMP//./}
 MY_BLD=${PV#*_p}
 MY_IDX=79
