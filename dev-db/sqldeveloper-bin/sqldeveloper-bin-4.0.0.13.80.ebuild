@@ -4,7 +4,7 @@
 
 inherit eutils
 
-MYSQLCONVER=5.1.24
+MYSQLCONVER=5.1.28
 
 DESCRIPTION="Oracle SQL Developer is a free graphical tool for database development."
 HOMEPAGE="http://www.oracle.com/technology/products/database/sql_developer/"
