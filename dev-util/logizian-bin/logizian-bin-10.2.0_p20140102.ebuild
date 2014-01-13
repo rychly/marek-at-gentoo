@@ -4,9 +4,9 @@
 
 inherit eutils
 
-LZ_MIRROR="eu2"
-#LZ_SRCD="archives"
-LZ_SRCD="visual-paradigm"
+LZ_MIRROR="eu5"
+LZ_SRCD="archives"
+#LZ_SRCD="visual-paradigm"
 LZ_MAIN=${PV%%.?_*}
 LZ_FULL=${PV%%_*} LZ_SPNO=${LZ_FULL##*.}
 LZ_PTCH=${PV##*_p}
