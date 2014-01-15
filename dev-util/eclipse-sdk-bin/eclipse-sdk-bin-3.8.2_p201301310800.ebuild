@@ -4,7 +4,7 @@
 
 inherit eutils
 
-MIRROR="http://eclipse.mirror.dkm.cz/pub/eclipse"
+MIRROR="http://archive.eclipse.org"
 
 DESCRIPTION="Eclipse Tools Platform"
 HOMEPAGE="http://archive.eclipse.org/eclipse/downloads/"
