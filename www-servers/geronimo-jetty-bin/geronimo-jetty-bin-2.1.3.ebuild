@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit eutils java-pkg-2
+inherit eutils java-pkg-2 user
 
 DESCRIPTION="Geronimo Java EE application server, which has passed the SUN's JEE5 Certification Test Suite, with Web container Jetty."
 

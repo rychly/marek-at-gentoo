@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit eutils systemd
+inherit eutils systemd user
 
 DESCRIPTION="SUN Java EE 5 application server"
 HOMEPAGE="http://glassfish.dev.java.net/"

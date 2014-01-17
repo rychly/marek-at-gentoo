@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit eutils rpm systemd
+inherit eutils rpm systemd user
 
 IUSE="hardened"
 
