@@ -42,13 +42,11 @@ S="${WORKDIR}/linux-${VERMAJ}"
 
 src_prepare() {
 	if use binary; then
-		## module and firmware symlinks fixup (due to genkernel initramfs)
+		## module and firmware symlinks fixup
 		rm "${WORKDIR}/lib/modules/${MYVERSION}.${MYARCH}/build"
 		ln -s "/usr/src/${LINUX_DIRNAME}" "${WORKDIR}/lib/modules/${MYVERSION}.${MYARCH}/build"
-		mv "${WORKDIR}/lib/modules/${MYVERSION}.${MYARCH}" "${WORKDIR}/lib/modules/${VERMAJ}"
-		ln -s "${VERMAJ}" "${WORKDIR}/lib/modules/${MYVERSION}.${MYARCH}"
-		ln -s "${MYVERSION}" "${WORKDIR}/lib/firmware/${MYVERSION}.${MYARCH}"
-		ln -s "${MYVERSION}" "${WORKDIR}/lib/firmware/${VERMAJ}"
+		mv "${WORKDIR}/lib/firmware/${MYVERSION}" "${WORKDIR}/lib/firmware/${MYVERSION}.${MYARCH}"
+		ln -s "${MYVERSION}.${MYARCH}" "${WORKDIR}/lib/firmware/${MYVERSION}"
 		## fixes FL-14
 		cp "${WORKDIR}/boot/System.map-${MYVERSION}.${MYARCH}" "${S}/System.map" || die "Unable to copy System.map"
 		gzip -dc "${WORKDIR}/boot/symvers-${MYVERSION}.${MYARCH}.gz" > "${S}/Module.symvers" || die "Unable to copy Module.symvers"
@@ -66,13 +64,21 @@ src_prepare() {
 		#local config_to="${S}/arch/x86/configs/x86_64_defconfig"
 		cp "${config_from}" "${config_to}" || die "Unable to set default kernel config"
 	fi
+	## set kernel extra and local versions to match genkernel's $KV to $(uname -r)
+	sed -i "s/^\\(EXTRAVERSION =\\).*\$/\\1 -${VERMIN}.el6uek/" "${S}/Makefile"
+	sed -i "s/^\\(CONFIG_LOCALVERSION=\\).*$/\\1\".${MYARCH}\"/" "${S}/.config"
 }
 
 src_compile() {
 	if use binary; then
+		## rebuild modules.dep
+		depmod -b "${WORKDIR}" -E "${S}/Module.symvers" "${MYVERSION}.${MYARCH}" -F "${S}/System.map" || die "Unable to rebuild modules.dep"
+		## create initramfs
 		install -d "${T}"/{cache,twork,bin}
-		cp "${FILESDIR}/lvm-strip-fix.sh" "${T}/bin/strip" && chmod 755 "${T}/bin/strip"
-		PATH="${T}/bin:${PATH}" genkernel --makeopts="${MAKEOPTS}" \
+		cp "${FILESDIR}/lvm-strip-fix.sh" "${T}/bin/strip"
+		chmod 755 "${T}/bin"/*
+		PATH="${T}/bin:${PATH}" genkernel \
+			--makeopts="${MAKEOPTS}" \
 			--kerneldir="${S}" \
 			--kernel-config="${S}/.config" \
 			--module-prefix="${WORKDIR}" \
@@ -85,7 +91,7 @@ src_compile() {
 			$(usex cryptsetup "--luks" "--no-luks") \
 			$(usex iscsi "--iscsi" "--no-iscsi") \
 			initramfs || die "Unable to build initramfs"
-		mv "${T}/twork/initramfs-${VERMAJ}" "${WORKDIR}/boot/initramfs-${MYVERSION}.${MYARCH}.img" || die "Unable to copy initramfs"
+		mv "${T}/twork"/initramfs-* "${WORKDIR}/boot/" || die "Unable to copy initramfs"
 	fi
 }
 
@@ -97,10 +103,9 @@ src_install() {
 	if use binary; then
 		# move boot
 		dodir /boot
-		mv "${WORKDIR}/boot"/{System.map,config,symvers}* "${D}/boot" || die "Unable to install kernel symbols/config"
+		mv "${WORKDIR}/boot"/{System.map,config,symvers,initramfs}-* "${D}/boot" || die "Unable to install kernel symbols/config/initramfs"
 		mv "${WORKDIR}/boot/vmlinuz-${MYVERSION}.${MYARCH}" "${D}/boot/kernel-${MYVERSION}.${MYARCH}" || die "Unable to install kernel bzImage"
-		mv "${WORKDIR}/boot/initramfs-${MYVERSION}.${MYARCH}.img" "${D}/boot/initramfs-${MYVERSION}.${MYARCH}" || die "Unable to install initramfs"
-		chmod 644 "${D}/boot/kernel-${MYVERSION}.${MYARCH}"
+		chmod a-x "${D}/boot/kernel-${MYVERSION}.${MYARCH}"
 		# move and strip modules
 		dodir /lib64/modules
 		mv "${WORKDIR}/lib/modules"/* "${D}/lib64/modules/" || die "Unable to install modules"
