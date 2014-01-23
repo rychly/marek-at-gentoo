@@ -25,7 +25,7 @@ SRC_URI="${SRC_URI_PREFIX}Source/kernel-uek-${MYVERSION}.src.rpm
 	)"
 
 KEYWORDS="amd64"
-SLOT="${VERMAJ}-${VERMIN}"
+SLOT="${PV}"
 RESTRICT="binchecks strip mirror"
 LICENSE="GPL-2"
 IUSE="binary debug symlink lvm mdadm cryptsetup iscsi"
@@ -36,7 +36,8 @@ DEPEND="binary? (
 		cryptsetup? ( sys-fs/cryptsetup[static] )
 	)"
 #	binary? ( lvm? ( sys-fs/lvm2[static] ) ) ## disabled in /usr/share/genkernel/gen_initramfs.sh:append_lvm()
-RDEPEND="binary? ( >=sys-fs/udev-147 )"
+RDEPEND="sys-libs/libdtrace-ctf
+	binary? ( >=sys-fs/udev-147 )"
 
 S="${WORKDIR}/linux-${VERMAJ}"
 
@@ -50,6 +51,7 @@ src_prepare() {
 		## fixes FL-14
 		cp "${WORKDIR}/boot/System.map-${MYVERSION}.${MYARCH}" "${S}/System.map" || die "Unable to copy System.map"
 		gzip -dc "${WORKDIR}/boot/symvers-${MYVERSION}.${MYARCH}.gz" > "${S}/Module.symvers" || die "Unable to copy Module.symvers"
+		cp "${WORKDIR}/lib/modules/${MYVERSION}.${MYARCH}"/modules.{builtin,order} "${S}/" || die "Unable to copy modules lists"
 		## set default kernel config
 		cp "${WORKDIR}/boot/config-${MYVERSION}.${MYARCH}" "${S}/.config" || die "Unable to copy kernel config"
 	else
@@ -64,9 +66,9 @@ src_prepare() {
 		#local config_to="${S}/arch/x86/configs/x86_64_defconfig"
 		cp "${config_from}" "${config_to}" || die "Unable to set default kernel config"
 	fi
-	## set kernel extra and local versions to match genkernel's $KV to $(uname -r)
-	sed -i "s/^\\(EXTRAVERSION =\\).*\$/\\1 -${VERMIN}.el6uek/" "${S}/Makefile"
-	sed -i "s/^\\(CONFIG_LOCALVERSION=\\).*$/\\1\".${MYARCH}\"/" "${S}/.config"
+	## set kernel's extra version to match $(uname -r), necessary for genkernel's $KV and building of modules
+	## this setting cannot be done by CONFIG_LOCALVERSION as the binary kernel's config is different
+	sed -i "s/^\\(EXTRAVERSION =\\).*\$/\\1 -${VERMIN}.el6uek.${MYARCH}/" "${S}/Makefile"
 }
 
 src_compile() {
@@ -92,6 +94,9 @@ src_compile() {
 			$(usex iscsi "--iscsi" "--no-iscsi") \
 			initramfs || die "Unable to build initramfs"
 		mv "${T}/twork"/initramfs-* "${WORKDIR}/boot/" || die "Unable to copy initramfs"
+		## prepare kernel for building external kernel modules
+		unset ARCH LDFLAGS # will interfere with kernel's Makefile if set
+		make -C "${S}" modules_prepare || die "Unable to prepare kernel for building external modules"
 	fi
 }
 
@@ -106,10 +111,6 @@ src_install() {
 		mv "${WORKDIR}/boot"/{System.map,config,symvers,initramfs}-* "${D}/boot" || die "Unable to install kernel symbols/config/initramfs"
 		mv "${WORKDIR}/boot/vmlinuz-${MYVERSION}.${MYARCH}" "${D}/boot/kernel-${MYVERSION}.${MYARCH}" || die "Unable to install kernel bzImage"
 		chmod a-x "${D}/boot/kernel-${MYVERSION}.${MYARCH}"
-		# move and strip modules
-		dodir /lib64/modules
-		mv "${WORKDIR}/lib/modules"/* "${D}/lib64/modules/" || die "Unable to install modules"
-		find "${D}/lib64/modules" -iname *.ko -exec strip --strip-debug {} \;
 		# move firmware
 		dodir /lib64/firmware
 		mv "${WORKDIR}/lib/firmware"/* "${D}/lib64/firmware/" || die "Unable to install firmware"
@@ -117,14 +118,37 @@ src_install() {
 		# move LD config
 		dodir /etc/ld.so.conf.d
 		mv "${WORKDIR}/etc/ld.so.conf.d"/* "${D}/etc/ld.so.conf.d/" || die "Unable to install LD config"
+		# modules will be moved after the install to beware to be added into @module-rebuild, now justr strip them
+		find "${WORKDIR}/lib64/modules" -iname *.ko -exec strip --strip-debug {} \;
 	fi
 }
 
-pkg_post_inst() {
-	## src/linux symlink
+pkg_postinst() {
+	if use binary; then
+		## move and strip kernel modules
+		einfo "Merging kernel modules..."
+		mkdir -vp /lib64/modules
+		cp -vrf "${WORKDIR}/lib/modules/${MYVERSION}.${MYARCH}" "/lib64/modules/" || die "Unable to install modules"
+		einfo "... kernel modules have been merged"
+	fi
 	if use symlink; then
+		## src/linux symlink
+		einfo "Creating symlinks to the kernel..."
 		[[ -h "${ROOT}usr/src/linux" ]] && rm "${ROOT}usr/src/linux"
-		ln -sf "${LINUX_DIRNAME}" "${ROOT}usr/src/linux"
+		ln -vsf "${LINUX_DIRNAME}" "${ROOT}usr/src/linux"
+		## boot/* symlinks
+		if use binary; then
+			local symlinkkernel="/boot/kernel"
+			local symlinkinitramfs="/boot/initramfs"
+			local symlinksystemmap="/boot/System.map"
+			for symlink in "${symlinkkernel}" "${symlinkinitramfs}" "${symlinksystemmap}"; do
+				## backup if not already backuped
+				[[ -h "${symlink}" ]] && [[ "$(readlink ${symlink})" != "$(readlink ${symlink}.old)" ]] && mv -vf "${symlink}" "${symlink}.old"
+				## if does not exists or exists symlink (not common file), create the new symlink to current kernel etc.
+				[[ -h "${symlink}" ]] || ! [[ -e "${symlink}" ]] && ln -vsf "$(basename ${symlink})-${MYVERSION}.${MYARCH}" "${symlink}"
+			done
+		fi
+		einfo "... symlinks have been created"
 	fi
 	echo
 	elog "If you are upgrading from a previous kernel, you may be interested"
