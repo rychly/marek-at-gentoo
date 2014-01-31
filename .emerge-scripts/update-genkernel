@@ -7,4 +7,9 @@ if [ ! -f "${KERNEL_CONFIG}" ]; then
 	exit 1
 fi
 
-exec genkernel "--kernel-config=${KERNEL_CONFIG}" --luks --lvm all
+## check if root is mounted by device mapper (i.e. at LVM/Luks)
+if grep -q '^/dev/mapper/[^ ]\{1,\}\s\{1,\}/\s' /etc/fstab; then
+	exec genkernel "--kernel-config=${KERNEL_CONFIG}" --luks --lvm all
+else
+	exec genkernel "--kernel-config=${KERNEL_CONFIG}" --no-luks --no-lvm all
+fi

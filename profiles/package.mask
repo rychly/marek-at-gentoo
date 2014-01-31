@@ -7,3 +7,10 @@
 # Marek Rychly <marek.rychly@gmail.com> (2 May 2013)
 # app-dicts/stardict-tools[tools] is deprecated, use app-text/stardict[tools]
 =app-dicts/stardict-tools-3.0.1
+
+# Marek Rychly <marek.rychly@gmail.com> (29 Jan 2014)
+# Internal error: within file drivers/built-in.o, module vmlinux, type at DIE offset 1c1b487
+# with ID /usr/src/linux-3.8.13-16.3.1.el6uek/drivers/firmware/dmi-id.c//73//struct mafield const
+# was not already noted by detect_duplicates().
+# detect_duplicates() is probably buggy. I don't know how to fix it.
+=sys-kernel/ol6uek3-sources-3.8.13.16.3.1
