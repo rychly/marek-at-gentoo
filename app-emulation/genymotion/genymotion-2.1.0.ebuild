@@ -8,8 +8,8 @@ inherit eutils
 
 DESCRIPTION="Genymotion is a complete set of tools that provides a virtual environment for Android."
 HOMEPAGE="http://www.genymotion.com/"
-SRC_URI="x86? ( https://ssl-files.genymotion.com/genymotion/genymotion-${PV}/genymotion-${PV}_x86.bin )
-	amd64? ( https://ssl-files.genymotion.com/genymotion/genymotion-${PV}/genymotion-${PV}_x64.bin )"
+SRC_URI="x86? ( http://files2.genymotion.com/genymotion/genymotion-${PV}/genymotion-${PV}_x86.bin )
+	amd64? ( http://files2.genymotion.com/genymotion/genymotion-${PV}/genymotion-${PV}_x64.bin )"
 
 RESTRICT="mirror"
 LICENSE=""
@@ -18,6 +18,7 @@ KEYWORDS="amd64 x86"
 
 RDEPEND="|| ( >=app-emulation/virtualbox-4.1 >=app-emulation/virtualbox-bin-4.1 )
 	media-libs/libpng:1.2
+	virtual/jpeg:0
 	=dev-qt/qtcore-4.8*
 	=dev-qt/qtgui-4.8*
 	=dev-qt/qtscript-4.8*
@@ -30,11 +31,16 @@ src_unpack() {
 	local dist="${DISTDIR}/${A}"
 	# Retrieve line number where tar.bzip2 binary begins
 	local skip=$(awk '/^__TARFILE_FOLLOWS__/ { print NR + 1; exit 0; }' "${dist}")
-	[ $? -ne 0 ] && die "Unable to locate tar.bzip2 content!"
+	[[ $? -ne 0 ]] && die "Unable to locate tar.bzip2 content!"
 	# Untar following archive
 	tail -n +$skip "${dist}" | tar -xj -C "${WORKDIR}" || die "Unable to extract tar.bzip2 content!"
 	# Remove bundled Qt
 	rm -v "${WORKDIR}"/libQt*.so.4 || die "Unable to remove bundled Qt!"
+	# Symlink system libjpeg
+	local libdir=$(get_libdir)
+	if ! [[ -e "/usr/${libdir}/libjpeg.so.8" ]]; then
+		ln -s "/usr/${libdir}/libjpeg.so" "${WORKDIR}/libjpeg.so.8"
+	fi
 }
 
 src_install() {
