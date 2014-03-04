@@ -2,11 +2,14 @@
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
+EAPI=3
+
 inherit eutils
 
 MYPNMAIN="${PN%%-bin}"
 MYVERMAJ="${PV%%_p*}"
 MYVERMIN="${PV##*_p}"
+MYVERBAS=$(echo "${MYVERMAJ}" | cut -d . -f 1-2)
 
 DESCRIPTION="Modelio is an open source modeling environment which can be extended through modules to add functionalities and services."
 HOMEPAGE="http://www.modelio.org/"
@@ -17,10 +20,10 @@ SRC_URI="\
 SLOT="0"
 RESTRICT="nomirror"
 KEYWORDS="x86 amd64"
-DEPEND=""
+DEPEND="net-libs/webkit-gtk:2" # for org.eclipse.swt.SWTError: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]
 RDEPEND=">=virtual/jre-1.5"
 
-S="${WORKDIR}/Modelio ${MYVERMAJ}"
+S="${WORKDIR}/Modelio ${MYVERBAS}"
 INSTALLDIR="/opt/${PN}"
 
 src_unpack() {
@@ -33,14 +36,9 @@ src_unpack() {
 
 src_install() {
 	dodir "${INSTALLDIR}"
-	mv "${S}"/* "${D}/${INSTALLDIR}"
+	mv "${S}"/* "${D}/${INSTALLDIR}" || die "Unable to move file for instalation!"
 	# we will utilise the existing launcher provided by the package
 	dodir /etc/env.d
 	echo -e "PATH=${INSTALLDIR}\nROOTPATH=${INSTALLDIR}" > "${D}/etc/env.d/10${PN}"
 	make_desktop_entry "sh -c \"exec ${INSTALLDIR}/${MYPNMAIN} -data ~/${MYPNMAIN}\"" "Modelio ${MYVERMAJ}" "${INSTALLDIR}/icon.xpm" "Development;IDE"
 }
-
-#pkg_postinst() {
-	# Known Bugs:
-	# * org.eclipse.swt.SWTError: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)] -- no mozilla[java] in Getnoo
-#}

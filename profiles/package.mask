@@ -14,3 +14,7 @@
 # was not already noted by detect_duplicates().
 # detect_duplicates() is probably buggy. I don't know how to fix it.
 =sys-kernel/ol6uek3-sources-3.8.13.16.3.1
+
+# Marek Rychly <marek.rychly@gmail.com> (4 Mar 2014)
+# Problems with automatic update of the application run by a user in the installation directory owned by root.
+=net-misc/jDownloader-9999
