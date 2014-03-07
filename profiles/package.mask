@@ -18,3 +18,7 @@
 # Marek Rychly <marek.rychly@gmail.com> (4 Mar 2014)
 # Problems with automatic update of the application run by a user in the installation directory owned by root.
 =net-misc/jDownloader-9999
+
+# Marek Rychly <marek.rychly@gmail.com> (7 Mar 2014)
+# Java WebStart depredated, URL of *.jnlp file not found.
+app-mobilephone/esmska-ws
