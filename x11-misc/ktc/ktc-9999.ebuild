@@ -27,10 +27,32 @@ DEPEND="${RDEPEND}
 	dev-libs/dbus-glib
 	dev-util/vala-dbus-binding-tool"
 
+darcsden_download() {
+	local SRC="${1}"
+	local DST="${2}"
+	echo "Fetching ${SRC} into ${DST} ..."
+	local URLS=$(wget "${SRC}" -O - | \
+		grep -o 'class="\(directory\|file\)"\|[^"]*/browse/[^"]*' | \
+		tr '\n' ' ' | \
+		sed 's/class="\([^"]\)[^"]*" \([^ ]*\) /\1|\2\n/g' \
+	)
+	[[ $? -eq 0 ]] || return -1
+	mkdir -p "${DST}"
+	for I in ${URLS}; do
+		local TYPE="${I:0:1}"
+		local URL="${I:2}"
+		if [[ "${TYPE}" == 'f' ]]; then
+			wget --directory-prefix="${DST}" "${URL//\/browse\///raw/}" || return -2
+		elif [[ "${TYPE}" == 'd' ]]; then
+			darcsden_download "${URL}/" "${DST}/$(basename ${URL})"
+			[[ $? -eq 0 ]] || return $?
+		fi
+	done
+	return 0
+}
+
 src_unpack() {
-	local MY_SRC_URI=$(wget "${EDARCS_REPOSITORY}" -O - | grep -o '[^"]*/browse/[^"]*' | sed 's:/browse/:/raw/:g' | tr '\n' ' ')
-	[ $? -ne 0 ] && die "Cannot download a list of files in the repository!"
-	wget --directory-prefix="${WORKDIR}" ${MY_SRC_URI} || die "Cannot download source files from the repository!"
+	darcsden_download "${EDARCS_REPOSITORY}" "${WORKDIR}" || die "Cannot download source files from the repository!"
 }
 
 src_prepare() {
@@ -38,6 +60,7 @@ src_prepare() {
 	sed -i \
 		-e 's:^\(XML *= *\).*$:\1/usr/share/dbus-1/interfaces/kbdd-service-interface.xml:' \
 		-e "s:^\(VALAC *= *\).*\$:\1${VALAC}:" \
+		-e 's:^\(VALACOPTS *=.*\) --fatal-warnings \(.*\)$:\1 \2:' \
 		"${WORKDIR}/Makefile"
 }
 
