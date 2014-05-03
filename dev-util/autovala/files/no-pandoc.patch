@@ -1,0 +1,18 @@
+diff -urN CMakeLists.txt.old CMakeLists.txt
+--- CMakeLists.txt.old	2014-05-03 19:23:37.292638397 +0200
++++ CMakeLists.txt	2014-05-03 19:23:45.464638155 +0200
+@@ -35,10 +35,10 @@
+ 
+ pkg_check_modules(DEPS REQUIRED ${MODULES_TO_CHECK})
+ 
+-find_program ( WHERE_PANDOC pandoc )
+-if ( NOT WHERE_PANDOC )
+-	MESSAGE(FATAL_ERROR "Error! PANDOC is not installed.")
+-endif()
++#find_program ( WHERE_PANDOC pandoc )
++#if ( NOT WHERE_PANDOC )
++#	MESSAGE(FATAL_ERROR "Error! PANDOC is not installed.")
++#endif()
+ 
+ add_subdirectory(doc)
+ add_subdirectory(po)
