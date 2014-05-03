@@ -1,10 +1,10 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=3
 
-inherit vala eutils
+inherit cmake-utils vala
 
 ## will be downloaded directly from the repository's web-server via HTTP, DARCS not needed
 #inherit darcs
@@ -13,7 +13,7 @@ DESCRIPTION="System tray companion for kbdd."
 HOMEPAGE="http://hub.darcs.net/zabbal/ktc"
 EDARCS_REPOSITORY="http://hub.darcs.net/zabbal/${PN}"
 
-LICENSE="AGPL-3"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64"
 IUSE=""
@@ -22,7 +22,7 @@ RDEPEND="x11-misc/kbdd[dbus]
 	sys-apps/dbus"
 DEPEND="${RDEPEND}
 	net-misc/wget
-	dev-lang/vala
+	dev-util/autovala
 	x11-libs/libnotify
 	dev-libs/dbus-glib
 	dev-util/vala-dbus-binding-tool"
@@ -52,20 +52,39 @@ darcsden_download() {
 }
 
 src_unpack() {
-	darcsden_download "${EDARCS_REPOSITORY}" "${WORKDIR}" || die "Cannot download source files from the repository!"
+	mkdir "${S}"
+	darcsden_download "${EDARCS_REPOSITORY}" "${S}" || die "Cannot download source files from the repository!"
 }
 
 src_prepare() {
+	# inicialize Vala
 	vala_src_prepare
-	sed -i \
-		-e 's:^\(XML *= *\).*$:\1/usr/share/dbus-1/interfaces/kbdd-service-interface.xml:' \
-		-e "s:^\(VALAC *= *\).*\$:\1${VALAC}:" \
-		-e 's:^\(VALACOPTS *=.*\) --fatal-warnings \(.*\)$:\1 \2:' \
-		"${WORKDIR}/Makefile"
+	local VALAVER=${VALAC##*-}
+	sed -i "s/^\\(\\s*NAMES valac\\)\\()\\)\$/\\1-${VALAVER}\\2/g" "${S}/cmake/FindVala.cmake"
+	# disable dbus introspection
+	sed -i 's/^\(dbus_interface:.*\)$/#\1/g' "${S}/ktc.avprj"
+}
+
+src_configure() {
+	# autovala
+	cd "${S}"
+	autovala cmake
+	# generate dbus bindings
+	mkdir -p "${S}/src/dbus_generated/ru.gentoo.KbddService/ru/gentoo/KbddService"
+	vala-dbus-binding-tool --gdbus --api-path=/usr/share/dbus-1/interfaces/kbdd-service-interface.xml "--directory=${S}/src/dbus_generated/ru.gentoo.KbddService/ru/gentoo/KbddService"
+	sed -i "s|^\\(set (APP_SOURCES \${APP_SOURCES} kbdd_tray_companion.vala)\\)$|\1\nset (APP_SOURCES \${APP_SOURCES} dbus_generated/ru.gentoo.KbddService/ru/gentoo/KbddService/ru-gentoo.vala)|" \
+		"${S}/src/CMakeLists.txt"
+	# cmake
+	cmake-utils_src_configure
+}
+
+src_compile() {
+	cmake-utils_src_compile
 }
 
 src_install() {
-	dobin kbdd_tray_companion
+	cmake-utils_src_install
 	dodoc LICENSE README
-	make_desktop_entry "kbdd_tray_companion" "KBDD tray companion" "preferences-desktop-keyboard" "System"
+	make_desktop_entry "ktc --flags=.icons/flags --extension=.svg --unknown=Unknown --libnotify-time=220" \
+		"KBDD tray companion" "preferences-desktop-keyboard" "System"
 }
