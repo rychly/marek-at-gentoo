@@ -57,11 +57,11 @@ src_compile() {
 
 src_install() {
 	cmake-utils_src_install
-	#dosym ${VALAC} /usr/bin/vala
+	#dosym ${VALAC} /usr/bin/valac
 }
 
 pkg_postinst() {
-	local VALACSYMLINK=/usr/bin/vala
+	local VALACSYMLINK=/usr/bin/valac
 	einfo "Autovala requires valac binnary without -version suffix, creating symlink:"
 	einfo "	${VALACSYMLINK} -> ${VALAC}"
 	ln -s ${VALAC} ${VALACSYMLINK} || die "Unable to create the symlink!"
