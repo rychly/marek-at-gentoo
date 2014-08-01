@@ -15,8 +15,8 @@ DESCRIPTION="Modelio is first and foremost a modeling environment, supporting a 
 HOMEPAGE="http://www.modeliosoft.com/en/download/dl-modelio.html"
 SRC_URI_PREFIX="http://www.modeliosoft.com/en/component/docman/doc_download"
 SRC_URI="\
-	x86?	( ${SRC_URI_PREFIX}/660-solution-modelio-${MYVERMAJ//./}-debian-32-bit.html -> modelio-modeler-3.1.1-i386.deb )
-	amd64?	( ${SRC_URI_PREFIX}/659-solution-modelio-${MYVERMAJ//./}-debian-64-bit.html -> modelio-modeler-3.1.1-amd64.deb )"
+	x86?	( ${SRC_URI_PREFIX}/660-solution-modelio-${MYVERMAJ//./}-debian-32-bit.html -> modelio-modeler-${MYVERMAJ}-i386.deb )
+	amd64?	( ${SRC_URI_PREFIX}/659-solution-modelio-${MYVERMAJ//./}-debian-64-bit.html -> modelio-modeler-${MYVERMAJ}-amd64.deb )"
 SLOT="0"
 RESTRICT="fetch"
 KEYWORDS="x86 amd64"
