@@ -18,7 +18,7 @@ IUSE=""
 
 DEPEND="sys-auth/polkit
     x11-libs/libnotify
-    sys-power/upower
+    || ( >=sys-power/upower-0.9.23 sys-power/upower-pm-utils )
     x11-libs/gtk+:2
     dev-libs/glib:2"
 RDEPEND="${DEPEND}"
