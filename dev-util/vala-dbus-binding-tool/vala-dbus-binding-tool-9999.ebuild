@@ -19,7 +19,7 @@ KEYWORDS="~arm ~x86 ~amd64"
 IUSE=""
 
 RDEPEND=">=dev-libs/glib-2.18.0
-	>=dev-libs/libgee-0.6.0"
+	>=dev-libs/libgee-0.6.0:0"
 DEPEND="${RDEPEND}
 	$(vala_depend)"
 
