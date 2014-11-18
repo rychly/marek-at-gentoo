@@ -4,9 +4,9 @@
 
 inherit eutils
 
-VP_MIRROR="eu5"
-#VP_SRCD="archives"
-VP_SRCD="visual-paradigm"
+VP_MIRROR="eu3"
+VP_SRCD="archives"
+#VP_SRCD="visual-paradigm"
 VP_MAIN=${PV%%.?_*}
 VP_FULL=${PV%%_*} VP_SPNO=${VP_FULL##*.}
 VP_PTCH=${PV##*_p}
@@ -46,12 +46,4 @@ src_install() {
 	echo -e "PATH=${INSTALLDIR}/bin\nROOTPATH=${INSTALLDIR}" > "${D}/etc/env.d/10${PN}"
 	make_desktop_entry "${INSTALLDIR}/bin/Visual_Paradigm" "Visual Paradigm ${VP_MAIN}" "${INSTALLDIR}/resources/vpuml.png" "Development;IDE"
 	make_desktop_entry "${INSTALLDIR}/bin/Visual_Paradigm_Shape_Editor" "Visual Paradigm Shape Editor ${VP_MAIN}" "${INSTALLDIR}/resources/vpuml.png" "Development;IDE"
-}
-
-pkg_postinst() {
-	einfo ""
-	einfo "To finish the Visual Paradigm ${VP_MAIN} installation you need to execute:"
-	ewarn "    ${INSTALLDIR}/bin/Visual_Paradigm_Product_Selector"
-	einfo "and select installed installed product version and licence keys."
-	einfo ""
 }
