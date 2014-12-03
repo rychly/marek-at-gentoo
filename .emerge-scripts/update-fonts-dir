@@ -1,4 +1,7 @@
 #!/bin/bash
-mkfontdir -- `cat /etc/X11/xorg.conf | grep '^[^#]*FontPath' | sed 's/^.*"\(.*\)"$/\1/' | sed 's/:unscaled//' | tr '\n' ' '`
+#FONTDIRS=`cat /etc/X11/xorg.conf | grep '^[^#]*FontPath' | sed 's/^.*"\(.*\)"$/\1/' | sed 's/:unscaled//' | tr '\n' ' '`
+FONTDIRS=$(ls /usr/share/fonts/*/fonts.{dir,alias} | cut -d '/' -f 1-5 | uniq | tr '\n' ' ')
+mkfontdir -- ${FONTSDIR}
 fc-cache -fsv
+xset fp default
 xset fp rehash
