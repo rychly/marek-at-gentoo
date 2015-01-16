@@ -12,7 +12,7 @@ HOSTOS=i686-pc-linux-gnu
 T1=${PV//./-} VER=${T1/-/.}
 MAINVER=${VER%-*}
 
-DESCRIPTION="Sourcery CodeBench is a complete development environment for embedded C/C++ development on ARM, Power, ColdFire, and other architectures (GCC 4.5)."
+DESCRIPTION="Sourcery CodeBench is a complete development environment for embedded C/C++ development on ARM, Power, ColdFire, and other architectures."
 HOMEPAGE="http://www.mentor.com/embedded-software/sourcery-tools/sourcery-codebench/editions/lite-edition/ https://sourcery.mentor.com/GNUToolchain/release${RELEASE}"
 SRC_URI="https://sourcery.mentor.com/public/gnu_toolchain/${TARGETOS}/${TARGETARCH}-${VER}-${TARGETOS}-${HOSTOS}.tar.bz2 -> ${P}.tar.bz2"
 #SRC_URI="https://sourcery.mentor.com/GNUToolchain/package${PACKAGE}/public/${TARGETOS}/${TARGETARCH}-${VER}-${TARGETOS}-${HOSTOS}.tar.bz2 -> ${P}.tar.bz2"
@@ -21,10 +21,10 @@ LICENSE=""
 KEYWORDS="x86 amd64"
 RESTRICT="nomirror strip binchecks"
 
-SLOT="0"
+SLOT="${RELEASE}"
 
 S="${WORKDIR}/${TARGETARCH}-${MAINVER}"
-INSTALLDIR="/opt/${PN}"
+INSTALLDIR="/opt/${PN}-r${RELEASE}"
 
 src_install() {
 	dodir "${INSTALLDIR}"
@@ -33,6 +33,13 @@ src_install() {
 	doman "${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man1"/*.1 #"${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man7"/*.7 # do not install man-pages for licences
 	doinfo "${S}/share/doc/${TARGETARCH}-${TARGETOS}/info"/*.info
 	# env
-	dodir /etc/env.d
-	echo -e "PATH=${INSTALLDIR}/bin\nROOTPATH=${INSTALLDIR}" > "${D}/etc/env.d/10${PN}"
+	#dodir /etc/env.d
+	#echo -e "PATH=${INSTALLDIR}/bin\nROOTPATH=${INSTALLDIR}" > "${D}/etc/env.d/10${PN}"
+}
+
+pkg_postinst() {
+	einfo ""
+	einfo "To use the development environment, you will need to add the following directory into PATH:"
+	ewarn "    ${INSTALLDIR}/bin"
+	einfo ""
 }
