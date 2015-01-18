@@ -1,0 +1,12 @@
+diff -urN src/common.c.old src/common.c
+--- src/common.c.old	2015-01-18 15:12:23.974823106 +0100
++++ src/common.c	2015-01-18 15:16:31.390816620 +0100
+@@ -1934,7 +1934,7 @@
+     size_t item_len = strlen(array[i]);
+     memcpy(p, array[i], item_len);
+     p += item_len;
+-    if(i < array_size)
++    if(i < array_size-1)
+       *p++ = delim;
+   }
+   *p = '\0';
