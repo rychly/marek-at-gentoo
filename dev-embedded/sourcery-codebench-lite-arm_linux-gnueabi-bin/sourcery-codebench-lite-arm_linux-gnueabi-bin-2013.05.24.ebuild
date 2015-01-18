@@ -1,8 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=2
+EAPI=4
 
 RELEASE=2450
 PACKAGE=11447
@@ -17,7 +17,7 @@ HOMEPAGE="http://www.mentor.com/embedded-software/sourcery-tools/sourcery-codebe
 SRC_URI="https://sourcery.mentor.com/public/gnu_toolchain/${TARGETOS}/${TARGETARCH}-${VER}-${TARGETOS}-${HOSTOS}.tar.bz2 -> ${P}.tar.bz2"
 #SRC_URI="https://sourcery.mentor.com/GNUToolchain/package${PACKAGE}/public/${TARGETOS}/${TARGETARCH}-${VER}-${TARGETOS}-${HOSTOS}.tar.bz2 -> ${P}.tar.bz2"
 
-LICENSE=""
+LICENSE="ESHLA"
 KEYWORDS="x86 amd64"
 RESTRICT="nomirror strip binchecks"
 
@@ -30,8 +30,12 @@ src_install() {
 	dodir "${INSTALLDIR}"
 	mv "${S}/${TARGETOS}" "${S}/bin" "${S}/lib" "${S}/libexec" "${D}/${INSTALLDIR}/" || die "Cannot install"
 	dodoc "${S}/share/doc/${TARGETARCH}-${TARGETOS}"/*.txt "${S}/share/doc/${TARGETARCH}-${TARGETOS}/pdf"/*.pdf "${S}/share/doc/${TARGETARCH}-${TARGETOS}/pdf/gcc"/*.pdf
-	doman "${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man1"/*.1 #"${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man7"/*.7 # do not install man-pages for licences
-	doinfo "${S}/share/doc/${TARGETARCH}-${TARGETOS}/info"/*.info
+	# We use full package name (one for each ${SLOT}) share directory instead of doman and doinfo
+	insinto "/usr/share/${P}/man"
+	doins "${S}/share/doc/${TARGETARCH}-${TARGETOS}/man/man1"/* # not man7 as we do not install man-pages for licences
+	insinto "/usr/share/${P}/info"
+	doins "${S}/share/doc/${TARGETARCH}-${TARGETOS}/info"/*.info
+	docompress "/usr/share/${P}/man" "/usr/share/${P}/info"
 	# env
 	#dodir /etc/env.d
 	#echo -e "PATH=${INSTALLDIR}/bin\nROOTPATH=${INSTALLDIR}" > "${D}/etc/env.d/10${PN}"
