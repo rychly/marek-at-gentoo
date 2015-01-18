@@ -31,9 +31,6 @@ src_prepare() {
 			-i docs/Makefile.am || die
 	fi
 
-	# fix for https://github.com/dajobe/flickcurl/issues/27 (tree 2e5b647)
-	epatch "${FILESDIR}/flickcurl_array_join_delim.patch"
-
 	eautoreconf
 }
 
