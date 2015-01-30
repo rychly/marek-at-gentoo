@@ -1,10 +1,10 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 inherit eutils
 
-MYSQLCONVER=5.1.28
+MYSQLCONVER=5.1.34
 
 DESCRIPTION="Oracle SQL Developer is a free graphical tool for database development."
 HOMEPAGE="http://www.oracle.com/technology/products/database/sql_developer/"
