@@ -27,6 +27,10 @@ RDEPEND=">=virtual/jre-1.5"
 S="${WORKDIR}/Visual_Paradigm_CE_${VP_MAIN}"
 INSTALLDIR="/opt/${PN}"
 
+src_prepare() {
+	epatch "${FILESDIR}/report4UseCaseDiagram.patch"
+}
+
 src_unpack() {
 	unpack ${A}
 	# remove bundled Java, uninstaller, updater, and Windows binaries

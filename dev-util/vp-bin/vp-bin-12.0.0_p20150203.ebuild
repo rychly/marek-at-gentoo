@@ -1,6 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
+
+EAPI=3
 
 inherit eutils
 
@@ -26,6 +28,10 @@ RDEPEND=">=virtual/jre-1.5"
 
 S="${WORKDIR}/Visual_Paradigm_${VP_MAIN}"
 INSTALLDIR="/opt/${PN}"
+
+src_prepare() {
+	epatch "${FILESDIR}/report4UseCaseDiagram.patch"
+}
 
 src_unpack() {
 	unpack ${A}
