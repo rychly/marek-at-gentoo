@@ -30,6 +30,7 @@ S="${WORKDIR}/Visual_Paradigm_${VP_MAIN}"
 INSTALLDIR="/opt/${PN}"
 
 src_prepare() {
+	epatch "${FILESDIR}/report4ERDiagram.patch"
 	epatch "${FILESDIR}/report4UseCaseDiagram.patch"
 }
 

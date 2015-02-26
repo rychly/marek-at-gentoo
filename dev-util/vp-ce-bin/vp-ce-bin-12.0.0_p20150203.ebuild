@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
+EAPI=3
+
 inherit eutils
 
 VP_MIRROR="eu5"
@@ -28,6 +30,7 @@ S="${WORKDIR}/Visual_Paradigm_CE_${VP_MAIN}"
 INSTALLDIR="/opt/${PN}"
 
 src_prepare() {
+	epatch "${FILESDIR}/report4ERDiagram.patch"
 	epatch "${FILESDIR}/report4UseCaseDiagram.patch"
 }
 

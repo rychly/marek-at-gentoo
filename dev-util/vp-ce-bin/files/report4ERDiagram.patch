@@ -1,0 +1,12 @@
+diff -urN Application/resources/Report/Default/ERDiagram/CombinedTemplate/DataSpecificationReport.xml.old Application/resources/Report/Default/ERDiagram/CombinedTemplate/DataSpecificationReport.xml
+--- Application/resources/Report/Default/ERDiagram/CombinedTemplate/DataSpecificationReport.xml.old	2015-02-26 21:22:57.817971808 +0100
++++ Application/resources/Report/Default/ERDiagram/CombinedTemplate/DataSpecificationReport.xml	2015-02-26 21:23:06.213972051 +0100
+@@ -1,6 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <CombinedTemplate id="Data Specification Report" name="Data Specification Report" type="imageWithLoop" default="false">
++	<!-- DiagramImage will be provided in separate file
+ 	<Include template="DataSpecificationReport/DiagramImage.xml"/>
++	-->
+ 	<Loop modelType="DBTable">
+ 		<Include template="DataSpecificationReport/Entity.xml"/>
+ 	</Loop>
