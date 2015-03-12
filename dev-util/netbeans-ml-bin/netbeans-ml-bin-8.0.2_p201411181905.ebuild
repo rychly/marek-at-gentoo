@@ -1,6 +1,8 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
+
+EAPI=3
 
 inherit eutils
 
@@ -9,17 +11,17 @@ NB_DATE=${PV##*_p}
 
 DESCRIPTION="The NetBeans IDE is a free, open-source Integrated Development Environment for software developers."
 HOMEPAGE="http://www.netbeans.org/products/ide/"
-SRC_URI="http://download.netbeans.org/netbeans/${NB_MAJV}/final/zip/netbeans-${NB_MAJV}-${NB_DATE}-ml.zip"
+SRC_URI="http://dlc-cdn.sun.com/netbeans/${NB_MAJV}/final/zip/netbeans-${NB_MAJV}-${NB_DATE}.zip"
 SLOT="0"
 RESTRICT="nomirror"
 KEYWORDS="x86 amd64"
 IUSE="tomcat"
-PDEPEND=">=virtual/jre-1.6
-	tomcat? ( >=virtual/jdk-1.6 =www-servers/tomcat-6.0* )"
+PDEPEND=">=virtual/jre-1.7
+	tomcat? ( >=virtual/jdk-1.7 >=www-servers/tomcat-7 )"
 
 S="${WORKDIR}/netbeans"
 INSTALLDIR="/opt/${PN}"
-TOMCATENDORSED60="/usr/share/tomcat-6/endorsed" # ${/etc/conf.d/tomcat-6:CATALINA_HOME}/endorsed
+TOMCATENDORSED70="/usr/share/tomcat-7/endorsed" # ${/etc/conf.d/tomcat-7:CATALINA_HOME}/endorsed
 
 src_unpack() {
 	unpack ${A}
@@ -50,8 +52,8 @@ END
 	# move JAX-WS 2.1 APIs to Tomcat's endorsed directory (-Djava.endorsed.dirs=/usr/share/tomcat-6/endorsed)
 	# http://wiki.netbeans.info/wiki/view/FaqEndorsedDirTomcat
 	if use tomcat; then
-		dodir "${TOMCATENDORSED60}"
-		ln "${D}/${INSTALLDIR}/java1/modules/ext/jaxws21/api"/*.jar "${D}/${TOMCATENDORSED60}/" \
+		dodir "${TOMCATENDORSED70}"
+		ln "${D}/${INSTALLDIR}/java1/modules/ext/jaxws21/api"/*.jar "${D}/${TOMCATENDORSED70}/" \
 		|| die "Cannot move JAX-WS 2.1 APIs to Tomcat's endorsed directory."
 	fi
 }
@@ -60,11 +62,11 @@ pkg_postinst() {
 	if use tomcat; then
 		elog
 		elog  " We moved JAX-WS 2.1 APIs to Tomcat's endorsed directory"
-		ewarn "  ${TOMCATENDORSED60}"
+		ewarn "  ${TOMCATENDORSED70}"
 		elog  " Please finish this operation in /etc/conf.d/tomcat-6 by checking"
-		ewarn "  CATALINA_HOME=${TOMCATENDORSED60%%endorsed}"
+		ewarn "  CATALINA_HOME=${TOMCATENDORSED70%%endorsed}"
 		elog  " and by adding of the following java option and enabling it"
-		ewarn "  JAVA_OPTS=\"-Djava.endorsed.dirs=${TOMCATENDORSED60}\""
+		ewarn "  JAVA_OPTS=\"-Djava.endorsed.dirs=${TOMCATENDORSED70}\""
 		elog  " See http://wiki.netbeans.info/wiki/view/FaqEndorsedDirTomcat for more information."
 		elog
 	fi
