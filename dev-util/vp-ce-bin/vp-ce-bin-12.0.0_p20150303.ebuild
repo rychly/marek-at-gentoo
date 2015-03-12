@@ -16,13 +16,17 @@ VP_PTCH=${PV##*_p}
 
 DESCRIPTION="Visual Paradigm Community Edition is a software design tool for agile software projects which supports modeling standards such as UML, SysML, ERD, DFD, BPMN, ArchiMate, etc."
 HOMEPAGE="https://www.visual-paradigm.com/editions/community.jsp"
-SRC_URI_PREFIX="http://${VP_MIRROR}.visual-paradigm.com/${VP_SRCD}/vpce${VP_MAIN}/${VP_SPREFIX}${VP_PTCH}/Visual_Paradigm_CE_${VP_MAIN//./_}_${VP_SPREFIX}${VP_PTCH}"
+SRC_URI_PREFIX="http://${VP_MIRROR}.visual-paradigm.com/${VP_SRCD}/vpce${VP_MAIN}/${VP_SPREFIX}${VP_PTCH}"
+SRC_URI_PGKPREFIX="Visual_Paradigm_CE_${VP_MAIN//./_}_${VP_SPREFIX}${VP_PTCH}"
+SRC_URI_HLPFILE="Visual_Paradigm_CE_${VP_MAIN//./_}_${VP_SPREFIX}${VP_PTCH}_Help.jar"
 SRC_URI="\
-	x86?	( ${SRC_URI_PREFIX}_Linux32_InstallFree.tar.gz )
-	amd64?	( ${SRC_URI_PREFIX}_Linux64_InstallFree.tar.gz )"
+	x86?	( ${SRC_URI_PREFIX}/${SRC_URI_PGKPREFIX}_Linux32_InstallFree.tar.gz )
+	amd64?	( ${SRC_URI_PREFIX}/${SRC_URI_PGKPREFIX}_Linux64_InstallFree.tar.gz )
+	help?	( ${SRC_URI_PREFIX//vpce/vp}/Update/lib/vp-help.jar -> ${SRC_URI_HLPFILE} )"
 SLOT="0"
 RESTRICT="nomirror"
 KEYWORDS="x86 amd64"
+IUSE="+help"
 DEPEND=""
 RDEPEND=">=virtual/jre-1.5"
 
@@ -35,7 +39,7 @@ src_prepare() {
 }
 
 src_unpack() {
-	unpack ${A}
+	unpack ${A/${SRC_URI_HLPFILE}/}
 	# remove bundled Java, uninstaller, updater, and Windows binaries
 	rm -rf "${S}/jre" "${S}/Application/uninstaller" "${S}/Application/updatesynchronizer" "${S}/Application/bin/vp_windows"
 	# make scripts executable
@@ -47,10 +51,18 @@ src_unpack() {
 }
 
 src_install() {
+	# install distribution package
 	dodir "${INSTALLDIR}"
 	mv "${S}"/* "${S}/.install4j" "${D}/${INSTALLDIR}"
+	# install help
+	if use help; then
+		insinto "${INSTALLDIR}/Application/lib"
+		newins "${DISTDIR}/${SRC_URI_HLPFILE}" "vp-help.jar"
+	fi
+	# register paths
 	dodir /etc/env.d
 	echo -e "PATH=${INSTALLDIR}/Application/bin\nROOTPATH=${INSTALLDIR}" > "${D}/etc/env.d/10${PN}"
+	# make desktop entries
 	make_desktop_entry "${INSTALLDIR}/Application/bin/Visual_Paradigm" "Visual Paradigm Community Edition ${VP_MAIN}" "${INSTALLDIR}/Application/resources/vpuml.png" "Development;IDE"
 	make_desktop_entry "${INSTALLDIR}/Application/bin/Visual_Paradigm_Shape_Editor" "Visual Paradigm Community Edition Shape Editor ${VP_MAIN}" "${INSTALLDIR}/Application/resources/vpuml.png" "Development;IDE"
 }
