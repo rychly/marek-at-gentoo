@@ -1,5 +1,5 @@
 #!/bin/sh
-# smazeme zbytecne distribucni balicky
+# delete distribution files
 eclean --destructive --interactive $* distfiles
-# smazeme zbytecne binarni balicky
-eclean --destructive --interactive $* packages
+# delete package backups
+exec eclean --destructive --interactive $* packages

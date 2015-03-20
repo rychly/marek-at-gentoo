@@ -1,7 +1,14 @@
 #!/bin/sh
-# updatuje lokalni overlay
-UIMP=/var/portage/imported/update.sh
-[ -x "${UIMP}" ] && "${UIMP}"
-# updatuje portage overlays spravovane Laymanem a cely portage strom vc. eix-cache
-# viz konfigurace v /etc/eix-sync.conf
-exec eix-sync
+
+# update "imported" overlay by a script
+IMPDIR="$(portageq get_repo_path / imported)"
+IMPSCR="${IMPDIR}/update.sh"
+[[ -d "${IMPDIR}" && -x "${IMPSCR}" ]] && "${IMPSCR}"
+
+# update gentoo portage and overlays managed by repositories-configuration in repos.conf.d (see portage(5))
+emerge --sync
+
+# update eix database
+mv -v /var/cache/eix/portage.eix /var/cache/eix/previous.eix
+eix-update
+exec eix-diff

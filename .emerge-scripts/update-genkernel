@@ -2,7 +2,7 @@
 
 KERNEL_CONFIG=./.config
 
-if [ ! -f "${KERNEL_CONFIG}" ]; then
+if [[ ! -f "${KERNEL_CONFIG}" ]]; then
 	echo "Current working directory needs to be the one with a kernel sources!" >&2
 	exit 1
 fi

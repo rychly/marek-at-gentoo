@@ -1,5 +1,5 @@
 #!/bin/sh
 # deprecated
-exec revdep-rebuild --verbose --ignore -- --pretend --verbose $*
+#exec revdep-rebuild --verbose --ignore -- --pretend --verbose $*
 # new method that will be supported in future
-#exec emerge --ask --verbose --oneshot @preserved-rebuild $*
+exec emerge --ask --verbose --oneshot @preserved-rebuild $*

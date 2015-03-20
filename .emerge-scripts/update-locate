@@ -3,7 +3,7 @@
 UPDATE=/usr/bin/updatedb
 CONF=/etc/updatedb.conf
 
-if [ -x ${UPDATE} ]; then
+if [[ -x ${UPDATE} ]]; then
 	echo -n "Updating locate database ... "
 	if [ -f ${CONF} ]; then
 		nice ${UPDATE}
