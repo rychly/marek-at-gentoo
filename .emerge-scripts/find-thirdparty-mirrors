@@ -1,0 +1,14 @@
+#!/bin/sh
+
+LIST="$(portageq get_repo_path / gentoo)/profiles/thirdpartymirrors"
+
+if [ -z "${1}" ]; then
+	echo "Usage:	${0} <url-substring>" >&2
+	echo "# List mirrors from "${LIST}" which contains given substring (e.g. '.com')." >&2
+	exit 1
+fi
+
+cat "${LIST}" | while read M; do
+	OUT=$(echo "${M}" | grep -o '[^	]*$' | tr ' ' '\n' | grep -o "[^ ]*${1//./\\.}[^ ]*" | tr '\n' ' ')
+	[ -n "${OUT}" ] && echo $(echo "${M}" | grep -o '^[^	]*' ) "${OUT}"
+done

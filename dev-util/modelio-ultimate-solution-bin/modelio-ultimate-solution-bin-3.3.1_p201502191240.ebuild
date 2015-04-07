@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
@@ -12,13 +12,27 @@ MYVERMIN="${PV##*_p}" # full version from *.deb:/control.tar.gz:/control
 MYVERBAS=$(echo "${MYVERMAJ}" | cut -d . -f 1-2)
 
 DESCRIPTION="The Modeliosoft Ultimate Solution provides the entire set of features and modules for the most advanced users of Modelio who want to get the very most out of their models."
-HOMEPAGE="http://www.modeliosoft.com/en/download/ultimate-solution.html"
+HOMEPAGE="https://www.modeliosoft.com/en/products/solutions/ultimate-solution-overview.html"
+DOWNLOAD_PAGE="http://www.modeliosoft.com/en/download/ultimate-solution.html"
 SRC_URI="http://www.modeliosoft.com/en/component/docman/doc_download/942-solution-ultimate-solution-${MYVERMAJ//./}-debian.html -> modelio-ultimate-solution-${MYVERMAJ}-all.deb"
 SLOT="0"
 RESTRICT="fetch"
 KEYWORDS="x86 amd64"
 DEPEND=""
 RDEPEND="=dev-util/modelio-modeler-bin-${MYVERMAJ}_p*"
+
+pkg_nofetch() {
+	einfo
+	einfo " Because of license terms and file name conventions, please:"
+	einfo
+	einfo " 1. Visit ${DOWNLOAD_PAGE}"
+	einfo "    (you may need to create an account on Modeliosoft's site)"
+	einfo " 2. Download the appropriate file:"
+	einfo "    ${SRC_URI}"
+	einfo " 3. Place the files in ${DISTDIR}"
+	einfo " 4. Resume the installation."
+	einfo
+}
 
 src_prepare() {
 	# from *.deb:/control.tar.gz:/postinst

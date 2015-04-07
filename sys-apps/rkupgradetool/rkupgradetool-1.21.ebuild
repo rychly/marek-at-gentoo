@@ -13,9 +13,9 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 RESTRICT="mirror"
 
-S=${WORKDIR}
+S="${WORKDIR}/Linux_Upgrade_Tool_v${PV}"
 
 src_install() {
 	dodir "/usr/bin"
-	mv "${S}/upgrade_tool" "${D}/usr/bin/${PN}"
+	mv "${S}/upgrade_tool" "${D}/usr/bin/${PN}" || die 'cannot install binary'
 }
