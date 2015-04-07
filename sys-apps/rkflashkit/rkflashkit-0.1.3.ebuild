@@ -10,7 +10,7 @@ inherit python-single-r1 waf-utils
 
 DESCRIPTION="A toolkit for flashing Linux kernel images to rk3066/rk3188/rk3288 based devices."
 HOMEPAGE="https://github.com/linuxerwang/rkflashkit"
-COMMIT_ID="115dd21fa0f350f94c6a7e1da6685b9492185f3e"
+COMMIT_ID="224eeefec43f051e934055c37f32f331fe0d1499"
 SRC_URI="https://github.com/linuxerwang/${PN}/archive/${COMMIT_ID}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
