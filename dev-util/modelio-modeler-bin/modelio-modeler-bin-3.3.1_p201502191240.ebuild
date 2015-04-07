@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
@@ -15,8 +15,8 @@ DESCRIPTION="Modelio is first and foremost a modeling environment, supporting a 
 HOMEPAGE="http://www.modeliosoft.com/en/download/dl-modelio.html"
 SRC_URI_PREFIX="http://www.modeliosoft.com/en/component/docman/doc_download"
 SRC_URI="\
-	x86?	( ${SRC_URI_PREFIX}/660-solution-modelio-${MYVERMAJ//./}-debian-32-bit.html -> modelio-modeler-${MYVERMAJ}-i386.deb )
-	amd64?	( ${SRC_URI_PREFIX}/659-solution-modelio-${MYVERMAJ//./}-debian-64-bit.html -> modelio-modeler-${MYVERMAJ}-amd64.deb )"
+	x86?	( ${SRC_URI_PREFIX}/944-solution-modelio-${MYVERMAJ//./}-debian-32-bit.html -> modelio-modeler-${MYVERMAJ}-i386.deb )
+	amd64?	( ${SRC_URI_PREFIX}/945-solution-modelio-${MYVERMAJ//./}-debian-64-bit.html -> modelio-modeler-${MYVERMAJ}-amd64.deb )"
 SLOT="0"
 RESTRICT="fetch"
 KEYWORDS="x86 amd64"
