@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -41,8 +41,11 @@ src_prepare() {
 	fi
 	# inicialize Vala
 	vala_src_prepare
-	local VALAVER=${VALAC##*-}
-	sed -i "s/^\\(\\s*NAMES valac\\)\\()\\)\$/\\1-${VALAVER}\\2/g" "${S}/cmake/FindVala.cmake" || die "Unable to patch for valac binnary!"
+	cat >"${S}/cmake/FindVala.cmake" <<END
+set(VALA_FOUND TRUE)
+set(VALA_EXECUTABLE "${VALAC}")
+set(VALA_VERSION "${VALAC##*-}")
+END
 }
 
 src_configure() {
