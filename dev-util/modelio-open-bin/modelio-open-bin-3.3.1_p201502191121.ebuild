@@ -20,16 +20,17 @@ SRC_URI="\
 SLOT="0"
 RESTRICT="nomirror"
 KEYWORDS="x86 amd64"
+# https://www.modelio.org/documentation/installation/12-installation.html
 DEPEND="net-libs/webkit-gtk:2" # for org.eclipse.swt.SWTError: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]
-RDEPEND=">=virtual/jre-1.5"
+RDEPEND=">=virtual/jre-1.8"
 
 S="${WORKDIR}/Modelio ${MYVERBAS}"
 INSTALLDIR="/opt/${PN}"
 
-src_unpack() {
-	unpack ${A}
-	# remove bundled Java, uninstaller, updater, and Windows binaries
+src_prepare() {
+	# remove bundled Java
 	rm -rf "${S}/jre" "${S}/lib"
+	ln -s /etc/java-config-2/current-system-vm/jre "${S}/jre"
 	# remove executable bit
 	chmod a-x "${S}/icon.xpm"
 }

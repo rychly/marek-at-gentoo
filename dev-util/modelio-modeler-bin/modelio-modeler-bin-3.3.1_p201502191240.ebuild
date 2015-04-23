@@ -19,10 +19,11 @@ SRC_URI="\
 	x86?	( ${SRC_URI_PREFIX}/944-solution-modelio-${MYVERMAJ//./}-debian-32-bit.html -> modelio-modeler-${MYVERMAJ}-i386.deb )
 	amd64?	( ${SRC_URI_PREFIX}/945-solution-modelio-${MYVERMAJ//./}-debian-64-bit.html -> modelio-modeler-${MYVERMAJ}-amd64.deb )"
 SLOT="0"
+IUSE="-systemjre"
 RESTRICT="fetch"
 KEYWORDS="x86 amd64"
 DEPEND="net-libs/webkit-gtk:2" # for org.eclipse.swt.SWTError: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]
-RDEPEND=">=virtual/jre-1.5"
+RDEPEND="systemjre? ( >=virtual/jre-1.8 )"
 
 pkg_nofetch() {
 	einfo
@@ -43,8 +44,11 @@ src_prepare() {
 	local MODELIO_LNK="/usr/bin/modelio${MYVERBAS}"
 	mkdir -p $(dirname "${WORKDIR}${MODELIO_LNK}")
 	ln -s "${MODELIO_PATH}/modelio" "${WORKDIR}${MODELIO_LNK}"
-	# remove bundled Java, uninstaller, updater, and Windows binaries
-	rm -rf "${WORKDIR}${MODELIO_PATH}/jre" "${WORKDIR}${MODELIO_PATH}/lib"
+	# remove bundled Java
+	if use systemjre; then
+		rm -rf "${WORKDIR}${MODELIO_PATH}/jre" "${WORKDIR}${MODELIO_PATH}/lib"
+		ln -s /etc/java-config-2/current-system-vm/jre "${WORKDIR}${MODELIO_PATH}/jre"
+	fi
 	# remove executable bit
 	chmod a-x "${WORKDIR}${MODELIO_PATH}/modules"/* "${WORKDIR}${MODELIO_PATH}/templates"/*
 	find "${WORKDIR}/usr/share" -type f -print0 | xargs -0 chmod a-x
