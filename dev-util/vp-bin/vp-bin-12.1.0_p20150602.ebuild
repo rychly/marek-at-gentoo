@@ -25,7 +25,7 @@ SRC_URI="\
 	help?	( ${SRC_URI_PREFIX}/Update/lib/vp-help.jar -> ${SRC_URI_HLPFILE} )"
 SLOT="0"
 RESTRICT="nomirror"
-KEYWORDS="x86 amd64"
+KEYWORDS="~x86 ~amd64"
 IUSE="+help"
 DEPEND=""
 RDEPEND=">=virtual/jre-1.5"
