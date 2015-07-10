@@ -22,8 +22,12 @@ SLOT="0"
 IUSE="-systemjre"
 RESTRICT="fetch"
 KEYWORDS="x86 amd64"
-DEPEND="net-libs/webkit-gtk:2" # for org.eclipse.swt.SWTError: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]
 RDEPEND="systemjre? ( >=virtual/jre-1.8 )"
+
+# GTK+2 for org.eclipse.swt.SWTError: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]
+# and set env variable SWT_GTK3=0 in ${MODELIO_PATH}/modelio.sh to use GTK+2 instead of GTK+3
+# for org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTError: No more handles [Browser style SWT.MOZILLA and Java system property org.eclipse.swt.browser.DefaultType=mozilla are not supported with GTK 3 as XULRunner is not ported for GTK 3 yet] org.eclipse.swt.SWTError: No more handles [Browser style SWT.MOZILLA and Java system property org.eclipse.swt.browser.DefaultType=mozilla are not supported with GTK 3 as XULRunner is not ported for GTK 3 yet]
+DEPEND="net-libs/webkit-gtk:2"
 
 pkg_nofetch() {
 	einfo
@@ -43,7 +47,7 @@ src_prepare() {
 	local MODELIO_PATH="/usr/lib/modelio-by-modeliosoft${MYVERBAS}"
 	local MODELIO_LNK="/usr/bin/modelio${MYVERBAS}"
 	mkdir -p $(dirname "${WORKDIR}${MODELIO_LNK}")
-	ln -s "${MODELIO_PATH}/modelio" "${WORKDIR}${MODELIO_LNK}"
+	ln -s "${MODELIO_PATH}/modelio.sh" "${WORKDIR}${MODELIO_LNK}"
 	# remove bundled Java
 	if use systemjre; then
 		rm -rf "${WORKDIR}${MODELIO_PATH}/jre" "${WORKDIR}${MODELIO_PATH}/lib"
