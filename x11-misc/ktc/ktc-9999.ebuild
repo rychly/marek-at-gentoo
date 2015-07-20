@@ -63,6 +63,8 @@ src_prepare() {
 	sed -i "s/^\\(\\s*NAMES valac\\)\\()\\)\$/\\1-${VALAVER}\\2/g" "${S}/cmake/FindVala.cmake"
 	# disable dbus introspection
 	sed -i 's/^\(dbus_interface:.*\)$/#\1/g' "${S}/ktc.avprj"
+	# disable autovala icon actions
+	sed -i 's/^\(\*icon:.*\)$/#\1/g' "${S}/ktc.avprj"
 }
 
 src_configure() {
@@ -83,8 +85,12 @@ src_compile() {
 }
 
 src_install() {
+	local flagsdir=/usr/share/icons/hicolor/scalable/intl
 	cmake-utils_src_install
 	dodoc LICENSE README
-	make_desktop_entry "ktc --flags=.icons/flags --extension=.svg --unknown=Unknown --libnotify-time=220" \
+	make_desktop_entry "ktc --flags=.icons/flags --extension=.svg --libnotify-time=220" \
 		"KBDD tray companion" "preferences-desktop-keyboard" "System"
+	## BUG: a value of arg --flags is always prefixed with ${HOME}, so it cannot be an absolute path to ${flagsdir} => need not to install there
+	#dodir "${flagsdir}"
+	#mv "${S}/data/icons"/*.svg "${D}${flagsdir}" || die "Cannot install flag icons."
 }

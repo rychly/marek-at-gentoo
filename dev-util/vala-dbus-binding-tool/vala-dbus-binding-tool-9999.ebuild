@@ -8,10 +8,10 @@ VALA_MIN_API_VERSION=0.11
 
 inherit base git-2 autotools vala
 
-DESCRIPTION="A tool to create gobject interfaces out of DBus XML specifications."
-HOMEPAGE="http://wiki.freesmartphone.org/index.php/Implementations/vala-dbus-binding-tool"
+DESCRIPTION="A tool to create GObject interfaces from DBus introspection files."
+HOMEPAGE="https://github.com/freesmartphone/vala-dbus-binding-tool"
 
-EGIT_REPO_URI="git://git.freesmartphone.org/${PN}.git"
+EGIT_REPO_URI="https://github.com/freesmartphone/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -67,5 +67,5 @@ pkg_postinst() {
 	local VALACSYMLINK=/usr/bin/valac
 	einfo "Autovala requires valac binnary without -version suffix, creating symlink:"
 	einfo "	${VALACSYMLINK} -> ${VALAC}"
-	ln -s ${VALAC} ${VALACSYMLINK} || die "Unable to create the symlink!"
+	ln -vfs ${VALAC} ${VALACSYMLINK} || die "Unable to create the symlink!"
 }
