@@ -25,18 +25,13 @@ SRC_URI="\
 	help?	( ${SRC_URI_PREFIX}/Update/lib/vp-help.jar -> ${SRC_URI_HLPFILE} )"
 SLOT="0"
 RESTRICT="nomirror"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="x86 amd64"
 IUSE="+help"
 DEPEND=""
 RDEPEND=">=virtual/jre-1.5"
 
 S="${WORKDIR}/Visual_Paradigm_${VP_MAIN}"
 INSTALLDIR="/opt/${PN}"
-
-src_prepare() {
-	epatch "${FILESDIR}/report4ERDiagram.patch"
-	epatch "${FILESDIR}/report4UseCaseDiagram.patch"
-}
 
 src_unpack() {
 	unpack ${A/${SRC_URI_HLPFILE}/}
