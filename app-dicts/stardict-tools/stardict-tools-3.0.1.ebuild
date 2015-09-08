@@ -1,15 +1,15 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
 EAPI="3"
 
-inherit eutils autotools
+inherit eutils autotools flag-o-matic
 
 IUSE="+editor +tools"
 DESCRIPTION="Stardict tools"
-HOMEPAGE="https://code.google.com/p/stardict-3/"
-SRC_URI="https://stardict-3.googlecode.com/files/${P}.tar.bz2"
+HOMEPAGE="http://stardict-4.sourceforge.net/"
+SRC_URI="mirror://sourceforge/stardict-4/${PV}/${P}.tar.bz2"
 
 RESTRICT="test mirror"
 LICENSE="GPL-2"
@@ -36,6 +36,12 @@ src_unpack() {
 	cd "${S}"
 	epatch "${FILESDIR}/nomysql.patch" || die "Cannot apply a patch"
 	epatch "${FILESDIR}/gcc43.patch" || die "Cannot apply a patch"
+}
+
+src_configure() {
+	filter-ldflags '*'
+	append-ldflags -lz
+	econf
 }
 
 src_install() {
