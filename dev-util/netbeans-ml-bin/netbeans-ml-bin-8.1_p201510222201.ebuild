@@ -10,8 +10,8 @@ NB_MAJV=${PV%%_*}
 NB_DATE=${PV##*_p}
 
 DESCRIPTION="The NetBeans IDE is a free, open-source Integrated Development Environment for software developers."
-HOMEPAGE="http://www.netbeans.org/products/ide/"
-SRC_URI="http://dlc-cdn.sun.com/netbeans/${NB_MAJV}/final/zip/netbeans-${NB_MAJV}-${NB_DATE}.zip"
+HOMEPAGE="https://netbeans.org/features/ide/"
+SRC_URI="http://download.netbeans.org/netbeans/${NB_MAJV}/final/zip/netbeans-${NB_MAJV}-${NB_DATE}.zip"
 SLOT="0"
 RESTRICT="nomirror"
 KEYWORDS="x86 amd64"
