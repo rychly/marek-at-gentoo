@@ -28,6 +28,7 @@ DEPEND="
 	x11-libs/libX11
 	x11-libs/libXtst
 	!app-admin/keepassx
+	!app-admin/keepassx-sf
 	net-libs/libmicrohttpd
 "
 RDEPEND="${DEPEND}"
