@@ -5,6 +5,12 @@ IMPDIR="$(portageq get_repo_path / imported)"
 IMPSCR="${IMPDIR}/update.sh"
 [[ -d "${IMPDIR}" && -x "${IMPSCR}" ]] && "${IMPSCR}"
 
+# checkout some automatically modified files to enable pulling new version without conflicts
+for REPO in $(portageq get_repos /); do
+	DIR=$(portageq get_repo_path / ${REPO})
+	[[ -d "${DIR}/.git" ]] && git -C "${DIR}" checkout profiles/use.local.desc 'metadata/md5-cache/**'
+done
+
 # update gentoo portage and overlays managed by repositories-configuration in repos.conf.d (see portage(5))
 emerge --sync
 
