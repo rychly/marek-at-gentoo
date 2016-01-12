@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -28,6 +28,7 @@ DEPEND="
 	!app-admin/keepassx
 	!app-admin/keepassx-kb
 	net-libs/libmicrohttpd
+	sys-auth/oath-toolkit
 "
 RDEPEND="${DEPEND}"
 
