@@ -21,7 +21,7 @@ HOMEPAGE="https://wiki.linaro.org/Platform/Android/Toolchain https://android-bui
 SRC_URI="https://snapshots.linaro.org/android/~linaro-android${ARCHIVE}/toolchain-${LINAROVER1}/${BUILDNO}/android-toolchain-eabi-${LINAROVER2}-x86.tar.bz2"
 
 LICENSE="GPL-3+ LGPL-3+ || ( GPL-3+ libgcc libstdc++ gcc-runtime-library-exception-3.1 ) FDL-1.3+"
-KEYWORDS="amd64"
+KEYWORDS="x86 amd64"
 RESTRICT="mirror strip binchecks"
 
 SLOT="${LINAROVER1}"
