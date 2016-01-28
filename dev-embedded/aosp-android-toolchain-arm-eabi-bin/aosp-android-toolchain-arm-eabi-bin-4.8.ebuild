@@ -7,7 +7,7 @@ EAPI=5
 inherit git-2
 
 DESCRIPTION="Prebuild Android (AOSP) gcc toolchain."
-EGIT_REPO_URI="git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-${PV}"
+EGIT_REPO_URI="https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-${PV}"
 HOMEPAGE="https://source.android.com/source/building-kernels.html https://android.googlesource.com/toolchain ${EGIT_REPO_URI}"
 
 # HEAD is OK for amd64 (x86 is not supported)
