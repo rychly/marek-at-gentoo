@@ -26,7 +26,7 @@ RESTRICT="mirror strip binchecks"
 
 SLOT="${LINAROVER1}"
 
-S="${WORKDIR}/android-toolchain-armv7"
+S="${WORKDIR}/android-toolchain-eabi"
 INSTALLDIR="/opt/${PN}-${LINAROVER1}"
 
 src_install() {
