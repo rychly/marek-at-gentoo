@@ -4,14 +4,14 @@
 	<repo quality="experimental" status="unofficial">
 		<name>marek-at-gentoo</name>
 		<description>Marek's Gentoo Overlay</description>
-		<homepage>https://bitbucket.org/rychly/marek-at-gentoo</homepage>
+		<homepage>https://github.com/rychly/marek-at-gentoo</homepage>
 		<owner type="project">
 			<email>marek.rychly at gmail.com</email>
 			<name>Marek Rychly</name>
 		</owner>
-		<source type="git">https://bitbucket.org/rychly/marek-at-gentoo.git</source>
-		<source type="git">git+ssh://git@bitbucket.org/rychly/marek-at-gentoo.git</source>
-		<feed>https://bitbucket.org/rychly/marek-at-gentoo/rss</feed>
-		<!-- layman -f -a marek-at-gentoo -o https://bitbucket.org/rychly/marek-at-gentoo/raw/master/overlay.xml -->
+		<source type="git">https://github.com/rychly/marek-at-gentoo.git</source>
+		<source type="git">git+ssh://git@github.com:rychly/marek-at-gentoo.git</source>
+		<feed>https://github.com/rychly/marek-at-gentoo/commits/master.atom</feed>
+		<!-- layman -f -a marek-at-gentoo -o https://raw.githubusercontent.com/rychly/marek-at-gentoo/master/overlay.xml -->
 	</repo>
 </repositories>
