@@ -6,6 +6,11 @@ EAPI=4
 
 RELEASE=2785
 PACKAGE=12774
+
+# There are several updates of this release (Sourcery CodeBench 2014.05).
+# The latest is release 3168 (Sourcery CodeBench 2014.05-73) from 21 February 2016. See https://sourcery.mentor.com/GNUToolchain/release3168
+# However, it cannot be downloaded as we don't know its package number and evaluations are no longer available.
+
 T1=${PN#*-*-*-} T2=${T1%-*} TARGETOS=${T2/_/-none-}
 TARGETARCH=${TARGETOS%%-*}
 HOSTOS=i686-pc-linux-gnu
