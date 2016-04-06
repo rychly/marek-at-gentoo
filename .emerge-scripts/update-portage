@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# update "imported" overlay by a script
-IMPDIR="$(portageq get_repo_path / imported)"
-IMPSCR="${IMPDIR}/update.sh"
-[[ -d "${IMPDIR}" && -x "${IMPSCR}" ]] && "${IMPSCR}"
-
 # checkout some automatically modified files to enable pulling new version without conflicts
 for REPO in $(portageq get_repos /); do
 	DIR=$(portageq get_repo_path / ${REPO})
