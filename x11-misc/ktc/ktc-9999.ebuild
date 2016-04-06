@@ -60,11 +60,11 @@ src_prepare() {
 	# inicialize Vala
 	vala_src_prepare
 	local VALAVER=${VALAC##*-}
-	sed -i "s/^\\(\\s*NAMES valac\\)\\()\\)\$/\\1-${VALAVER}\\2/g" "${S}/cmake/FindVala.cmake"
+	sed -i "s/^\\(\\s*NAMES valac\\)\\()\\)\$/\\1-${VALAVER}\\2/g" "${S}/cmake/FindVala.cmake" || die "Cannot fix valaversion in cmake/FindVala.cmake"
 	# disable dbus introspection
-	sed -i 's/^\(dbus_interface:.*\)$/#\1/g' "${S}/ktc.avprj"
+	sed -i 's/^\(dbus_interface:.*\)$/#\1/g' "${S}/ktc.avprj" || die "Cannot disable dbus introspection in ktc.avprj"
 	# disable autovala icon actions
-	sed -i 's/^\(\*icon:.*\)$/#\1/g' "${S}/ktc.avprj"
+	sed -i 's/^\(\*full_icon:.*\)$/#\1/g' "${S}/ktc.avprj" || die "Cannot disable autovala icon actions in ktc.avprj"
 }
 
 src_configure() {

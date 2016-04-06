@@ -1,16 +1,16 @@
 diff -urN CMakeLists.txt.old CMakeLists.txt
---- CMakeLists.txt.old	2015-07-20 20:58:56.000000000 +0200
-+++ CMakeLists.txt	2015-07-20 21:00:02.712400671 +0200
-@@ -49,19 +49,10 @@
- 	message(FATAL_ERROR "Can't find the file /usr/include/readline/readline.h")
+--- CMakeLists.txt.old	2016-04-06 10:41:53.000000000 +0200
++++ CMakeLists.txt	2016-04-06 10:45:37.620848467 +0200
+@@ -50,19 +50,10 @@
+ 	message(FATAL_ERROR "Can't find any of the files /usr/include/readline/readline.h")
  endif()
  
--if ( NOT EXISTS "/usr/bin/pandoc" )
--	message(FATAL_ERROR "Can't find the file /usr/bin/pandoc")
+-if ( (NOT EXISTS "/usr/bin/pandoc"))
+-	message(FATAL_ERROR "Can't find any of the files /usr/bin/pandoc")
 -endif()
 -
- if ( NOT EXISTS "/usr/bin/curl" )
- 	message(FATAL_ERROR "Can't find the file /usr/bin/curl")
+ if ( (NOT EXISTS "/usr/bin/curl"))
+ 	message(FATAL_ERROR "Can't find any of the files /usr/bin/curl")
  endif()
  
 -find_program ( WHERE_PANDOC pandoc )
