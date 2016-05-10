@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 # http://git.meleeweb.net/gentoo/portage.git/tree/sys-apps/IPMIView/IPMIView-2.9.30.ebuild
 
 EAPI=5

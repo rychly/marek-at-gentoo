@@ -1,6 +1,6 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 RELEASE="europa.winter" # EPP Europa Build Status 20080228-0640
 MIRROR="http://ftp.sh.cvut.cz/MIRRORS/eclipse"

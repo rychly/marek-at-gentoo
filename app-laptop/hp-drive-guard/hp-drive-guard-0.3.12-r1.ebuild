@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 # based on http://jaybee.cz/software/gentoo-linux/gentoo-on-hp-probook-4530s/
 
 EAPI=2

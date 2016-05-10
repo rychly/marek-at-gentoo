@@ -1,4 +1,4 @@
-# $Header: $
+# $Id$
 
 EAPI=1
 JAVA_PKG_IUSE="doc source test"

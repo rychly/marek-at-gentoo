@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 DESCRIPTION="The Mobility Workbench (MWB) is a tool for manipulating and analyzing mobile concurrent systems described in the pi-calculus."
 HOMEPAGE="https://www.it.uu.se/research/group/mobility/mwb"

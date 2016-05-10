@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="4"
 
@@ -28,7 +28,7 @@ RDEPEND=">=x11-libs/libxcb-1.8
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 	sys-devel/autoconf-archive
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 DOCS=( README AUTHORS ChangeLog INSTALL THANKS )
 

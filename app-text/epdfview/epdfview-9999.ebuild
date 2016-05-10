@@ -1,6 +1,6 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="2"
 inherit subversion eutils
@@ -21,7 +21,7 @@ COMMON_DEPEND=">=virtual/poppler-glib-0.5.0[cairo]
 	>=x11-libs/gtk+-2.6
 	cups? ( >=net-print/cups-1.1 )"
 DEPEND="${COMMON_DEPEND}
-	>=dev-util/pkgconfig-0.9
+	>=virtual/pkgconfig-0.9
 	nls? ( sys-devel/gettext )
 	test? ( dev-util/cppunit )"
 RDEPEND="${COMMON_DEPEND}

@@ -1,14 +1,14 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 inherit git-2 multilib
 
-DESCRIPTION="KeePass plugin to expose password entries securely (256bit AES/CBC) over HTTP for clients to consume."
+DESCRIPTION="KeePass plugin to expose password entries over HTTP for clients to consume"
 HOMEPAGE="https://github.com/pfn/keepasshttp"
 EGIT_REPO_URI="git://github.com/pfn/${PN}.git"
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""

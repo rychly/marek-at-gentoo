@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=2
 
@@ -20,7 +20,7 @@ RDEPEND=">=x11-libs/gtk+-2.4
 	>=dev-libs/libpcre-6.3
 	spell? ( app-text/aspell )"
 DEPEND="${RDEPEND}
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 src_prepare() {
 	epatch "${FILESDIR}/configure-man.patch"

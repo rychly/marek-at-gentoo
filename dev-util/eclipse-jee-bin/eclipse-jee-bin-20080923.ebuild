@@ -1,6 +1,6 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 RELEASE="ganymede.SR1" # EPP Ganymede Build Status 20080923-0620
 MIRROR="http://ftp.sh.cvut.cz/MIRRORS/eclipse"

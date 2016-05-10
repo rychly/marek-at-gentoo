@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v3
-# $Header: $
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 DESCRIPTION="A perl based utility to convert Microsoft Office Docx documents to equivalent text documents."
 HOMEPAGE="http://docx2txt.sourceforge.net/"

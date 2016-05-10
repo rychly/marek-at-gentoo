@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v3
-# $Header: $
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI="3"
 
-inherit eutils autotools flag-o-matic
+inherit eutils flag-o-matic
 
 IUSE="+editor +tools"
 DESCRIPTION="Stardict tools"
@@ -22,7 +22,7 @@ RDEPEND="sys-libs/zlib
 
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.22
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 pkg_setup() {
 	if ! use editor && ! use tools; then
@@ -31,9 +31,7 @@ pkg_setup() {
 	fi
 }
 
-src_unpack() {
-	unpack "${A}"
-	cd "${S}"
+src_prepare() {
 	epatch "${FILESDIR}/nomysql.patch" || die "Cannot apply a patch"
 	epatch "${FILESDIR}/gcc43.patch" || die "Cannot apply a patch"
 }

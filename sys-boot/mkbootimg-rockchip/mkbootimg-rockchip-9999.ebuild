@@ -1,6 +1,6 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 # based on: http://data.gpo.zugaina.org/mrueg/sys-boot/mkbootimg-rockchip/mkbootimg-rockchip-9999.ebuild
 
 EAPI=5

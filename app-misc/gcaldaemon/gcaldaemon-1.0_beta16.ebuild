@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v3
-# $Header: $
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 DESCRIPTION="GCALDaemon offers two-way synchronization between Google Calendar and various iCalendar compatible calendar applications."
 HOMEPAGE="http://gcaldaemon.sourceforge.net/"

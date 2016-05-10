@@ -1,12 +1,12 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
 inherit cmake-utils git-2
 
-DESCRIPTION="Surefire's port of KeePassX + keepasshttp + autotype, a Qt password manager compatible with its Win32 and Pocket PC versions."
+DESCRIPTION="Surefire's port of KeePassX + keepasshttp + autotype"
 HOMEPAGE="https://github.com/repsac-by/keepassx"
 EGIT_REPO_URI="https://github.com/repsac-by/${PN%%-sf}.git"
 

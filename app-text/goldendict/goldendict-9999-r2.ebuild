@@ -1,6 +1,6 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 # based on http://data.gpo.zugaina.org/raiagent/app-dicts/goldendict/goldendict-9999-r2.ebuild
 
 EAPI=5

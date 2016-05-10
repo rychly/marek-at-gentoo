@@ -1,6 +1,6 @@
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 DESCRIPTION="A replacement set of images and CSS code for the Firefox widgets which will make them much nicer on the eyes."
 HOMEPAGE="http://ubuntuforums.org/showpost.php?p=2206886&postcount=1"

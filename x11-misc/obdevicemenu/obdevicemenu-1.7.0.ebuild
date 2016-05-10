@@ -1,6 +1,6 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 # from https://github.com/rasdark/overlay/tree/master/x11-misc/obdevicemenu with modified SRC_URI and install paths
 
 EAPI="2"

@@ -1,6 +1,6 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 DESCRIPTION="A small program to set X11 desktop layout."
 HOMEPAGE="http://openbox.org/wiki/Help%3aFAQ#How_do_I_put_my_desktops_into_a_grid_layout_instead_of_a_single_row.3F"

@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ PV_SUFFIX=-kb
 
 inherit cmake-utils vcs-snapshot
 
-DESCRIPTION="Keith Bennett's port of KeePassX + keepasshttp + autotype, a Qt password manager compatible with its Win32 and Pocket PC versions"
+DESCRIPTION="Keith Bennett's port of KeePassX + keepasshttp + autotype"
 HOMEPAGE="https://github.com/keithbennett/keepassx"
 SRC_URI="https://github.com/keithbennett/${PN%%-kb}/archive/${PV/_/-}${PV_SUFFIX}.tar.gz -> ${P}${PV_SUFFIX}.tar.gz"
 

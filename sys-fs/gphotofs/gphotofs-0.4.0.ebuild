@@ -1,6 +1,6 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 DESCRIPTION="FUSE module to mount camera as filesystem"
 HOMEPAGE="http://www.gphoto.org/proj/gphotofs/"

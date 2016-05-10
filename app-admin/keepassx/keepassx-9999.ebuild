@@ -1,34 +1,36 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=4
+EAPI=6
 
-inherit qt4-r2 cmake-utils git-2
+inherit cmake-utils git-r3
 
-DESCRIPTION="Qt password manager compatible with its Win32 and Pocket PC versions."
-HOMEPAGE="http://keepassx.sourceforge.net/"
+DESCRIPTION="Qt password manager compatible with its Win32 and Pocket PC versions"
+HOMEPAGE="http://www.keepassx.org/"
 EGIT_REPO_URI="git://gitorious.org/${PN}/${PN}"
 
-LICENSE="LGPL-2.1 GPL-2 GPL-3"
+LICENSE="|| ( GPL-2 GPL-3 ) BSD GPL-2 LGPL-2.1 LGPL-3+ CC0-1.0 public-domain || ( LGPL-2.1 GPL-3 )"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug test"
+IUSE="test"
 
-RDEPEND="dev-libs/libgcrypt
+DEPEND="
+	dev-libs/libgcrypt:0=
+	dev-qt/qtcore:4
+	dev-qt/qtgui:4
+	dev-qt/qttest:4
 	sys-libs/zlib
-	x11-libs/qt-core:4[qt3support]
-	x11-libs/qt-gui:4[qt3support]
+	x11-libs/libX11
+	x11-libs/libXtst
 "
-DEPEND="${RDEPEND}
-	test? ( x11-libs/qt-test:4 )
-"
+RDEPEND="${DEPEND}"
+
+DOCS=(CHANGELOG)
 
 src_configure() {
-	mycmakeargs=(
-		$(cmake-utils_use_with test TESTS)
-		-DWITH_GUI_TESTS=OFF
+	local mycmakeargs=(
+		-DWITH_TESTS="$(usex test)"
 	)
-
 	cmake-utils_src_configure
 }
