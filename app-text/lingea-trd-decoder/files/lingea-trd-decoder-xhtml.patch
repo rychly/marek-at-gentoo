@@ -1,0 +1,136 @@
+diff -urN lingea-trd-decoder.py.old lingea-trd-decoder.py
+--- lingea-trd-decoder.py.old	2016-05-18 21:35:44.000000000 +0200
++++ lingea-trd-decoder.py	2016-04-28 20:08:17.479492739 +0200
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python2
+ # -*- coding: utf-8 -*-
+ #
+ # Script for decoding Lingea Dictionary (.trd) file
+@@ -12,6 +12,7 @@
+ # http://hp.vector.co.jp/authors/VA005784/cobuild/cobuildconv.html
+ #
+ # Version history:
++# 0.7.1 (11.1.2013) Patch by Marek Rychly, added workaround for lg_grcz-2 and XHTML output for GoldenDict
+ # 0.7 (19.6.2008) Patch by Petr Dlouhy, added support for many new dicts
+ # 0.6 (29.5.2008) Patch by Petr Dlouhy, added support for French-Czech and Spanish-Czech dictionaries; automatic encoding selection; all unrecognized characters are printed now as #something# (note: some of them are bugs in Lingea dictionaries); typo
+ # 0.5 (3.12.2007) Patch by Petr Dlouhy, iPaq and 2000 dicts support
+@@ -85,7 +86,7 @@
+ # Boston, MA 02111-1307, USA.
+ 
+ # VERSION
+-VERSION = "0.7"
++VERSION = "0.7.1"
+ 
+ import getopt, sys
+ def usage():
+@@ -101,6 +102,7 @@
+    print "                                          0   no tags"
+    print "                                          1   \\n tags"
+    print "                                          2   html tags"
++   print "                                          3   xhtml tags"
+    print "    -h            --help             : Print this message"
+    print "    -d            --debug            : Debug"
+    print "    -r            --debug-header     : Debug - print headers"
+@@ -121,7 +123,7 @@
+    
+ import locale
+ DEBUG = False
+-OUTSTYLE = 2
++OUTSTYLE = 3
+ DEBUGHEADER = False
+ DEBUGALL = False
+ DEBUGLIMIT = 1
+@@ -132,7 +134,7 @@
+    if o in ("-o", "--out-style"):
+       # output style
+       OUTSTYLE = locale.atoi(a)
+-      if OUTSTYLE > 2:
++      if OUTSTYLE > 3:
+          usage()
+          print "ERROR: Output style not specified"
+          sys.exit(2)
+@@ -263,6 +265,40 @@
+            'b1':('"'                                                 ,' = '),           #Data phrase (block) 1
+            'b2':('" '                                                ,''),              #Data phrase (block) 2
+           }
++if OUTSTYLE == 3:
++    tag = {
++           'db':('&bull;'                                                              ,''),                 #Data beginning
++           'rn':(''                                                                    ,'\t'),               #Record name
++           'va':(''                                                                    ,' '),                #Header variant
++           'wc':('<span style="font-size: larger; color: darkred; font-weight: bold;">','</span><br/>\\n'),  #WordClass
++           'pa':('<span style="font-size: larger; color: darkred; font-weight: bold;">',':</span><br/>\\n'), #Header parts
++           'fo':('('                                                                   ,') '),               #Header forms
++           'on':('<span style="color: blue;">('                                        ,')</span><br/>\\n'), #Header origin note
++           'pr':('['                                                                   ,']<br/>\\n'),        #Header pronunciation; not printed by Lingea
++           'du':('('                                                                   ,')'),                #Data sub example
++           'dc':('('                                                                   ,')'),                #Data sub shortcut
++           'hs':('('                                                                   ,')<br/>\\n'),        #Header source
++           'dv':('{'                                                                   ,'} '),               #Header dataVariant
++           'sh':(''                                                                    ,'<br/>\\n'),         #Header shortcut
++           'pv':('/'                                                                   ,'/<br/>\\n'),        #Header plural variant
++           'ex':('('                                                                   ,')<br/>\\n'),        #Header example
++           'sa':('&emsp;<span style="color: darkred; font-weight: bold;">'             ,'</span><br/>\\n'),  #Data sample
++           'sw':(''                                                                    ,''),                 #Data sample wordclass; is not printed by Lingea (it is printed in only in French?)
++           'do':('&emsp;<span style="color: darkred; font-weight: bold;">'             ,'</span> '),         #Data origin note
++           'df':('&emsp;<span style="font-weight: bold;">'                             ,'</span><br/>\\n'),  #Data definition
++           'nt':(''                                                                    ,''),                 #Data note
++           'ps':('&emsp;<span style="color: dimgray; font-weight: bold;">'             ,'</span><br/>\\n'),  #Data phrase short form
++           'pg':('&emsp;<span style="color: darkgreen; font-style: italic;">'          ,'</span> '),         #Data phrase green
++           'pc':('&emsp;<span style="color: darkgreen; font-style: italic;">'          ,'</span> '),         #Data phrase comment; this comment is not printed by Lingea, but it seems useful
++           'p1':('&emsp;<span style="color: dimgray; font-style: italic;">'            ,'</span> '),         #Data phrase 1
++           'p2':('&emsp;&ensp;'                                                        ,'<br/>\\n'),         #Data phrase 2
++           'rs':('SYNONYM: '                                                           ,'<br/>\\n'),         #Reference synonym
++           'rr':('HYPERNYM: '                                                          ,'<br/>\\n'),         #Reference hypernym
++           'rp':('HYPONYM: '                                                           ,'<br/>\\n'),         #Reference hyponym
++           'sp':('&emsp;<span style="color: cyan;">'                                   ,'</span><br/>\\n'),  #Data simple phrase
++           'b1':('"'                                                                   ,' = '),              #Data phrase (block) 1
++           'b2':('" '                                                                  ,''),                 #Data phrase (block) 2
++          }
+ 
+ 
+ 
+@@ -440,6 +476,33 @@
+         s = re_y.sub(r'<span size="small" color="blue" style="italic">\1</span>',s)
+         s = re_z.sub(r'<span size="small" color="blue" style="italic">\1</span>',s)
+         s = re__.sub(r'<span size="small" color="blue" style="italic">\1</span>',s)
++    if OUTSTYLE == 3:
++        s = re_a.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_c.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_d.sub(r'<span style="font-size: small; color: blue;">(\1)</span>',s)
++        s = re_e.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_E.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_f.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_g.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_h.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_i.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_I.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_l.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_L.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_n.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_N.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_o.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_p.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_q.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_r.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_t.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_u.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_v.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_w.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_x.sub(r'<span style="font-size: small; color: brown; font-style: italic;">\1</span>',s)
++        s = re_y.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re_z.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
++        s = re__.sub(r'<span style="font-size: small; color: blue; font-style: italic;">\1</span>',s)
+ 
+     return s
+ 
+@@ -694,7 +757,7 @@
+             result += item
+ 
+     ok = True
+-    if (len(stream) != 13752) and (len(stream) != 21988) and (len(stream) != 16204) and (len(stream) != 12656): #hack to workaround bug in some dicts (lg_czen-eco, lg_encz-ind, lg_czgr-eco, lg_grsk-2)
++    if (len(stream) != 13752) and (len(stream) != 21988) and (len(stream) != 16204) and (len(stream) != 12656) and (len(stream) != 30696): #hack to workaround bug in some dicts (lg_czen-eco, lg_encz-ind, lg_czgr-eco, lg_grsk-2, lg_grcz-2)
+        while pos < len(stream):
+            ok = (outInt() == 0x00) and ok
+ 

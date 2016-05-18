@@ -6,7 +6,7 @@ EAPI="2"
 
 inherit eutils
 
-DESCRIPTION="Java application for sending SMS over the Internet using various mobile operator web gateways"
+DESCRIPTION="A program for sending SMS over the Internet"
 HOMEPAGE="http://code.google.com/p/esmska/"
 
 LICENSE="GPL-3"

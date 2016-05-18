@@ -16,17 +16,17 @@ SRC_URI="https://build.opensuse.org/source/hardware/hp-drive-guard/${P}.tar.bz2
 	https://build.opensuse.org/source/hardware/hp-drive-guard/use-new-polkit.diff
 	https://build.opensuse.org/source/hardware/hp-drive-guard/hp-drive-guard.service"
 
-LICENSE="GPL"
+LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 RESTRICT="mirror"
 
 DEPEND="sys-auth/polkit
-    x11-libs/libnotify
-    || ( >=sys-power/upower-0.9.23 sys-power/upower-pm-utils )
-    x11-libs/gtk+:2
-    dev-libs/glib:2"
+	x11-libs/libnotify
+	|| ( >=sys-power/upower-0.9.23 sys-power/upower-pm-utils )
+	x11-libs/gtk+:2
+	dev-libs/glib:2"
 RDEPEND="${DEPEND}"
 
 src_prepare() {

@@ -30,7 +30,7 @@ pkg_setup() {
 
 src_install() {
 	linux-mod_src_install
-	dodoc README COPYING NEWS
+	dodoc README NEWS
 	docinto doc
 	dodoc doc/*
 }

@@ -1,1 +1,30 @@
-../../metadata.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <use>
+    <flag name="spell_de"></flag>
+    <flag name="spell_es"></flag>
+    <flag name="spell_fr"></flag>
+    <flag name="spell_cs"></flag>
+    <flag name="spell_hi"></flag>
+    <flag name="spell_pl"></flag>
+    <flag name="spell_ru"></flag>
+    <flag name="spell_sk"></flag>
+    <flag name="spell_sv"></flag>
+    <flag name="cfg_dita"></flag>
+    <flag name="cfg_mathml"></flag>
+    <flag name="cfg_samples"></flag>
+    <flag name="cfg_sdb"></flag>
+    <flag name="cfg_slides"></flag>
+    <flag name="cfg_wxs"></flag>
+    <flag name="cfg_xxe"></flag>
+    <flag name="fop_fop1"></flag>
+    <flag name="fop_xep"></flag>
+    <flag name="fop_xfc"></flag>
+    <flag name="img_batik"></flag>
+    <flag name="img_jeuclid"></flag>
+    <flag name="img_jimi"></flag>
+    <flag name="vd_dav"></flag>
+    <flag name="vd_ftp"></flag>
+  </use>
+</pkgmetadata>

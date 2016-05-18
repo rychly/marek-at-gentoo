@@ -1,1 +1,14 @@
-../../metadata.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <use>
+    <flag name="espeak">Enable text to speech synthesizer using espeak engine</flag>
+    <flag name="gnome"></flag>
+    <flag name="gucharmap"></flag>
+    <flag name="qqwry">Enable QQWry plugin, which provides information (in Chinese language) about geographical positions, owner, etc. for IP addresses</flag>
+    <flag name="pronounce">Install WyabdcRealPeopleTTS package (it is just many .wav files) to make StarDict pronounce English words</flag>
+    <flag name="spell"></flag>
+    <flag name="tools">Build and install the extra stardict tools</flag>
+    <flag name="mysql"></flag>
+  </use>
+</pkgmetadata>

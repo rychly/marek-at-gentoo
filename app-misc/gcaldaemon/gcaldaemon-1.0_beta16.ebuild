@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-DESCRIPTION="GCALDaemon offers two-way synchronization between Google Calendar and various iCalendar compatible calendar applications."
+DESCRIPTION="Two-way synchronization between Google Calendar and iCalendar applications"
 HOMEPAGE="http://gcaldaemon.sourceforge.net/"
 SRC_URI="mirror://sourceforge/gcaldaemon/${PN}-linux-${PV//_/-}.zip"
 
 LICENSE="LGPL-2"
 KEYWORDS="x86 amd64"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 
 IUSE="doc source"
 SLOT="0"

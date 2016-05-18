@@ -7,7 +7,7 @@ EAPI=3
 ## will be downloaded directly from the repository's web-server via HTTP, CVS not needed
 #inherit cvs
 
-DESCRIPTION="Goal of this project is to create system for searching in bus/train timetables."
+DESCRIPTION="Goal of this project is to create system for searching in bus/train timetables"
 HOMEPAGE="http://timetab.sourceforge.net/"
 ECVS_SERVER="timetab.cvs.sourceforge.net:/cvsroot/timetab"
 ECVS_USER="pserver"

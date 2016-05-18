@@ -6,7 +6,7 @@ EAPI=5
 
 inherit git-2 java-utils-2 eutils
 
-DESCRIPTION="Raccoon is a Google Play Desktop client that allows you to download apps directly from Google Play without you having to give Google control over your phone."
+DESCRIPTION="Google Play Desktop client to download apps from Google Play without a phone"
 #SRC_URI="https://github.com/onyxbits/Raccoon/archive/v${PV}.tar.gz"
 EGIT_REPO_URI="https://github.com/onyxbits/Raccoon.git"
 HOMEPAGE="http://www.onyxbits.de/raccoon ${EGIT_REPO_URI}"

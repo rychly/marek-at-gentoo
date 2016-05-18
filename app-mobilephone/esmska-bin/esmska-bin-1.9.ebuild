@@ -9,7 +9,7 @@ inherit java-utils-2 eutils
 MYP="${P//-bin/}"
 MYPN="${PN//-bin/}"
 
-DESCRIPTION="A program for sending SMS over the Internet."
+DESCRIPTION="A program for sending SMS over the Internet"
 HOMEPAGE="https://code.google.com/p/esmska/"
 #SRC_URI="http://esmska.googlecode.com/files/${MYP}.tar.gz"
 SRC_URI="http://ripper.profitux.cz/esmska/packages/${MYP}.tar.gz"

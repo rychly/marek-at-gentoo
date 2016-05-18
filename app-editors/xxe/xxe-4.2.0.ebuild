@@ -66,10 +66,10 @@ SRC_URI="$SRC_URI
 "
 
 SLOT="0"
-LICENSE="as-is"
+LICENSE="xmlmind-xmleditor-pro"
 KEYWORDS="x86 amd64"
 
-RESTRICT="nostrip nomirror"
+RESTRICT="strip mirror"
 RDEPEND=">=virtual/jre-1.5"
 DEPEND=""
 
@@ -82,17 +82,17 @@ src_unpack() {
 	local addon="${S}/addon/"
 	local i
 
-	mv $addon/spell $addon/en_dictionary
-	use cfg_samples && mv ${WORKDIR}/sample_customize_xxe $addon
+	mv "${addon}/spell" "${addon}/en_dictionary"
+	use cfg_samples && mv "${WORKDIR}/sample_customize_xxe" "${addon}"
 	for i in \
-		${WORKDIR}/*_translation \
-		${WORKDIR}/*_dictionary \
-		${WORKDIR}/*_config \
-		${WORKDIR}/*_foprocessor \
-		${WORKDIR}/*_imagetoolkit \
-		${WORKDIR}/*_vdrive; \
+		"${WORKDIR}"/*_translation \
+		"${WORKDIR}"/*_dictionary \
+		"${WORKDIR}"/*_config \
+		"${WORKDIR}"/*_foprocessor \
+		"${WORKDIR}"/*_imagetoolkit \
+		"${WORKDIR}"/*_vdrive; \
 	do
-		mv $i $addon
+		mv "${i}" "${addon}"
 	done
 	einfo ""
 	einfo "Move language files, you must have linguas_* in USE where"

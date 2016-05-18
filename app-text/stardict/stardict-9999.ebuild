@@ -73,7 +73,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	cd ${WORKDIR}/${P}
+	cd "${WORKDIR}/${P}"
 
 	#epatch \
 	#	"${FILESDIR}"/correct-glib-include.patch \

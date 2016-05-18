@@ -6,13 +6,13 @@ EAPI="3"
 
 inherit eutils
 
-DESCRIPTION="Genymotion is a complete set of tools that provides a virtual environment for Android."
+DESCRIPTION="A complete set of tools that provides a virtual environment for Android"
 HOMEPAGE="http://www.genymotion.com/"
 SRC_URI="x86? ( http://files2.genymotion.com/genymotion/genymotion-${PV}/genymotion-${PV}_x86.bin )
 	amd64? ( http://files2.genymotion.com/genymotion/genymotion-${PV}/genymotion-${PV}_x64.bin )"
 
 RESTRICT="mirror"
-LICENSE=""
+LICENSE="genymotion"
 SLOT="0"
 KEYWORDS="amd64 x86"
 

@@ -1,1 +1,21 @@
-../../metadata.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <use>
+    <flag name="debug"></flag>
+    <flag name="epwing"></flag>
+    <flag name="lzma"></flag>
+    <flag name="sound"></flag>
+    <flag name="tiff"></flag>
+    <flag name="kde"></flag>
+    <flag name="linguas_ay_WI"></flag>
+    <flag name="linguas_be_BY@latin"></flag>
+    <flag name="linguas_es_BO"></flag>
+    <flag name="linguas_qt_es"></flag>
+    <flag name="linguas_qt_it"></flag>
+    <flag name="linguas_qt_lt"></flag>
+    <flag name="linguas_qu_WI"></flag>
+    <flag name="linguas_sr_SR"></flag>
+    <flag name="linguas_tk_TM"></flag>
+  </use>
+</pkgmetadata>

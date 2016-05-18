@@ -21,7 +21,7 @@ COMMON_DEPEND=">=virtual/poppler-glib-0.5.0[cairo]
 	>=x11-libs/gtk+-2.6
 	cups? ( >=net-print/cups-1.1 )"
 DEPEND="${COMMON_DEPEND}
-	>=virtual/pkgconfig-0.9
+	virtual/pkgconfig
 	nls? ( sys-devel/gettext )
 	test? ( dev-util/cppunit )"
 RDEPEND="${COMMON_DEPEND}
@@ -31,6 +31,9 @@ src_unpack() {
 	subversion_src_unpack
 	# We need to create the ChangeLog here
 	TZ=UTC svn log -v "${ESVN_REPO_URI}" >./ChangeLog
+}
+
+src_prepare() {
 	# Icon size
 	sed -i -e 's:Icon=icon_epdfview-48:Icon=epdfview:' ./data/epdfview.desktop || die "desktop sed failed"
 }

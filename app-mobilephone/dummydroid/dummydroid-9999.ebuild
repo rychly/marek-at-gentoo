@@ -6,7 +6,7 @@ EAPI=5
 
 inherit git-2 java-utils-2 eutils
 
-DESCRIPTION="Dummy Droid allows you to create hardware profiles for arbitrary Android devices and upload them into your Google Play account."
+DESCRIPTION="Creates HW profiles for Android devices and uploads them into a Google Play"
 #SRC_URI="https://github.com/onyxbits/dummydroid/archive/v${PV}.tar.gz"
 EGIT_REPO_URI="https://github.com/onyxbits/dummydroid.git"
 HOMEPAGE="http://www.onyxbits.de/dummydroid ${EGIT_REPO_URI}"
