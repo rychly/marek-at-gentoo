@@ -11,7 +11,7 @@ SRC_URI="http://cdn.wuala.com/repo/other/wuala.tar.gz -> ${P}.tgz"
 
 LICENSE="wuala"
 SLOT="0"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 

@@ -12,7 +12,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
-RESTRICT="nomirror"
+RESTRICT="mirror"
 
 DEPEND=">=sys-fs/fuse-2.4
 	>=media-libs/libgphoto2-2.0

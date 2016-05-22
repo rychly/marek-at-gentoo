@@ -14,7 +14,7 @@ VP_FULL=${PV%%_*} VP_SPNO=${VP_FULL##*.}
 VP_PTCH=${PV##*_p}
 [ "${VP_SPNO}" -gt 0 ] && VP_SPREFIX="sp${VP_SPNO}_"
 
-DESCRIPTION="Visual Paradigm is a software design tool for agile software projects which supports modeling standards such as UML, SysML, ERD, DFD, BPMN, ArchiMate, etc."
+DESCRIPTION="A software design tool supporting UML, SysML, ERD, DFD, BPMN, ArchiMate, etc."
 HOMEPAGE="https://www.visual-paradigm.com/product/vp"
 SRC_URI_PREFIX="http://${VP_MIRROR}.visual-paradigm.com/${VP_SRCD}/vp${VP_MAIN}/${VP_SPREFIX}${VP_PTCH}"
 SRC_URI_PGKPREFIX="Visual_Paradigm_${VP_MAIN//./_}_${VP_SPREFIX}${VP_PTCH}"
@@ -23,8 +23,9 @@ SRC_URI="\
 	x86?	( ${SRC_URI_PREFIX}/${SRC_URI_PGKPREFIX}_Linux32_InstallFree.tar.gz )
 	amd64?	( ${SRC_URI_PREFIX}/${SRC_URI_PGKPREFIX}_Linux64_InstallFree.tar.gz )
 	help?	( ${SRC_URI_PREFIX}/Update/lib/vp-help.jar -> ${SRC_URI_HLPFILE} )"
+LICENSE="visual-paradigm-evaluation"
 SLOT="0"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="x86 amd64"
 IUSE="+help"
 DEPEND=""

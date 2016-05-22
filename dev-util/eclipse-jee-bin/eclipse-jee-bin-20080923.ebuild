@@ -5,13 +5,14 @@
 RELEASE="ganymede.SR1" # EPP Ganymede Build Status 20080923-0620
 MIRROR="http://ftp.sh.cvut.cz/MIRRORS/eclipse"
 
-DESCRIPTION="The Eclipse IDE for Java EE Developers contains everything you need to build Java and Java EE applications."
+DESCRIPTION="The Eclipse IDE for Java EE Developers to build Java and Java EE applications"
 # Contains binaries of RCP/Platform, CVS, EMF, GEF, JDT, Mylyn, WST, PDE, Datatools, JST.
 HOMEPAGE="http://www.eclipse.org/downloads/moreinfo/jee.php"
 SRC_URI="x86? ( ${MIRROR}/technology/epp/downloads/release/${RELEASE%%.*}/${RELEASE##*.}/eclipse-jee-${RELEASE//./-}-linux-gtk.tar.gz )
 	amd64? ( ${MIRROR}/technology/epp/downloads/release/${RELEASE%%.*}/${RELEASE##*.}/eclipse-jee-${RELEASE//./-}-linux-gtk-x86_64.tar.gz )"
+LICENSE="EPL-1.0"
 SLOT="0"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="~x86 ~amd64"
 DEPEND=""
 RDEPEND=">=virtual/jre-1.5"
@@ -30,6 +31,6 @@ src_install() {
 	dodir "${INSTALLDIR}"
 	mv "${S}"/* "${D}/${INSTALLDIR}" || die "Cannot install files from work-dir."
 	dodoc "${S}/.readme"/*
-        dodir /etc/env.d
-        echo -e "PATH=${INSTALLDIR}\nROOTPATH=${INSTALLDIR}" > "${D}"/etc/env.d/10eclipse
+	dodir /etc/env.d
+	echo -e "PATH=${INSTALLDIR}\nROOTPATH=${INSTALLDIR}" > "${D}"/etc/env.d/10eclipse
 }

@@ -16,7 +16,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc examples +ocamlopt"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 
 DEPEND=">=dev-lang/ocaml-3.06[ocamlopt?]"
 RDEPEND="${DEPEND}"

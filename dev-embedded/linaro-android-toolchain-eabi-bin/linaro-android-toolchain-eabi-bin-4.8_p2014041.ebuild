@@ -16,7 +16,7 @@ LINAROVER1="${GCCVER}-${PATCHVER}"
 && LINAROVER2="${LINAROVER1}" \
 || LINAROVER2="linaro-${LINAROVER1}-${BUILDNO}-${BUILDATE}-linux"
 
-DESCRIPTION="Build and verify Android with the Linaro Toolchain."
+DESCRIPTION="Build and verify Android with the Linaro Toolchain"
 HOMEPAGE="https://wiki.linaro.org/Platform/Android/Toolchain https://android-build.linaro.org/builds/~linaro-android/toolchain-${LINAROVER1}/#build=${BUILDNO}"
 SRC_URI="https://snapshots.linaro.org/android/~linaro-android${ARCHIVE}/toolchain-${LINAROVER1}/${BUILDNO}/android-toolchain-eabi-${LINAROVER2}-x86.tar.bz2"
 

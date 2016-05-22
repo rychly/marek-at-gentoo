@@ -4,11 +4,11 @@
 
 EAPI=3
 
-VALA_MIN_API_VERSION=0.11
+VALA_MIN_API_VERSION=0.26
 
-inherit base git-2 autotools vala
+inherit eutils git-2 autotools vala
 
-DESCRIPTION="A tool to create GObject interfaces from DBus introspection files."
+DESCRIPTION="A tool to create GObject interfaces from DBus introspection files"
 HOMEPAGE="https://github.com/freesmartphone/vala-dbus-binding-tool"
 
 EGIT_REPO_URI="https://github.com/freesmartphone/${PN}.git"
@@ -30,6 +30,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	base_src_prepare
+	epatch_user
 	vala_src_prepare
 }

@@ -1,0 +1,50 @@
+#!/sbin/runscript
+# Copyright 1999-2004 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-db/hsqldb/files/hsqldb,v 1.2 2007/12/19 21:58:05 caster Exp $
+
+depend() {
+    use net
+}
+
+init_env_vars() {
+	JAVA_HOME=`java-config --jre-home`
+	HSQLDB_HOME="/var/lib/${RC_SVCNAME}"
+	HSQLDB_USER=hsqldb
+	HSQLDB_GROUP=hsqldb
+	if [ "$SERVER_PROTOCOL" = "http" ] ; then
+		HSQLDB_MAIN=org.hsqldb.server.WebServer
+		HSQLDB_MODE="(web server mode)"
+	else
+		HSQLDB_MAIN=org.hsqldb.server.Server
+		HSQLDB_MODE=""
+	fi
+	SQLTOOL_MAIN=org.hsqldb.cmdline.SqlTool
+	CLASSPATH=`java-config -d -p ${RC_SVCNAME}`
+
+}
+
+start() {
+	init_env_vars
+	ebegin "Starting HSQL-2 Database ${HSQLDB_MODE}"
+	start-stop-daemon --start --quiet --background \
+		--chdir "${HSQLDB_HOME}" \
+		--user ${HSQLDB_USER}:${HSQLDB_GROUP} \
+		--make-pidfile --pidfile /var/run/${RC_SVCNAME}.pid \
+		--stdout /var/log/${RC_SVCNAME}.log \
+		--exec ${JAVA_HOME}/bin/java -- -classpath "${CLASSPATH}" \
+			"${HSQLDB_MAIN}"
+
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping HSQL-2 Database"
+	init_env_vars
+
+	${JAVA_HOME}/bin/java -classpath "${CLASSPATH}" \
+		"${SQLTOOL_MAIN}" --sql 'shutdown;' \
+		--rcFile="${HSQLDB_HOME}"/sqltool.rc \
+		"${URLID}" > /dev/null
+	eend $?
+}

@@ -14,7 +14,7 @@ SRC_URI="ml? ( http://download.java.net/glassfish/${PV}/release/glassfish-${PV}-
 SLOT="${PV%%.*}"
 KEYWORDS="~x86 ~amd64"
 LICENSE="|| ( CDDL GPL-2 )"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 IUSE="+ml"
 
 S="${WORKDIR}/glassfish${SLOT}"

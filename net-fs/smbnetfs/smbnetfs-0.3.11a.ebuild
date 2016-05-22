@@ -5,7 +5,7 @@
 
 inherit eutils
 
-DESCRIPTION="SMBNetFS is a Linux/FreeBSD filesystem that allow you to use samba/microsoft network in the same manner as the network neighborhood in Microsoft Windows."
+DESCRIPTION="To use samba/microsoft network in the same manner as in Microsoft Windows"
 HOMEPAGE="http://sourceforge.net/projects/smbnetfs"
 SRC_URI="mirror://sourceforge/smbnetfs/${P}.tar.bz2"
 
@@ -16,14 +16,14 @@ RESTRICT="mirror"
 IUSE=""
 
 RDEPEND=">=sys-fs/fuse-2.3
-	 >=net-fs/samba-3.0.21
-	 sys-devel/autoconf
-	 sys-devel/automake"
+	>=net-fs/samba-3.0.21"
 
 DEPEND="${RDEPEND}
 	virtual/libc
 	sys-devel/libtool
-	sys-devel/make"
+	sys-devel/make
+	sys-devel/autoconf
+	sys-devel/automake"
 
 src_unpack() {
 	unpack ${A}
@@ -33,9 +33,9 @@ src_unpack() {
 }
 
 src_install() {
-	make install DESTDIR=${D} || die "make install failed"
-	rm -rf ${D}/usr/share/doc/smbnetfs
-	dodoc COPYING AUTHORS ChangeLog README INSTALL RUSSIAN.FAQ
+	make install DESTDIR="${D}" || die "make install failed"
+	rm -rf "${D}/usr/share/doc/smbnetfs"
+	dodoc AUTHORS ChangeLog README INSTALL RUSSIAN.FAQ
 	dodoc doc/smbnetfs.conf
 }
 

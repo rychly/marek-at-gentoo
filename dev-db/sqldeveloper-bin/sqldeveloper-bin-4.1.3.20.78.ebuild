@@ -10,7 +10,7 @@ DESCRIPTION="Oracle SQL Developer is a free graphical tool for database developm
 HOMEPAGE="http://www.oracle.com/technology/products/database/sql_developer/"
 DOWNLOAD_PAGE="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/"
 SRC_URI="http://download.oracle.com/otn/java/sqldeveloper/${PN//-bin/}-${PV}-no-jre.zip
-	mysql? ( ftp://ftp.fi.muni.cz/pub/mysql/Downloads/Connector-J/mysql-connector-java-${MYSQLCONVER}.tar.gz )"
+	mysql? ( mirror://mysql/Downloads/Connector-J/mysql-connector-java-${MYSQLCONVER}.tar.gz )"
 
 KEYWORDS="~x86 ~amd64"
 SLOT="0"

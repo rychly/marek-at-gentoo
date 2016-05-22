@@ -12,7 +12,7 @@ SRC_URI="mirror://debian/pool/main/a/${PN}/${PN}_${PV%.*}.orig.tar.gz
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="x86 amd64"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 IUSE=""
 
 S=${WORKDIR}/${PN}

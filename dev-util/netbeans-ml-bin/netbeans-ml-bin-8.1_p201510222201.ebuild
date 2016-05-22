@@ -9,11 +9,12 @@ inherit eutils
 NB_MAJV=${PV%%_*}
 NB_DATE=${PV##*_p}
 
-DESCRIPTION="The NetBeans IDE is a free, open-source Integrated Development Environment for software developers."
+DESCRIPTION="A free, open-source Integrated Development Environment for software developers"
 HOMEPAGE="https://netbeans.org/features/ide/"
 SRC_URI="http://download.netbeans.org/netbeans/${NB_MAJV}/final/zip/netbeans-${NB_MAJV}-${NB_DATE}.zip"
+LICENSE="|| ( CDDL GPL-2 )"
 SLOT="0"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="x86 amd64"
 IUSE="tomcat"
 PDEPEND=">=virtual/jre-1.7

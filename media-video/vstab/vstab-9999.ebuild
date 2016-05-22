@@ -14,13 +14,14 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
-RESTRICT="nomirror"
+RESTRICT="mirror"
 
 DEPEND="virtual/jpeg"
+RDEPEND=""
 
 S=${WORKDIR}/${PN}
 
 src_install() {
 	exeinto /usr/bin
-	doexe ${S}/vstab || die 'Installation failed'
+	doexe "${S}/vstab" || die 'Installation failed'
 }

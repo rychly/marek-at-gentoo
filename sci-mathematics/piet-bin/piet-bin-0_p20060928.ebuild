@@ -15,7 +15,7 @@ LICENSE="LGPL"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+gui"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 
 DEPEND=""
 RDEPEND=">=virtual/jre-1.4"

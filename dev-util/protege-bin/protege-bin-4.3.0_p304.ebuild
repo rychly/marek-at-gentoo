@@ -10,14 +10,14 @@ PV_DIST="4.2"
 PV_MAIN=${PV%*.*}
 PV_FULL=${PV/_p/-}
 
-DESCRIPTION="An ontology editor and knowledge-base framework for ontologies in OWL, RDF(S), and XML Schema formats."
+DESCRIPTION="An ontology editor/knowledge-base framework for OWL, RDF(S), and XSD ontologies"
 HOMEPAGE="http://protege.stanford.edu/"
 SRC_URI="http://protege.stanford.edu/download/protege/${PV_MAIN}/zip/protege-${PV_FULL}.zip
 	http://protege.stanford.edu/images/ProtegeLogo.gif"
 
 LICENSE="MPL-1.1"
 SLOT="4"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="x86 amd64"
 DEPEND=""
 RDEPEND=">=virtual/jre-1.5"
@@ -25,8 +25,7 @@ RDEPEND=">=virtual/jre-1.5"
 S="${WORKDIR}/Protege_${PV_DIST}"
 INSTALLDIR="/opt/${PN}-${SLOT}"
 
-src_unpack() {
-	unpack ${A}
+src_prepare() {
 	# remove non-Linux executables
 	rm -rf "${S}"/*.{bat,command}
 	# make Linux scripts executable

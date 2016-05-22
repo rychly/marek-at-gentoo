@@ -54,7 +54,7 @@ pkg_setup() {
 }
 
 src_unpack() {
-	unpack "${A}"
+	unpack ${A}
 	cd "${WORKDIR}/Disk1"
 	rpm_unpack "./$(basename ${A} .zip)"
 	rm "./$(basename ${A} .zip)"

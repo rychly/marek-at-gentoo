@@ -10,11 +10,12 @@ VPS_MAIN=${PV%%.?_*}
 VPS_FULL=${PV%%_*} VPS_SPNO=${VPS_FULL##*.}
 VPS_PTCH=${PV##*_p}
 
-DESCRIPTION="Visual Paradigm Suite is a collection of tools: Visual Paradigm for UML, Smart Development Environment, DB Visual ARCHITECT, Business Process Visual ARCHITECT, Agilian"
+DESCRIPTION="A collection of several Visual Paradigm tools and editors"
 HOMEPAGE="http://www.visual-paradigm.com/product/vpsuite/"
 SRC_URI="http://eu3.visual-paradigm.com/${VPS_SRCD}/vpsuite${VPS_MAIN}/sp${VPS_SPNO}_${VPS_PTCH}/VP_Suite_Linux_NoInstall_${VPS_MAIN//./_}_sp${VPS_SPNO}_${VPS_PTCH}.tar.gz"
+LICENSE="visual-paradigm-evaluation"
 SLOT="0"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="x86 amd64"
 DEPEND=""
 RDEPEND=">=virtual/jre-1.5"

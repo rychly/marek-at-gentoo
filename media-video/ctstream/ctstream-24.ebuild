@@ -11,7 +11,7 @@ SRC_URI="http://xpisar.wz.cz/ctstream/ctstream-${PV}"
 RESTRICT="mirror"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 m68k mips ppc ppc64 s390 sh sparc x86 x86-fbsd" # the same as for dev-lang/perl
+KEYWORDS="~alpha ~amd64 ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd" # the same as for dev-lang/perl
 
 RDEPEND="dev-lang/perl
 	dev-perl/HTTP-Message

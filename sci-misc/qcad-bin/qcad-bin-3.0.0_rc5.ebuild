@@ -11,7 +11,7 @@ HOMEPAGE="http://www.ribbonsoft.com/qcad.html"
 SRC_URI="http://www.ribbonsoft.com/archives/qcad/qcad-${MY_PV}-trial-linux-x86.tar.gz"
 
 SLOT="0"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="amd64 hppa ppc ppc64 x86"
 
 S="${WORKDIR}/qcad-${MY_PV}-trial-linux-x86"

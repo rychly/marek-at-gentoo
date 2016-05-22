@@ -11,7 +11,7 @@ SRC_URI="http://freerapid-downloader.sweb.cz/FreeRapiD-${PV%%0}.zip
 
 LICENSE="GPL"
 KEYWORDS="x86 amd64"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 
 IUSE="rs-premium"
 SLOT="0"

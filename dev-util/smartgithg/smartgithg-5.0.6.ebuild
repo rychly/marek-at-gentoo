@@ -8,10 +8,11 @@ inherit java-utils-2 eutils
 
 TEMP="${PV//./_}" MY_PV="${TEMP//rc/ea}"
 
-DESCRIPTION="SmartGit/Hg is a client for Git and Mercurial."
+DESCRIPTION="SmartGit/Hg is a client for Git and Mercurial"
 HOMEPAGE="http://www.syntevo.com/smartgithg/"
 SRC_URI="http://www.syntevo.com/download/smartgithg/${PN}-generic-${MY_PV}.tar.gz"
 
+LICENSE="smartgit"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

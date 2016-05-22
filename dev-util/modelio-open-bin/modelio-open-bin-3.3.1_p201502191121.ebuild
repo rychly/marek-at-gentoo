@@ -11,14 +11,15 @@ MYVERMAJ="${PV%%_p*}"
 MYVERMIN="${PV##*_p}"
 MYVERBAS=$(echo "${MYVERMAJ}" | cut -d . -f 1-2)
 
-DESCRIPTION="Modelio is an open source modeling environment which can be extended through modules to add functionalities and services."
+DESCRIPTION="An open source modeling environment"
 HOMEPAGE="http://www.modelio.org/"
 SRC_URI_PREFIX="mirror://sourceforge/modeliouml/${MYVERMAJ}/${MYPNMAIN}-${MYVERMIN}"
 SRC_URI="\
 	x86?	( ${SRC_URI_PREFIX}-linux.gtk.x86.tar.gz )
 	amd64?	( ${SRC_URI_PREFIX}-linux.gtk.x86_64.tar.gz )"
+LICENSE="GPL-3 APL-1.0"
 SLOT="0"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="x86 amd64"
 # https://www.modelio.org/documentation/installation/12-installation.html
 DEPEND="net-libs/webkit-gtk:2" # for org.eclipse.swt.SWTError: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]

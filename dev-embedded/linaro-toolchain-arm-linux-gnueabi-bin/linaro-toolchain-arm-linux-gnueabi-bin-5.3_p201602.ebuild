@@ -10,7 +10,7 @@ PATCHVER=${PVPATCH:0:4}.${PVPATCH:4:2}
 BUILDNO=${PVPATCH:6}
 [[ -n "${BUILDNO}" ]] && LINAROVER="${GCCVER}-${PATCHVER}-${BUILDNO}" || LINAROVER="${GCCVER}-${PATCHVER}"
 
-DESCRIPTION="Linaro Stable Binary Toolchain provides cross-toolchain executables (compiler, debugger, linker, etc.) and shared libraries (libstdc++, libc, etc.) that target ARM GNU/Linux environments."
+DESCRIPTION="Linaro cross-toolchain executables and shared libraries for ARM GNU/Linux"
 HOMEPAGE="https://wiki.linaro.org/WorkingGroups/ToolChain http://releases.linaro.org/components/toolchain/binaries/${LINAROVER}/"
 SRC_URI="\
 	x86? ( http://releases.linaro.org/components/toolchain/binaries/${LINAROVER}/arm-linux-gnueabi/gcc-linaro-${LINAROVER}-i686-mingw32_arm-linux-gnueabi.tar.xz )

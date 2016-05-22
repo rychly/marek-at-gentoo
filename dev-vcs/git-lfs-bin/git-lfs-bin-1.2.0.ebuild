@@ -15,6 +15,7 @@ KEYWORDS="amd64"
 
 RESTRICT="mirror"
 DEPEND="!dev-vcs/git-lfs"
+RDEPEND="dev-vcs/git"
 
 src_unpack() {
 	unpack ${A}

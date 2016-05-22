@@ -12,14 +12,14 @@ HOSTOS=i686-pc-linux-gnu
 T1=${PV//./-} VER=${T1/-03/q1} # just for 2010 releases
 MAINVER=${VER%-*}
 
-DESCRIPTION="Sourcery CodeBench is a complete development environment for embedded C/C++ development on ARM, Power, ColdFire, and other architectures."
+DESCRIPTION="Sourcery CodeBench environment for embedded C/C++ development on ARM"
 HOMEPAGE="http://www.mentor.com/embedded-software/sourcery-tools/sourcery-codebench/editions/lite-edition/ https://sourcery.mentor.com/GNUToolchain/release${RELEASE}"
 SRC_URI="https://sourcery.mentor.com/public/gnu_toolchain/${TARGETOS}/${TARGETARCH}-${VER}-${TARGETOS}-${HOSTOS}.tar.bz2 -> ${P}.tar.bz2"
 #SRC_URI="https://sourcery.mentor.com/GNUToolchain/package${PACKAGE}/public/${TARGETOS}/${TARGETARCH}-${VER}-${TARGETOS}-${HOSTOS}.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE="ESHLA"
 KEYWORDS="x86 amd64"
-RESTRICT="nomirror strip binchecks"
+RESTRICT="mirror strip binchecks"
 
 SLOT="${RELEASE}"
 

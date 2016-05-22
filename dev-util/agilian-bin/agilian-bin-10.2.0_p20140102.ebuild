@@ -12,14 +12,15 @@ AG_FULL=${PV%%_*} AG_SPNO=${AG_FULL##*.}
 AG_PTCH=${PV##*_p}
 [ "${AG_SPNO}" -gt 0 ] && AG_SPREFIX="sp${AG_SPNO}_"
 
-DESCRIPTION="Agilian is an agile modeling tool that supports UML, BPMN, ERD, screen mock up and Mind Mapping."
+DESCRIPTION="An agile modeling tool for UML, BPMN, ERD, screen mock up and Mind Mapping"
 HOMEPAGE="http://www.visual-paradigm.com/product/ag/"
 SRC_URI_PREFIX="http://${AG_MIRROR}.visual-paradigm.com/${AG_SRCD}/ag${AG_MAIN}/${AG_SPREFIX}${AG_PTCH}/Agilian_Linux"
 SRC_URI="\
 	x86?	( ${SRC_URI_PREFIX}_NoInstall_${AG_MAIN//./_}_${AG_SPREFIX}${AG_PTCH}.tar.gz )
 	amd64?	( ${SRC_URI_PREFIX}_64bit_NoInstall_${AG_MAIN//./_}_${AG_SPREFIX}${AG_PTCH}.tar.gz )"
+LICENSE="visual-paradigm-evaluation"
 SLOT="0"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="x86 amd64"
 DEPEND=""
 RDEPEND=">=virtual/jre-1.5"

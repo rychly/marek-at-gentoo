@@ -4,18 +4,18 @@
 
 EAPI=3
 
-VALA_MIN_API_VERSION=0.20
+VALA_MIN_API_VERSION=0.26
 
 inherit cmake-utils git-2 vala
 
-DESCRIPTION="A program and a library designed to help in the creation of projects with Vala and CMake."
+DESCRIPTION="A program and a library for creation of projects with Vala and CMake"
 HOMEPAGE="https://github.com/rastersoft/autovala/"
 
 EGIT_REPO_URI="https://github.com/rastersoft/${PN} git://github.com/rastersoft/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~arm ~x86 ~amd64"
+KEYWORDS="~x86 ~amd64"
 IUSE="pandoc"
 
 RDEPEND="dev-libs/glib:2

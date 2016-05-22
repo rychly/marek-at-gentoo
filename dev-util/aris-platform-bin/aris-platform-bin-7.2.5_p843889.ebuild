@@ -11,11 +11,12 @@ TMP=${PV%_*} MY_VER=${TMP//./}
 MY_BLD=${PV#*_p}
 MY_IDX=79
 
-DESCRIPTION="ARIS Platform for Unix contains ARIS Client installation files (ARIS Platform) for use with approved Linux operating systems."
+DESCRIPTION="ARIS Client (ARIS Platform) for use with approved Linux operating systems"
 HOMEPAGE="http://www.softwareag.com/corporate/products/aris/default.asp"
 SRC_URI="http://aris.softwareag.com/ARISDownloadCenter?downloadfile=ARIS${MY_VER}_PLATFORM_${MY_BLD}.tar.gz&downloadfileindex=${MY_IDX} -> ARIS${MY_VER}_PLATFORM_${MY_BLD}.tar.gz"
 
 RESTRICT="mirror"
+LICENSE="software-ag"
 SLOT="0"
 KEYWORDS="x86 amd64"
 DEPEND=""
@@ -24,13 +25,16 @@ RDEPEND=">=virtual/jre-1.5"
 INSTALLDIR=/opt/${PN}
 
 src_unpack() {
-	unpack "${A}"
+	unpack ${A}
 	local dist="${WORKDIR}/ARIS Platform/install_ARIS_${MY_VER:0:2}.${MY_BLD}.sh"
 	# Retrieve line number where tar.gzip binary begins
 	local skip=$(grep --text -o '^OFFSET=[0-9]*$' -m 1 "${dist}" | cut -d '=' -f 2)
 	[ $? -ne 0 ] && die "Unable to locate tar.gzip content!"
 	# Untar following archive
 	tail -c +$skip "${dist}" | tar -xz -C "${WORKDIR}" && rm -rf "${dist%/*}" || die "Unable to extract tar.gzip content!"
+}
+
+src_prepare() {
 	# Fix white-spaces in script names
 	for I in "${WORKDIR}"/*.sh; do
 		mv "${I}" "${I// /_}" 2>/dev/null

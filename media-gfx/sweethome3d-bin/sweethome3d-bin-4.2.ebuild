@@ -9,14 +9,14 @@ inherit java-pkg-2 eutils
 OPN="${PN%-bin}"
 OPNUP="SweetHome3D"
 
-DESCRIPTION="Sweet Home 3D is a free interior design application."
-HOMEPAGE="http://sweethome3d.sourceforge.net/"
+DESCRIPTION="Sweet Home 3D is a free interior design application"
+HOMEPAGE="http://www.sweethome3d.com/"
 SRC_URI="x86? ( mirror://sourceforge/${OPN}/${OPNUP}/${OPNUP}-${PV}/${OPNUP}-${PV}-linux-x86.tgz )
 	amd64? ( mirror://sourceforge/${OPN}/${OPNUP}/${OPNUP}-${PV}/${OPNUP}-${PV}-linux-x64.tgz )"
 
-LICENSE="GPL"
+LICENSE="GPL-2"
 KEYWORDS="x86 amd64"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 
 IUSE=""
 SLOT="0"
@@ -25,12 +25,11 @@ RDEPEND=">=virtual/jre-1.6"
 S="${WORKDIR}/${OPNUP}-${PV}"
 
 src_unpack() {
-	unpack "${A}"
+	unpack ${A}
 	unzip "${S}/lib/SweetHome3D.jar" "com/eteks/sweethome3d/resources/frameIcon32x32.png" || die "Cannot unpack icon!"
 }
 
 src_install() {
-	cd "${S}"
 	dodoc "${S}"/*.TXT
 	java-pkg_dojar $(grep -o 'lib/[^:]*\.jar' "${S}/${OPNUP}" | grep -v "/javaws\.jar")
 	java-pkg_dojar "${S}"/jre*/"lib/javaws.jar"

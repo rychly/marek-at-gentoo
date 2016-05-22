@@ -1,6 +1,6 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/webkit-gtk/webkit-gtk-1.8.3-r201.ebuild,v 1.13 2013/10/10 23:43:20 tetromino Exp $
+# $Id$
 
 EAPI=5
 
@@ -25,7 +25,7 @@ REQUIRED_USE="introspection? ( geoloc gstreamer )"
 RDEPEND="
 	dev-libs/libxml2:2
 	dev-libs/libxslt
-	virtual/jpeg
+	virtual/jpeg:*
 	>=media-libs/libpng-1.4:0=
 	>=x11-libs/cairo-1.10
 	>=dev-libs/glib-2.32:2
@@ -36,7 +36,7 @@ RDEPEND="
 	>=x11-libs/pango-1.21
 	x11-libs/libXrender
 
-	geoloc? ( app-misc/geoclue )
+	geoloc? ( app-misc/geoclue:* )
 
 	gstreamer? (
 		media-libs/gstreamer:0.10

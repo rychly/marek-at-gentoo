@@ -12,7 +12,7 @@ HOMEPAGE="http://openjump.org/"
 SRC_URI="mirror://sourceforge/jump-pilot/OpenJUMP/${PV_MAJ}/OpenJUMP-Portable-${PV_MAJ}-r${PV_REL}-PLUS.zip"
 LICENSE="GPL"
 KEYWORDS="x86 amd64"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 
 SLOT="0"
 RDEPEND=">=virtual/jre-1.5"

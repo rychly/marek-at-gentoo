@@ -4,7 +4,7 @@
 
 inherit eutils
 
-DESCRIPTION="A visual database design system that integrates database design, modeling, creation and maintenance into a single, seamless environment."
+DESCRIPTION="A visual system for design, modeling, creation and maintenance of databases."
 HOMEPAGE="http://fabforce.net/dbdesigner4/"
 SRC_URI="mirror://mysql/DBDesigner4/DBDesigner${PV}.tar.gz
 	mirror://sourceforge/kylixlibs/kylixlibs3-borqt-3.0-2.tar.gz"
@@ -15,7 +15,7 @@ IUSE=""
 LICENSE="GPL-2"
 DEPEND=""
 RDEPEND=""
-RESTRICT="nomirror"
+RESTRICT="mirror"
 
 S="${WORKDIR}/DBDesigner${PV%%.*}"
 INSTALLDIR="/opt/${PN}"

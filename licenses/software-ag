@@ -1,0 +1,173 @@
+This Agreement ("Agreement") is made and entered into by and between
+
+Software AG
+with its principal place of business at
+Uhlandstrasse 12
+Darmstadt
+D-64297
+Germany
+(hereinafter "Software AG")
+
+and
+
+you
+(hereinafter "Licensee")
+
+Software AG holds titles and distribution rights in the software described in the attached license sheets to this agreement. The purpose of Software AG's offering is to make available certain Products at no charge under Software AG's License Agreement for Education and Research (the "Agreement") to you, the "Licensee".
+
+1. Definitions
+
+Institution:
+Either (1) an accredited higher educational institution which offers courses that lead to a publicly accepted academic degree or title.
+Or (2) a non-university research institute.
+Licensee:
+Either (1) an employee of an Institution who has registered, with the authorization of his Institutions supervisory authority, to conclude this Agreement.
+Or (2) a student taking courses or researching at an institution.
+Products:
+Products include software programs, manuals, software maintenance, related educational materials, and other resources that are made available by Software AG under this Agreement and its "University Relations Program" and at http://www.softwareag.com/university. Products may not be used, copied, modified, or distributed except as provided in this Agreement.
+Students:
+Students enrolled in the classes for which Licensee is responsible, if applicable.
+
+
+2. License
+
+(1) Software AG grants Licensee a royalty free, nonexclusive, nontransferable license to use Products solely for instruction and learning, as well as noncommercial research. Purpose of a royalty free usage of the software can only be the use in education or research projects. Commercial use of the Products, e.g. usage for administrative purposes in research and education or for the Institution itself, requires a separate commercial license. This license includes the right to use the Products for design, development and testing of software applications or hardware created by Licensee and/or its Students and coworkers. The usage is limited to research and educational projects which are instrumental for the training of Licensee, and if applicable Licensees's Students and coworkers. Products may not be used for courses which do not lead to nationally recognized qualifications or levels of academic achievement.
+
+(2) Licensee may only install the Products on one or more of the Institution's servers or personal computers located on its premises as indicated on the University License Sheet. Licensee and Licensee's Students may be granted unlimited access to such servers and personal computers, including unlimited (remote-) connections given Licensee and Licensee's Students have understood and agreed to the terms of this Agreement. Licensee has to maintain and keep records of individuals who have accessed the systems including the names and IDs of the users.
+
+(3) It is not permitted to process data on behalf or for the benefit of any third party. The Products may not be used for a benchmark or other comparative evaluation with competitive products unless otherwise explicitly agreed in advance by Software AG in writing. It is not allowed under this license to reverse assemble, reverse compile, or otherwise translate the Products, except as specifically permitted by law without the possibility of contractual waiver; nor may the Products be sublicensed, rented, or leased, or used for commercial or administrative purposes.
+
+(4) Licensee and Licensee's Students are not allowed to make any modifications or alterations to the licensed Products and are not allowed to create any derivative works thereof. Should Licensee and/or Licensee's Students wish to be allowed to create derivative works, Licensor agrees to grant Licensee and Licensee's Students a permission to do so, provided that Licensee and Licensee's Students, in its/their turn, will grant Licensor an irrevocable, nonexclusive, worldwide, paid-up license to use, reproduce, display, distribute license to use derivative works and the right to authorize others to do any of the former. The use of derivative works by Licensee and Licensee's Students are subject to the same license terms as the Products. Any other use or extensions of the Products to other systems, e.g. systems for commercial use, which do not serve the purpose of this Agreement, require a change in this Agreement.
+
+(5) The rights of use under the then current term include the last versions of the Products the Licensee has received under section 5, Technical Services. With the usage of a new version the right to use the previous version used by the Licensee is revoked unless problems with the new version prevent the migration. The previous version has to be deleted with the exception of one backup copy. Because of the non-transferable license of use, no copy shall be transferred to any third party.
+
+(6) Licensee may make copies, including backup copies, to support the level of use authorized, provided Licensee ensures that the copyright notices and any other legends of ownership are reproduced on each copy or partial copy of Products.
+
+(7) Licensee agrees to the publication of the Institution's name on a reference list on Software AG's University Relations homepage and agrees to communication of the collaboration both internally (e.g. a Software AG company presentation) and externally (agreed partnership references, press releases and success stories).
+
+
+3. Deliverables
+
+(1) Software AG agrees to deliver the Products subject to this Agreement including documentation.
+
+(2) The installation of the Products is not part of this Agreement. Software AG or its subsidiaries or its distribution partners offer installation support and training for the Products at the premises of the Licensee. Such additional services would require separate agreements and additional charges.
+
+(3) Software AG reserves the right to develop and enhance the Products.
+
+
+4. Term and Termination
+
+(1) The license to use the Products is temporally limited, cf. University License Sheet to be completed by Software AG. The maximum duration of the license is 12 months after date of issue.
+
+(2) On termination of this Agreement, the Licensee agrees to delete the respective licensed Products from all computer systems and to destroy all media or irrevocably delete the Products on such media, including all back-up copies.
+
+(3) Licensee warrants the completeness of the deletion of the Licensed Products and on request of Software AG will timely submit a written confirmation of deletion.
+
+(4) In case Licensee fails to comply with its duties to delete the Products or if Licensee uses the licensed Products in excess of the licensed term, Licensee agrees to pay an excess usage charge equal to one year's license fees according to the then current list price of the Product.
+
+(5) If Licensee fails to comply with the terms of this Agreement, Software AG may terminate Technical Services and all of Licensee's licenses to use Products that Licensee has been granted under this Agreement at any time.
+
+(6) Software AG or Licensee may terminate this Agreement at any time with three months written notice.
+
+(7) Any terms of this Agreement which by their nature extend beyond the Agreement termination remain in effect until fulfilled, and apply to both of our respective successors and assignees.
+
+
+5. Technical Services
+
+(1) Technical Services are limited to the duration of the license, cf. section 4. (1) of this Agreement.
+
+(2) Software AG offers the following Technical Services:
+
+(2.1) Errors in a then current version of the licensed Products will be handled and corrected as described in section 2.3 and 2.4. In case a putative error occurs with the licensed Product, Licensee will provide Software AG with essential information about the conditions resulting from the error including data description and dumps. If machine time is needed on Licensees equipment to reproduce the error, Licensee will provide this at no cost. In the context of Technical Services provided to Licensee, Software AG does only take responsibility for errors that fall into its technical competence. Excluded from Software AG's area of technical competence are any errors based on claims of third parties of compatibility of hardware or software platforms with licensed Product.
+
+(2.2) Software AG shall deliver technically enhanced and updated Products including updated documentation. This can be done by shipping new versions of the licensed Product.
+
+(2.3) The support and maintenance services performed by Software AG as Technical Services under this Agreement are described in the following:
+
+(2.3.1) Web based online support: Empower offers query, online access to new product information, product documentation, knowledge center, and information on software fixes available. Software AG does not warrant that the service is at all times available or that access is interruption free.
+
+(2.3.2) Remote Diagnosis: Software AG may, but is under no obligation to, perform remote diagnosis to facilitate problem analysis.
+Software AG will access Licensee's environment via a Remote Online Diagnostic Tool for purposes of diagnosis and analysis only. Dial-in service to Licensee's environments will occur during regular business hours at such times as agreed between the Customer and Software AG. Licensee will provide appropriate tools to enable remote access for Software AG (IPCS, TSO, Terminal-Emulation, and the like); Licensee will establish appropriate security to ensure that Software AG's access is restricted to permissible areas. Licensee has installed the currently supported release levels of the Software AG products - Licensee will provide Software AG with sufficient information and assistance as requested by Software AG regarding Licensee's environment. - Licensee will provide information on any tools used as required by Software AG - Licensee will provide diagnostic information (traces, dumps, parameters, etc.) as required by Software AG.
+
+(2.4) Licensee receives the following update services:
+- Error corrections of licensed Software AG products;
+- Updates of licensed Software AG Products containing additional capability or functionality of a licensed Software AG Product;
+- Documentation updates for Software AG products. Information regarding availability of Products and documentation updates is available in Empower.
+
+(3) Services that extend the Technical Services described herein have to be ordered separately and will be charged at Software AG’s then current rates for professional services.
+
+(4) Licensee agrees to use only the latest release of the licensed Products as provided by Software AG and to apply patches published by Software AG. Software AG will support only the two latest versions available, the older of which will be supported for 360 more days after the release of the consecutive version.
+
+
+6. Non-Assignment, Usage
+
+(1) Licensee may not assign this Agreement, in whole or in part, without the prior written consent of Software AG. Any attempt to do so is void. Licensee agrees to comply with applicable export laws and regulations.
+
+(2) The Products are trade secrets and the proprietary property of Software AG or Software AG's licensors. Licensee and its employees, Students or coworkers shall keep the Products strictly confidential, and Licensee shall not disclose or otherwise distribute the Products to anyone other than Licensee's authorized employees, Students or coworkers as allowed under this Agreement. Licensee shall not remove or destroy any proprietary marking of Software AG or Software AG's licensors. Licensee shall not permit anyone other than its authorized employees, Students or coworkers to have access to the Products.
+
+(3) Licensee will, within ten (10) working days from the date of its receipt of a written request from Software AG (provided that such requests may not be submitted by Software AG more than twice in any twelve (12) month period), submit to Software AG a written report on the utilization of the Products, including the installation locations and the utilization. This written confirmation shall include sufficient detail to enable Software AG to assess Licensee's compliance with the terms and conditions of this Agreement.
+
+(4) Software AG, or at Software AG's discretion an independent consultant appointed by Software AG, shall have the right on giving reasonable notice to Licensee to enter into any premises where an Installation Site exists or any Products are held and have access to the CPU(s) or other machines on which any of the Products are installed for the purpose of auditing Licensee's use of the Products in accordance with the terms of this Agreement. Should Software AG choose to exercise this right to appoint a consultant, Software AG shall pay the expenses for such consultant. However, should such consultant conclude that Licensee's use of the Products exceeds the license grant and terms and conditions herein, then Licensee shall be responsible to pay or reimburse Software AG for the expenses of such consultant.
+
+
+7. No Warranty
+
+SUBJECT TO ANY STATUTORY WARRANTIES WHICH CAN NOT BE EXCLUDED, THE PROGRAM IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. The exclusion also applies to any of Software AG's subcontractors, suppliers, or program developers (collectively called "Suppliers"). Manufacturers, Suppliers, or publishers of non-Software AG Products may provide their own warranties.
+
+
+8. Items for Which Software AG is Not Liable
+
+Under no circumstances is Software AG or Suppliers liable for any of the following, even if informed of their possibility: (1) loss of, or damage to, data; (2) special, incidental, or indirect damages or for any economic consequential damages; or (3) lost profits, business, revenue, goodwill, or anticipated savings.
+
+
+9. Limitation of Liability
+
+Circumstances may arise where, because of a default on Software AG's part or other liability, Licensee is entitled to recover damages from Software AG. In each such instance, regardless of the basis on which Licensee is entitled to claim damages from Software AG (including fundamental breach, negligence, misrepresentation, or other contract or tort claim), Software AG is liable for no more than damages for bodily injury (including death) and direct damages to real property and tangible personal property. This limit also applies to any of Software AG's subcontractors and Product developers. It is the maximum for which Software AG and its subcontractors and Product developers are collectively responsible.
+
+
+10. Special Provisions
+
+For the right to use Software AG's Products without charge, Licensee will, upon request from Software AG, submit contributions regarding the licensed Products to be used by Software AG, its subsidiaries or distribution partners for presentations at events or publications. Software AG allows and Licensee commits to use Software AG's name, trademarks, service marks, and/or trade names relating to the Products e.g. on the institute's homepage, in the lecture prospectus or in bachelor or master thesis documentation. Licensee grants Software AG the right to use its name, trademarks, service marks, and/or trade names in relation to this Agreement and Licensee's Institution being a participant of a related program. Both parties acknowledge and agree that they shall not acquire any rights or licenses in or to the marks as a result of the use permitted herein, and shall cease such use for new publications immediately upon termination of this Agreement.
+
+The Licensee appoints one of its employees / coworkers as a partnership contact person for Software AG.
+
+
+11. Business Contact Information
+
+Licensee agrees to allow Software AG and entities within Software AG and the subsidiaries it owns by more than 50 percent to store and use Licensee's business contact information, including names, address, business telephone numbers, and business e-mail addresses, anywhere they do business. Such information will be processed and used in connection with our business relationship, and may be provided to contractors acting on Software AG's behalf, Software AG partners who promote, market, and support certain Software AG products and services, and assignees for uses consistent with our business relationship.
+
+
+12. Charges and Taxes
+
+If any authority imposes a duty, tax, levy or fee, excluding those based on Software AG's net income, upon Products supplied by Software AG under this Agreement, then Licensee agrees to pay that amount as Software AG specifies in its invoice or equivalent document or supply exemption documentation. Except as set forth above with regard to taxes on Software AG's net income, any local charges and taxes are to be paid by and are the sole responsibility of the Licensee.
+
+
+13. General
+
+Additional or different terms in any written communication from Licensee are void. Both parties are free to enter into similar agreements with others. Each party grants the other only the licenses and rights specified. No other licenses or rights (including licenses or rights under patents) are granted. Both parties may communicate with the other by electronic means and such communication is acceptable as a signed writing. An identification code (called a "user ID") contained in an electronic document is sufficient to verify the sender's identity and the document's authenticity.
+
+Licensee agrees that this Agreement will not create any right or cause of action for any third party, nor will Software AG be responsible for any third party claims against Licensee except as permitted by the Limitation of Liability section above for bodily injury (including death) or damage to real or tangible personal property for which Software AG is legally liable.
+
+Neither Licensee nor Software AG will bring a legal action under this Agreement more than two years after the cause of action arose unless otherwise provided by local law without the possibility of contractual waiver or limitation.
+
+Neither Licensee nor Software AG is responsible for failure to fulfill any obligations due to causes beyond its control.
+
+In the event that any provision of this Agreement is held to be invalid or unenforceable, the remaining provisions of this Agreement remain in full force and effect.
+
+This Agreement and any Software AG license agreements or any other agreements under which Products are made available to Licensee are the complete agreement between Licensee and Software AG regarding the use of those Products and replace any prior oral or written communications between Licensee and Software AG regarding this offering. If there is a conflict between any of the terms of other applicable licenses and agreements and those of this Agreement, the terms of this Agreement prevail to the extent that the terms conflict.
+
+
+14. Governing Law
+
+Both Licensee and Software AG consent to the application of the laws of Germany, with the exception of the UN Convention on Contracts for the International Sale of Goods, to govern, interpret, and enforce all of Licensee's and Software AG's rights, duties, and obligations arising from, or relating in any manner to, the subject matter of this Agreement, without regard to conflict of law principles.
+
+
+15. Export
+
+
+The Product, including technical data is subject to international and local export and import control laws and associated regulations of various governments including those of Japan, Germany, and the United States of America. Licensee must comply strictly with all such regulations and Licensee is responsible for obtaining all licenses or other consents related to the export, re-export or import of the Product.
+
+
+16. Contract Version
+
+The contract version is 18/04/2011, in case of questions, please refer to the number of your version.

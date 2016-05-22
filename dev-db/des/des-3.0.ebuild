@@ -6,7 +6,7 @@ EAPI=2
 
 inherit eutils
 
-DESCRIPTION="The Datalog Educational System (DES) is a free, open-source, multiplatform, portable, Prolog-based implementation of a basic deductive database system."
+DESCRIPTION="Datalog Educational System (DES) is a Prolog-based basic deductive db system."
 HOMEPAGE="http://www.fdi.ucm.es/profesor/fernan/des/"
 SRC_URI="mirror://sourceforge/des/DES${PV}SWI.tar.gz"
 RESTRICT="mirror"
@@ -53,7 +53,6 @@ END
 }
 
 src_install() {
-	cd "${S}"
 	dodir "/usr/share/${P}" "/usr/share/doc/${P}"
 	# Install base
 	cp "${S}"/*.pl "${D}/usr/share/${P}" || die "Failed to install files"

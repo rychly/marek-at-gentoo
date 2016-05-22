@@ -11,13 +11,14 @@ MYVERMAJ="${PV%%_p*}"
 MYVERMIN="${PV##*_p}" # full version from *.deb:/control.tar.gz:/control
 MYVERBAS=$(echo "${MYVERMAJ}" | cut -d . -f 1-2)
 
-DESCRIPTION="Modelio is first and foremost a modeling environment, supporting a wide range of UML/BPMN models and diagrams, and providing model assistance and consistency checking features."
+DESCRIPTION="A modeling environment supporting a wide range of UML/BPMN models and diagrams"
 HOMEPAGE="https://www.modeliosoft.com/en/modules/modelio-modeler.html"
 DOWNLOAD_PAGE="http://www.modeliosoft.com/en/download/dl-modelio.html"
 SRC_URI_PREFIX="http://www.modeliosoft.com/en/component/docman/doc_download"
 SRC_URI="\
 	x86?	( ${SRC_URI_PREFIX}/944-solution-modelio-${MYVERMAJ//./}-debian-32-bit.html -> modelio-modeler-${MYVERMAJ}-i386.deb )
 	amd64?	( ${SRC_URI_PREFIX}/945-solution-modelio-${MYVERMAJ//./}-debian-64-bit.html -> modelio-modeler-${MYVERMAJ}-amd64.deb )"
+LICENSE="modeliosoft"
 SLOT="0"
 IUSE="-systemjre"
 RESTRICT="fetch"

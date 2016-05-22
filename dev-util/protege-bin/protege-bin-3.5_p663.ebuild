@@ -8,7 +8,7 @@ inherit eutils
 
 PV_MAIN=${PV%_p*}
 
-DESCRIPTION="An ontology editor and knowledge-base framework for ontologies in OWL, RDF(S), and XML Schema formats."
+DESCRIPTION="An ontology editor/knowledge-base framework for OWL, RDF(S), and XSD ontologies"
 HOMEPAGE="http://protege.stanford.edu/"
 SRC_URI_BASE="http://protege.stanford.edu/download/protege/${PV_MAIN}/installanywhere/Web_Installers/InstData"
 SRC_URI="x86? ( ${SRC_URI_BASE}/Linux/NoVM/install_protege_${PV_MAIN}.bin -> install_protege_${PV}-x86.bin )
@@ -17,7 +17,7 @@ SRC_URI="x86? ( ${SRC_URI_BASE}/Linux/NoVM/install_protege_${PV_MAIN}.bin -> ins
 
 LICENSE="MPL-1.1"
 SLOT="3"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="x86 amd64"
 DEPEND=""
 RDEPEND=">=virtual/jre-1.5"
@@ -35,6 +35,9 @@ src_unpack() {
 	sh "${DISTDIR}/${A% *}" \
 		LAX_VM /etc/java-config-2/current-system-vm/bin/java \
 		-i Silent "-DUSER_INSTALL_DIR=${S}" || die "unpack failed"
+}
+
+src_prepare() {
 	# remove un-installer
 	rm -rf "${S}/Uninstall_Protege ${PV_MAIN}"
 	# fix LaunchAnywhere install directory

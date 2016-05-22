@@ -1,6 +1,6 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/webkit-gtk/webkit-gtk-1.8.3-r300.ebuild,v 1.14 2013/10/10 23:43:20 tetromino Exp $
+# $Id$
 
 EAPI="4"
 

@@ -12,14 +12,15 @@ LZ_FULL=${PV%%_*} LZ_SPNO=${LZ_FULL##*.}
 LZ_PTCH=${PV##*_p}
 [ "${LZ_SPNO}" -gt 0 ] && LZ_SPREFIX="sp${LZ_SPNO}_"
 
-DESCRIPTION="Logizian is a process modeling software designed to graphically represent business processes and workflows in BPMN 2.0."
+DESCRIPTION="A process modeling software for business processes and workflows in BPMN 2.0"
 HOMEPAGE="http://www.visual-paradigm.com/product/lz/"
 SRC_URI_PREFIX="http://${LZ_MIRROR}.visual-paradigm.com/${LZ_SRCD}/lz${LZ_MAIN}/${LZ_SPREFIX}${LZ_PTCH}/Logizian_Linux"
 SRC_URI="\
 	x86?	( ${SRC_URI_PREFIX}_NoInstall_${LZ_MAIN//./_}_${LZ_SPREFIX}${LZ_PTCH}.tar.gz )
 	amd64?	( ${SRC_URI_PREFIX}_64bit_NoInstall_${LZ_MAIN//./_}_${LZ_SPREFIX}${LZ_PTCH}.tar.gz )"
+LICENSE="visual-paradigm-evaluation"
 SLOT="0"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 KEYWORDS="x86 amd64"
 DEPEND=""
 RDEPEND=">=virtual/jre-1.5"

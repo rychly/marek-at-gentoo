@@ -16,7 +16,7 @@ SRC_URI="x86? ( http://www.varicad.cz/userdata/files/release/${PLANG}/${PNAME}-$
 
 LICENSE=""
 KEYWORDS="x86 amd64"
-RESTRICT="nomirror"
+RESTRICT="mirror"
 
 IUSE=""
 SLOT="0"

@@ -11,10 +11,11 @@ MYVERMAJ="${PV%%_p*}"
 MYVERMIN="${PV##*_p}" # full version from *.deb:/control.tar.gz:/control
 MYVERBAS=$(echo "${MYVERMAJ}" | cut -d . -f 1-2)
 
-DESCRIPTION="The Modeliosoft Ultimate Solution provides the entire set of features and modules for the most advanced users of Modelio who want to get the very most out of their models."
+DESCRIPTION="A set of features and modules for the most advanced users of Modelio"
 HOMEPAGE="https://www.modeliosoft.com/en/products/solutions/ultimate-solution-overview.html"
 DOWNLOAD_PAGE="http://www.modeliosoft.com/en/download/ultimate-solution.html"
 SRC_URI="http://www.modeliosoft.com/en/component/docman/doc_download/942-solution-ultimate-solution-${MYVERMAJ//./}-debian.html -> modelio-ultimate-solution-${MYVERMAJ}-all.deb"
+LICENSE="modeliosoft"
 SLOT="0"
 RESTRICT="fetch"
 KEYWORDS="x86 amd64"
