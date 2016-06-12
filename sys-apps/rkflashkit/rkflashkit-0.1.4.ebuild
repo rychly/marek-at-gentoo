@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit python-single-r1 waf-utils
 
-DESCRIPTION="A toolkit for flashing Linux kernel images to rk3066/rk3188/rk3288 based devices."
+DESCRIPTION="Toolkit for flashing Linux kernel images to rk3066/rk3188/rk3288 based devices"
 HOMEPAGE="https://github.com/linuxerwang/rkflashkit"
 COMMIT_ID="19f45de3c65faa0e3bc9ea595349676a85f03ef9"
 SRC_URI="https://github.com/linuxerwang/${PN}/archive/${COMMIT_ID}.tar.gz -> ${P}.tar.gz"

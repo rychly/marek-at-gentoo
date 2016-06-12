@@ -11,10 +11,10 @@ HOMEPAGE="http://wiki.mikrotik.com/wiki/Manual:Winbox"
 
 SLOT="0"
 KEYWORDS="x86 amd64"
+LICENSE="proprietary-unspecified"
 
 DEPEND=""
 RDEPEND="app-emulation/wine"
-
 
 src_unpack() {
 	cp --dereference "${FILESDIR}/${PN}.png" "${WORKDIR}"

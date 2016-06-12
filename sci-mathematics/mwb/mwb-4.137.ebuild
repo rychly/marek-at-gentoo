@@ -2,11 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-DESCRIPTION="The Mobility Workbench (MWB) is a tool for manipulating and analyzing mobile concurrent systems described in the pi-calculus."
+DESCRIPTION="The Mobility Workbench (MWB) for manipulating and analyzing pi-calculus systems"
 HOMEPAGE="https://www.it.uu.se/research/group/mobility/mwb"
 SRC_URI="https://www.it.uu.se/profundis/mwb-dist/${PN}99-sources-${PV}.tar.gz
 	doc? ( https://www.it.uu.se/profundis/mwb-dist/x4.ps.gz )"
 
+LICENSE="proprietary-unspecified"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~x86" # the same as for dev-lang/smlnj or dev-lang/smlnj-bin
 RESTRICT="mirror"

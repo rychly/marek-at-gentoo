@@ -6,7 +6,7 @@ EAPI=2
 
 inherit eutils
 
-DESCRIPTION="Advanced/Another Bisimulation Checker is a tool that checks open-equivalence in the pi-calculus."
+DESCRIPTION="Advanced/Another Bisimulation Checker of open-equivalence in the pi-calculus"
 HOMEPAGE="http://sbriais.free.fr/tools/abc/"
 # the unversioned download, patch level set to Last-Modified as it has been get by curl -I <URI>
 SRC_URI="http://sbriais.free.fr/tools/abc/${PN}.tar.gz -> ${P}.tgz
@@ -25,9 +25,9 @@ S="${WORKDIR}"
 
 src_compile() {
 	if use ocamlopt; then
-		emake -j1 opt || die "Error: make to build native code failed!"
+		emake opt || die "Error: make to build native code failed!"
 	else
-		emake -j1 || die "Error: make to build OCaml bytecode failed!"
+		emake || die "Error: make to build OCaml bytecode failed!"
 	fi
 }
 

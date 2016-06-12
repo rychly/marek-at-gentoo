@@ -15,10 +15,10 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~sparc ~x86"
 
-RDEPEND="dev-libs/libusb:1"
+RDEPEND="virtual/libusb:1"
 DEPEND="${RDEPEND}"
 
 src_install() {
 	dobin awflash awimage log2bin
-	dodoc COPYING README
+	dodoc README
 }

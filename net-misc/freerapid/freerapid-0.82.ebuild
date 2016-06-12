@@ -2,21 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-inherit eutils user
+inherit java-pkg-2
 
-DESCRIPTION="FreeRapid is a simple Java downloader that supports downloading from Rapidshare and other file-sharing services."
+DESCRIPTION="Simple Java downloader for Rapidshare and other file-sharing services"
 HOMEPAGE="http://wordrider.net/freerapid/"
 SRC_URI="http://freerapid-downloader.sweb.cz/FreeRapiD-${PV%%0}.zip
 	rs-premium? ( http://wordrider.net/download/rapidshare_premium.frp )"
 
-LICENSE="GPL"
+LICENSE="GPL-2"
 KEYWORDS="x86 amd64"
 RESTRICT="mirror"
 
 IUSE="rs-premium"
 SLOT="0"
-DEPEND=">=virtual/jdk-1.6"
-RDEPEND=">=virtual/jre-1.6"
+DEPEND="virtual/jdk"
+RDEPEND="virtual/jre"
 # no app-admin/realpath, we have got BusyBox multi-call binary
 
 S="${WORKDIR}/FreeRapid-${PV%%0}"

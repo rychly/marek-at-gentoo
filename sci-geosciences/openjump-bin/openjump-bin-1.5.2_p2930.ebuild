@@ -7,10 +7,10 @@ inherit eutils
 PV_MAJ=${PV%%_*}
 PV_REL=${PV##*_p}
 
-DESCRIPTION="The free, Java based and open source Geographic Information System for the World."
+DESCRIPTION="The free, Java based and open source Geographic Information System for the World"
 HOMEPAGE="http://openjump.org/"
 SRC_URI="mirror://sourceforge/jump-pilot/OpenJUMP/${PV_MAJ}/OpenJUMP-Portable-${PV_MAJ}-r${PV_REL}-PLUS.zip"
-LICENSE="GPL"
+LICENSE="GPL-2"
 KEYWORDS="x86 amd64"
 RESTRICT="mirror"
 

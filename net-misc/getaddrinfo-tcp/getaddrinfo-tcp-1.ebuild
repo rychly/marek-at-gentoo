@@ -4,7 +4,8 @@
 
 EAPI=2
 
-DESCRIPTION="Network address and service translation call by getaddrinfo with IPPROTO_TCP ai_protocol."
+DESCRIPTION="Network address and service translation call with IPPROTO_TCP ai_protocol"
+HOMEPAGE="https://en.wikipedia.org/wiki/Getaddrinfo"
 
 SLOT="0"
 LICENSE="GPL-2"
@@ -12,7 +13,7 @@ KEYWORDS="x86 amd64"
 IUSE=""
 
 src_compile() {
-	gcc ${FILESDIR}/getaddrinfo-tcp.c -o ${WORKDIR}/${PN} || die 'Cannot compile the source file!'
+	gcc "${FILESDIR}/getaddrinfo-tcp.c" -o "${WORKDIR}/${PN}" || die 'Cannot compile the source file!'
 }
 
 src_install() {

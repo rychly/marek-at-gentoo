@@ -22,7 +22,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=">=virtual/jre-1.6"
+DEPEND="virtual/jre:*"
 RDEPEND="${DEPEND}"
 
 RESTRICT="mirror"

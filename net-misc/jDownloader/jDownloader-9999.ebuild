@@ -6,7 +6,7 @@ EAPI=2
 
 inherit java-utils-2 eutils
 
-DESCRIPTION="A free, open-source download management tool with a huge community of developers that makes downloading as easy and fast as it should be."
+DESCRIPTION="Download management tool"
 HOMEPAGE="http://www.jdownloader.org/"
 
 SLOT="0"

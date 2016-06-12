@@ -2,11 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
+EAPI=2
+
 inherit eutils
 
-DESCRIPTION="GtkPSproc is a front-end for the PSUTILS designed to work from all programs that uses CUPS"
-HOMEPAGE="http://www.rastersoft.com/gtkpsproc.html"
-SRC_URI="http://www.rastersoft.com/descargas/${P}.tar.bz2"
+DESCRIPTION="Front-end for the PSUTILS designed to work from all programs that uses CUPS"
+HOMEPAGE="http://www.rastersoft.com/programas/gtkpsproc.html"
+SRC_URI="http://www.rastersoft.com/descargas/unsuported/${P}.tar.bz2"
 
 RESTRICT="mirror"
 LICENSE="GPL-2"
@@ -16,13 +18,11 @@ SLOT="0"
 
 DEPEND=">=net-print/cups-1.1.23
 	>=dev-python/pygtk-2.6.1
-	>=app-text/psutils-1.17
-	dev-python/gnome-applets-python"
+	>=app-text/psutils-1.17"
+#	dev-python/gnome-applets-python
+RDEPEND="${DEPEND}"
 
-src_unpack() {
-	unpack "${A}"
-	cd "${S}"
-
+src_prepare() {
 	epatch "${FILESDIR}/${P}-visor_failure.patch"
 
 	mv "${S}/Makefile" "${S}/Makefile.orig"

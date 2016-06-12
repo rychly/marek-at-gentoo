@@ -6,12 +6,12 @@ EAPI=2
 
 inherit eutils
 
-DESCRIPTION="Pi Calculus Equivalences Tester of types of behavioural equivalences (binary version)."
+DESCRIPTION="Pi Calculus Equivalences Tester of types of behavioural equivalences"
 HOMEPAGE="http://piet.sourceforge.net/"
 # the unversioned download, patch level set according to "updated" information on http://piet.sourceforge.net/#download
 SRC_URI="mirror://sourceforge/piet/binaries_linux.zip -> ${P}.zip"
 
-LICENSE="LGPL"
+LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+gui"

@@ -8,6 +8,7 @@ DESCRIPTION="A closed-source RockChip's firmware images (*.img) unpacker/packer.
 HOMEPAGE="http://forum.xda-developers.com/showthread.php?t=2257331"
 SRC_URI="http://forum.xda-developers.com/attachment.php?attachmentid=3434522&d=1439217533 -> ${P}.zip"
 
+LICENSE="proprietary-unspecified"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
