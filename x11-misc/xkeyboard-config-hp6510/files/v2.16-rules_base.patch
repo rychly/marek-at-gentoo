@@ -1,0 +1,11 @@
+diff -urN usr/share/X11/xkb/rules/base.old usr/share/X11/xkb/rules/base
+--- usr/share/X11/xkb/rules/base.old	2009-04-08 14:29:37.000000000 +0200
++++ usr/share/X11/xkb/rules/base	2009-04-08 14:30:53.000000000 +0200
+@@ -101,6 +101,7 @@
+               genius geniuscomfy2 \
+               gyration honeywell_euroboard \
+               hp250x hp5xx hp500fa hpdv5 \
++              hp6510 \
+               hpi6 hpxe3gc hpxe3gf hpxe4xxx hpxt1000 hpzt11xx htcdream \
+               ibm_spacesaver ipaq inspiron intel \
+               logiaccess logicda logicink \

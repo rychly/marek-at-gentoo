@@ -1,7 +1,7 @@
 diff -urN usr/share/X11/xkb/rules/base.xml.old usr/share/X11/xkb/rules/base.xml
 --- usr/share/X11/xkb/rules/base.xml.old	2008-03-24 21:36:29.000000000 +0100
 +++ usr/share/X11/xkb/rules/base.xml	2008-03-24 21:39:40.000000000 +0100
-@@ -547,6 +547,13 @@
+@@ -554,6 +554,13 @@
      </model>
      <model>
        <configItem>

@@ -15,7 +15,7 @@ EDARCS_REPOSITORY="http://hub.darcs.net/zabbal/${PN}"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="x11-misc/kbdd[dbus]
@@ -69,7 +69,6 @@ src_prepare() {
 
 src_configure() {
 	# autovala
-	cd "${S}"
 	autovala cmake
 	# generate dbus bindings
 	mkdir -p "${S}/src/dbus_generated/ru.gentoo.KbddService/ru/gentoo/KbddService"
@@ -87,7 +86,7 @@ src_compile() {
 src_install() {
 	local flagsdir=/usr/share/icons/hicolor/scalable/intl
 	cmake-utils_src_install
-	dodoc LICENSE README
+	dodoc README
 	make_desktop_entry "ktc --flags=.icons/flags --extension=.svg --libnotify-time=220" \
 		"KBDD tray companion" "preferences-desktop-keyboard" "System"
 	## BUG: a value of arg --flags is always prefixed with ${HOME}, so it cannot be an absolute path to ${flagsdir} => need not to install there

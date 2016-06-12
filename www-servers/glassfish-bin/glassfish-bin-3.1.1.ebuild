@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit eutils systemd user
+inherit eutils systemd user java-pkg-2
 
 DESCRIPTION="SUN Java EE 5 application server"
 HOMEPAGE="http://glassfish.dev.java.net/"
@@ -21,13 +21,12 @@ S="${WORKDIR}/glassfish${SLOT}"
 NAME="glassfish${SLOT}-bin"
 DEST="/opt/${NAME}"
 
-RDEPEND=">=virtual/jdk-1.5"
+RDEPEND="virtual/jdk"
 
 DEPEND="${RDEPEND}
 	app-arch/unzip"
 
-src_unpack() {
-	unpack ${A}
+src_prepare() {
 	# remove Windows and MacOS files
 	find "${S}" -regex '.*\.\(exe\|cmd\|bat\|dll\|dylib\)$' | xargs rm --verbose
 	# prepare conf.d and init.d files

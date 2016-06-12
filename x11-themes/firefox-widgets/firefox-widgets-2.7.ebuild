@@ -2,16 +2,18 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-DESCRIPTION="A replacement set of images and CSS code for the Firefox widgets which will make them much nicer on the eyes."
+DESCRIPTION="Firefox widgets which will make it much nicer on the eyes"
 HOMEPAGE="http://ubuntuforums.org/showpost.php?p=2206886&postcount=1"
 SRC_URI="${P//-/_}.tar.bz2"
+
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-RDEPEND=">=www-client/mozilla-firefox-2"
+RDEPEND="www-client/firefox"
 RESTRICT="fetch"
 
 S="${WORKDIR}/${P//-/_}"
-INSTALLDIR="/usr/lib64/mozilla-firefox"
+INSTALLDIR="/usr/$(get_libdir)/firefox"
 
 pkg_nofetch() {
 	einfo
@@ -37,7 +39,7 @@ src_install() {
 	doins "${INSTALLDIR}/res/forms.css"
 	cp -v "${INSTALLDIR}/res"/forms.css.without-${PN}-* "${D}${INSTALLDIR}/res/forms.css.without-${P}" \
 	|| cp -v "${INSTALLDIR}/res/forms.css" "${D}${INSTALLDIR}/res/forms.css.without-${P}" || die "Cannot backup old forms.css!"
-	cd ${S}; "${S}/install" "-p=${D}${INSTALLDIR}" -i || die "Cannot install!"
+	cd "${S}"; "${S}/install" "-p=${D}${INSTALLDIR}" -i || die "Cannot install!"
 	mv "${D}${INSTALLDIR}/res/forms.css" "${D}${INSTALLDIR}/res/forms.css.with-${P}"
 }
 

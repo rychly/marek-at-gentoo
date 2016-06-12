@@ -6,10 +6,11 @@ inherit eutils
 
 MY_PV=${PV//_/-}
 
-DESCRIPTION="A 2D CAD package based upon Qt."
-HOMEPAGE="http://www.ribbonsoft.com/qcad.html"
+DESCRIPTION="A 2D CAD package based upon Qt"
+HOMEPAGE="http://www.ribbonsoft.com/en/"
 SRC_URI="http://www.ribbonsoft.com/archives/qcad/qcad-${MY_PV}-trial-linux-x86.tar.gz"
 
+LICENSE="GPL-3"
 SLOT="0"
 RESTRICT="mirror"
 KEYWORDS="amd64 hppa ppc ppc64 x86"
@@ -19,7 +20,7 @@ INSTALLDIR="/opt/${PN}"
 
 src_unpack() {
 	unpack ${A}
-	find "${S}" -name '*.so.*' -print0 | xargs -0 chmod a-x
+	find "${S}" -name '*.so.*' -exec chmod a-x {} +
 }
 
 src_install () {

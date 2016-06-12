@@ -13,7 +13,8 @@ EGIT_REPO_URI="git://github.com/infinity0/mozilla-gnome-keyring.git"
 LICENSE="GPL-2"
 SLOT="0"
 
-DEPEND="gnome-base/libgnome-keyring"
+RDEPEND="gnome-base/libgnome-keyring"
+DEPEND="${RDEPEND}"
 
 S=${WORKDIR}
 

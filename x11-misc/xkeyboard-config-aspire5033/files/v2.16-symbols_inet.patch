@@ -1,9 +1,9 @@
 diff -urN usr/share/X11/xkb/symbols/inet.old usr/share/X11/xkb/symbols/inet
 --- usr/share/X11/xkb/symbols/inet.old	2008-03-24 21:22:53.000000000 +0100
 +++ usr/share/X11/xkb/symbols/inet	2008-03-24 21:26:24.000000000 +0100
-@@ -20,6 +20,47 @@
- // All keyboards listed here should be also mentioned in
- // xc/programs/xkbcomp/rules/xfree86, xfree86.lst and xfree86.xml.
+@@ -226,6 +226,47 @@
+     key <FK18>   {      [ XF86Launch9       ]       };
+ };
  
 +//
 +// Acer Aspire 5033
@@ -46,3 +46,6 @@ diff -urN usr/share/X11/xkb/symbols/inet.old usr/share/X11/xkb/symbols/inet
 +    key <K63>	{ [ XF86Phone	] };	// "bluetooth" button
 +};
 +
+ 
+ // Acer
+ 

@@ -31,7 +31,7 @@ RDEPEND="app-arch/bzip2
 	>=media-libs/libjpeg-turbo-1.2.0-r1
 	media-libs/libpng
 	sys-apps/dbus
-	sys-fs/udev
+	virtual/udev
 	sys-libs/zlib
 	x11-libs/gtk+:2
 	x11-libs/libXScrnSaver"

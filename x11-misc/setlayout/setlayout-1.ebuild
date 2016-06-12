@@ -6,7 +6,7 @@ DESCRIPTION="A small program to set X11 desktop layout."
 HOMEPAGE="http://openbox.org/wiki/Help%3aFAQ#How_do_I_put_my_desktops_into_a_grid_layout_instead_of_a_single_row.3F"
 SRC_URI="http://openbox.org/dist/tools/setlayout.c"
 
-LICENSE=""
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
 RESTRICT="mirror"

@@ -7,7 +7,7 @@ EAPI=2
 JAVA_PKG_IUSE="source"
 inherit subversion java-pkg-2 java-ant-2
 
-DESCRIPTION="Gdatafs is a FUSE implemtation that mount your account at google's picassa web to your filesystem. The filesystem support ful read/write and delete of album and photos."
+DESCRIPTION="Fuse-filesystem for google's picassa web"
 HOMEPAGE="http://sourceforge.net/projects/gdatafs/"
 
 ESVN_REPO_URI="https://gdatafs.svn.sourceforge.net/svnroot/gdatafs/trunk"

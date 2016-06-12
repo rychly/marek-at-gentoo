@@ -21,40 +21,40 @@ IUSE="battery examples tint2conf startup-notification"
 PDEPEND="tint2conf? ( x11-misc/tintwizard )"
 
 RDEPEND="startup-notification? ( x11-libs/startup-notification )
-        dev-libs/glib:2
-        media-libs/imlib2[X]
-        x11-libs/cairo
-        x11-libs/libX11
-        x11-libs/libXinerama
-        x11-libs/libXdamage
-        x11-libs/libXcomposite
-        x11-libs/libXrender
-        x11-libs/libXrandr
-        x11-libs/pango[X]"
+	dev-libs/glib:2
+	media-libs/imlib2[X]
+	x11-libs/cairo
+	x11-libs/libX11
+	x11-libs/libXinerama
+	x11-libs/libXdamage
+	x11-libs/libXcomposite
+	x11-libs/libXrender
+	x11-libs/libXrandr
+	x11-libs/pango[X]"
 
 DEPEND="${RDEPEND}
-        virtual/pkgconfig
-        x11-proto/xineramaproto"
+	virtual/pkgconfig
+	x11-proto/xineramaproto"
 
 PATCHES=( "${FILESDIR}/${PN}-update-icon-cache.patch" )
 
 src_configure() {
-        local mycmakeargs=(
-                $(cmake-utils_use_enable battery BATTERY)
-                $(cmake-utils_use_enable examples EXAMPLES)
-                $(cmake-utils_use_enable tint2conf TINT2CONF)
-                $(cmake-utils_use_enable startup-notification SN)
+	local mycmakeargs=(
+		$(cmake-utils_use_enable battery BATTERY)
+		$(cmake-utils_use_enable examples EXAMPLES)
+		$(cmake-utils_use_enable tint2conf TINT2CONF)
+		$(cmake-utils_use_enable startup-notification SN)
 
-                "-DDOCDIR=/usr/share/doc/${PF}"
-        )
-        cmake-utils_src_configure
+		"-DDOCDIR=/usr/share/doc/${PF}"
+	)
+	cmake-utils_src_configure
 }
 
 src_install() {
-        cmake-utils_src_install
-        if use tint2conf ; then
-                gnome2_icon_cache_update
-        fi
+	cmake-utils_src_install
+	if use tint2conf ; then
+		gnome2_icon_cache_update
+	fi
 }
 
 pkg_preinst() { gnome2_icon_savelist; }

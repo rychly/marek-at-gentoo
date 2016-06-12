@@ -12,12 +12,12 @@ SRC_URI="${THEME_URI}MCity-ClearlooksWithACherryOnTop.tar.gz"
 
 HOMEPAGE="http://art.gnome.org/themes/metacity/1256"
 
-RDEPEND="|| ( x11-wm/metacity x11-wm/mutter )"
+RDEPEND="x11-wm/mutter"
 DEPEND="${RDEPEND}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ppc sparc x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 S="${WORKDIR}/ClearlooksWithACherryOnTop"

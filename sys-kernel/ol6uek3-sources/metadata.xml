@@ -1,1 +1,11 @@
-../../metadata.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <use>
+    <flag name="binary"></flag>
+    <flag name="lvm"></flag>
+    <flag name="mdadm"></flag>
+    <flag name="cryptsetup"></flag>
+    <flag name="iscsi"></flag>
+  </use>
+</pkgmetadata>

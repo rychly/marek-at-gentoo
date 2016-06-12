@@ -18,16 +18,16 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 # https://gphoto.svn.sourceforge.net/svnroot/gphoto/trunk/gphotofs/configure.ac
-DEPEND=">=sys-fs/fuse-2.5
+RDEPEND=">=sys-fs/fuse-2.5
 	>=dev-libs/glib-2.6
-	>=media-libs/libgphoto2-2.5
-"
+	>=media-libs/libgphoto2-2.5"
+DEPEND="${RDEPEND}"
 
 src_unpack() {
 	subversion_fetch
-	cd ${S}
+	cd "${S}"
 	ebegin "Fetching m4m from SVN"
-	svn checkout ${ESVN_REPO_URI//gphotofs/m4} m4m || die "unable to fetch m4m"
+	svn checkout "${ESVN_REPO_URI//gphotofs/m4}" m4m || die "unable to fetch m4m"
 	eend $? "Failed to fetch m4m from SVN"
 	epatch "${FILESDIR}/automake-extra.patch"
 	subversion_bootstrap

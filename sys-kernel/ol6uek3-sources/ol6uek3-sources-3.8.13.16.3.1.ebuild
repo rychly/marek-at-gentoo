@@ -1,4 +1,6 @@
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=2
 
@@ -14,7 +16,7 @@ else
 	MYARCH="x86_64"
 fi
 
-DESCRIPTION="Full Linux kernel sources - The Unbreakable Enterprise Kernel Release 3 (UEK R3) by Oracle"
+DESCRIPTION="The Unbreakable Enterprise Kernel sources Release 3 (UEK R3) by Oracle"
 HOMEPAGE="https://oss.oracle.com/ol6/docs/RELEASE-NOTES-UEK3-en.html"
 SRC_URI_PREFIX="http://public-yum.oracle.com/repo/OracleLinux/OL6/UEKR3/latest/x86_64/getPackage"
 SRC_URI="${SRC_URI_PREFIX}Source/kernel-uek-${MYVERSION}.src.rpm

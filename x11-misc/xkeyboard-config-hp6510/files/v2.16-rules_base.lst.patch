@@ -1,11 +1,11 @@
 diff -urN usr/share/X11/xkb/rules/base.lst.old usr/share/X11/xkb/rules/base.lst
 --- usr/share/X11/xkb/rules/base.lst.old	2008-03-24 21:34:02.000000000 +0100
 +++ usr/share/X11/xkb/rules/base.lst	2008-03-24 21:35:24.000000000 +0100
-@@ -77,6 +77,7 @@
+@@ -78,6 +78,7 @@
    hp5xx           Hewlett-Packard Omnibook 5xx
    hpnx9020        Hewlett-Packard nx9020
    hp6000          Hewlett-Packard Omnibook 6000/6100
 +  hp6510          Hewlett-Packard Compaq 6510/6710
    honeywell_euroboard Honeywell Euroboard
+   hpmini110       Hewlett-Packard Mini 110 Notebook
    rapidaccess     IBM Rapid Access
-   rapidaccess2    IBM Rapid Access II

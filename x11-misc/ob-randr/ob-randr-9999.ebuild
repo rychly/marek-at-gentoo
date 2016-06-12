@@ -6,11 +6,11 @@ EAPI="2"
 
 inherit git-2
 
-DESCRIPTION="An interactive pipe menu for the OpenBox window manager to allow users easy access to xrandr information and actions."
+DESCRIPTION="Interactive pipe menu for the OpenBox window manager"
 HOMEPAGE="https://github.com/whiteinge/ob-randr"
 EGIT_REPO_URI="https://github.com/whiteinge/ob-randr.git"
 
-LICENSE=""
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 

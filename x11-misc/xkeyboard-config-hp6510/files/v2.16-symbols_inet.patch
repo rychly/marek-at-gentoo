@@ -1,8 +1,8 @@
 diff -urN usr/share/X11/xkb/symbols/inet.old usr/share/X11/xkb/symbols/inet
 --- usr/share/X11/xkb/symbols/inet.old	2008-03-24 21:22:53.000000000 +0100
 +++ usr/share/X11/xkb/symbols/inet	2008-03-24 21:26:24.000000000 +0100
-@@ -215,6 +215,22 @@
-  
+@@ -226,6 +226,22 @@
+     key <FK18>   {      [ XF86Launch9       ]       };
  };
  
 +// Hewlett-Packard Compaq 6510/6710 (kernel 2.6.31, xkeyboard-config 1.6)
@@ -22,5 +22,5 @@ diff -urN usr/share/X11/xkb/symbols/inet.old usr/share/X11/xkb/symbols/inet
 +	modifier_map Mod3	{	Hyper_R	};
 +};
  
- // Acer AirKey V
- partial alphanumeric_keys
+ // Acer
+ 

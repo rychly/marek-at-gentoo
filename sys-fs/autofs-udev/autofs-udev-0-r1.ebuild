@@ -6,14 +6,15 @@ EAPI=2
 
 inherit eutils toolchain-funcs
 
-DESCRIPTION="Automounter of storage devices which utilise (kernel) autofs automounter and udev events."
+DESCRIPTION="Automounter which utilise (kernel) autofs automounter and udev events"
 HOMEPAGE="https://rychly.homeip.net/wiki/notebook*automounter"
 
-KEYWORDS="alpha amd64 arm hppa ia64 m68k mips ppc ppc64 s390 sh sparc x86 x86-fbsd"
-IUSE=""
+LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="amd64 x86"
+IUSE=""
 RDEPEND="net-fs/autofs
-	sys-fs/udev"
+	virtual/udev"
 
 src_unpack() {
 	cd "${WORKDIR}"

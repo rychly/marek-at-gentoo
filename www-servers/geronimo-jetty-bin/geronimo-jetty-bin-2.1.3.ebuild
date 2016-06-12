@@ -4,19 +4,20 @@
 
 inherit eutils java-pkg-2 user
 
-DESCRIPTION="Geronimo Java EE application server, which has passed the SUN's JEE5 Certification Test Suite, with Web container Jetty."
+DESCRIPTION="Java EE application server with Web container Jetty"
 
 SRC_URI="mirror://apache/dist/geronimo/${PV}/geronimo-jetty6-javaee5-${PV}-bin.tar.gz"
 HOMEPAGE="http://geronimo.apache.org/"
 
-KEYWORDS="amd64 x86"
+LICENSE="Apache-2.0"
 SLOT="0"
+KEYWORDS="amd64 x86"
 IUSE=""
 RESTRICT="mirror"
 
 DEPEND="!www-servers/geronimo-tomcat"
 
-RDEPEND="=virtual/jdk-1.5*"
+RDEPEND="virtual/jdk"
 
 S="${WORKDIR}/geronimo-jetty6-javaee5-${PV}"
 

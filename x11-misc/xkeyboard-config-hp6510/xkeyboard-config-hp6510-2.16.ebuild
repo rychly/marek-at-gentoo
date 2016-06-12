@@ -4,11 +4,12 @@
 
 inherit eutils
 
-DESCRIPTION="Acer Aspire 5033 patch for X keyboard configuration database"
-KEYWORDS="alpha amd64 arm hppa ia64 m68k mips ppc ppc64 s390 sh sparc x86 x86-fbsd"
-HOMEPAGE="http://rychly.iglu.cz/doku.php?id=notebook:keyboard"
+DESCRIPTION="Hewlett-Packard Compaq 6510/6710 patch for X keyboard configuration database"
+KEYWORDS="~amd64 ~x86"
+HOMEPAGE="https://rychly.gitlab.io/"
 SRC_URI=""
 
+LICENSE="GPL-3"
 SLOT="0"
 
 RDEPEND="=x11-misc/xkeyboard-config-${PV}"
@@ -93,7 +94,7 @@ pkg_config() {
 		einfo "Done."
 		elog ""
 		elog "Use in xorg.conf as"
-		ewarn "	Option \"XkbModel\" \"aspire5033\""
+		ewarn "	Option \"XkbModel\" \"hp6510\""
 		elog ""
 	elif [ "${I}" == "disable" ]; then
 		for I in "/usr/share/X11/xkb"/*/*.without-${P}; do
