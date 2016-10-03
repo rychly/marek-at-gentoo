@@ -17,12 +17,12 @@ SLOT="0"
 RESTRICT="mirror"
 KEYWORDS="x86 amd64"
 IUSE="tomcat"
-PDEPEND=">=virtual/jre-1.7
-	tomcat? ( >=virtual/jdk-1.7 >=www-servers/tomcat-7 )"
+PDEPEND="virtual/jre:1.8
+	tomcat? ( virtual/jdk:1.8 www-servers/tomcat:8 )"
 
 S="${WORKDIR}/netbeans"
 INSTALLDIR="/opt/${PN}"
-TOMCATENDORSED70="/usr/share/tomcat-7/endorsed" # ${/etc/conf.d/tomcat-7:CATALINA_HOME}/endorsed
+TOMCATENDORSED70="/usr/share/tomcat-8/endorsed" # ${/etc/conf.d/tomcat-8:CATALINA_HOME}/endorsed
 
 src_unpack() {
 	unpack ${A}
