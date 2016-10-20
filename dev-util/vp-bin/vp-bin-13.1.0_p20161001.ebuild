@@ -7,8 +7,8 @@ EAPI=3
 inherit eutils
 
 VP_MIRROR="eu5"
-#VP_SRCD="archives"
-VP_SRCD="visual-paradigm"
+VP_SRCD="archives"
+#VP_SRCD="visual-paradigm"
 VP_MAIN=${PV%%.?_*}
 VP_FULL=${PV%%_*} VP_SPNO=${VP_FULL##*.}
 VP_PTCH=${PV##*_p}
