@@ -8,13 +8,15 @@ GCCVER=${PV%_p*}
 PVPATCH=${PV#*_p}
 PATCHVER=${PVPATCH:0:4}.${PVPATCH:4:2}
 BUILDNO=${PVPATCH:6}
-[[ -n "${BUILDNO}" ]] && LINAROVER="${GCCVER}-${PATCHVER}-${BUILDNO}" || LINAROVER="${GCCVER}-${PATCHVER}"
+GCCVERMAJ=${GCCVER%%.*} GCCVERMIN=${GCCVER#*.} LINAROSLOT="${GCCVERMAJ}.${GCCVERMIN%%.*}-${PATCHVER}"
+LINAROVER="${GCCVER}-${PATCHVER}"
+[[ -n "${BUILDNO}" ]] && LINAROVER="${LINAROVER}-${BUILDNO}"
 
 DESCRIPTION="Linaro cross-toolchain executables and shared libraries for ARM GNU/Linux"
-HOMEPAGE="https://wiki.linaro.org/WorkingGroups/ToolChain http://releases.linaro.org/components/toolchain/binaries/${LINAROVER}/"
+HOMEPAGE="https://wiki.linaro.org/WorkingGroups/ToolChain http://releases.linaro.org/components/toolchain/binaries/${LINAROSLOT}/"
 SRC_URI="\
-	x86? ( http://releases.linaro.org/components/toolchain/binaries/${LINAROVER}/arm-linux-gnueabi/gcc-linaro-${LINAROVER}-i686-mingw32_arm-linux-gnueabi.tar.xz )
-	amd64? ( http://releases.linaro.org/components/toolchain/binaries/${LINAROVER}/arm-linux-gnueabi/gcc-linaro-${LINAROVER}-x86_64_arm-linux-gnueabi.tar.xz )"
+	x86? ( http://releases.linaro.org/components/toolchain/binaries/${LINAROSLOT}/arm-linux-gnueabi/gcc-linaro-${LINAROVER}-i686-mingw32_arm-linux-gnueabi.tar.xz )
+	amd64? ( http://releases.linaro.org/components/toolchain/binaries/${LINAROSLOT}/arm-linux-gnueabi/gcc-linaro-${LINAROVER}-x86_64_arm-linux-gnueabi.tar.xz )"
 
 LICENSE="GPL-3+ LGPL-3+ || ( GPL-3+ libgcc libstdc++ gcc-runtime-library-exception-3.1 ) FDL-1.3+"
 KEYWORDS="x86 amd64"
@@ -22,9 +24,9 @@ RESTRICT="mirror strip binchecks"
 
 SLOT="${LINAROVER}"
 
-if use x86; then
+if [[ "${ABI}" == "x86" ]]; then
 	S="${WORKDIR}/gcc-linaro-${LINAROVER}-i686-mingw32_arm-linux-gnueabi"
-elif use amd64; then
+elif [[ "${ABI}" == "amd64" ]]; then
 	S="${WORKDIR}/gcc-linaro-${LINAROVER}-x86_64_arm-linux-gnueabi"
 fi
 

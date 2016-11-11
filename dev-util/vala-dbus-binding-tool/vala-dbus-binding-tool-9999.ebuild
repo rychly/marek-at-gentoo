@@ -33,3 +33,7 @@ src_prepare() {
 	epatch_user
 	vala_src_prepare
 }
+
+src_install() {
+	emake DESTDIR="${D}" install || die "Unable to install"
+}

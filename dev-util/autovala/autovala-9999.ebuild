@@ -24,6 +24,7 @@ RDEPEND="dev-libs/glib:2
 	x11-libs/gdk-pixbuf:2
 	dev-libs/libgee:0.8
 	x11-libs/pango
+	x11-libs/vte:2.91[vala]
 	pandoc? ( app-text/pandoc )"
 DEPEND="${RDEPEND}
 	$(vala_depend)"

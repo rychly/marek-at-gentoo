@@ -72,7 +72,8 @@ src_configure() {
 	autovala cmake
 	# generate dbus bindings
 	mkdir -p "${S}/src/dbus_generated/ru.gentoo.KbddService/ru/gentoo/KbddService"
-	vala-dbus-binding-tool --gdbus --api-path=/usr/share/dbus-1/interfaces/kbdd-service-interface.xml "--directory=${S}/src/dbus_generated/ru.gentoo.KbddService/ru/gentoo/KbddService"
+	vala-dbus-binding-tool --gdbus --api-path=/usr/share/dbus-1/interfaces/kbdd-service-interface.xml "--directory=${S}/src/dbus_generated/ru.gentoo.KbddService/ru/gentoo/KbddService" \
+	|| die "Unable to generate dbus vala bindings"
 	sed -i "s|^\\(set (APP_SOURCES \${APP_SOURCES} kbdd_tray_companion.vala)\\)$|\1\nset (APP_SOURCES \${APP_SOURCES} dbus_generated/ru.gentoo.KbddService/ru/gentoo/KbddService/ru-gentoo.vala)|" \
 		"${S}/src/CMakeLists.txt"
 	# cmake

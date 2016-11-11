@@ -22,9 +22,9 @@ RESTRICT="mirror strip binchecks"
 
 SLOT="${LINAROVER}"
 
-if use x86; then
+if [[ "${ABI}" == "x86" ]]; then
 	S="${WORKDIR}/gcc-linaro-${LINAROVER}-i686-mingw32_arm-eabi"
-elif use amd64; then
+elif [[ "${ABI}" == "amd64" ]]; then
 	S="${WORKDIR}/gcc-linaro-${LINAROVER}-x86_64_arm-eabi"
 fi
 

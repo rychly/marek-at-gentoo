@@ -13,13 +13,12 @@ PV_PTCH=${PV##*_p}
 DESCRIPTION="SuperMicro IPMI management tool"
 HOMEPAGE="ftp://ftp.supermicro.com/utility/IPMIView/Linux/"
 SRC_URI_PREFIX="ftp://ftp.supermicro.com/utility/IPMIView/Linux"
-SRC_URI="\
-	x86?	( ${SRC_URI_PREFIX}/IPMIView_V${PV_MAIN}_bundleJRE_Linux_x32_${PV_PTCH}.tar.gz )
-	amd64?	( ${SRC_URI_PREFIX}/IPMIView_V${PV_MAIN}_bundleJRE_Linux_x64_${PV_PTCH}.tar.gz )"
+SRC_URI="amd64?	( ${SRC_URI_PREFIX}/IPMIView_${PV_MAIN}_build.${PV_PTCH}_bundleJRE_Linux_x64.tar.gz )"
+#	x86?	( ${SRC_URI_PREFIX}/IPMIView_${PV_MAIN}_build.${PV_PTCH}_bundleJRE_Linux_x32.tar.gz )
 
 LICENSE="Oracle-BCLA-JavaSE"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="virtual/jre:*"
@@ -32,11 +31,11 @@ QA_PREBUILT="opt/${PN}/*.so"
 S="${WORKDIR}"
 
 src_prepare() {
-	local DIR="IPMIView_V${PV_MAIN}_bundleJRE_Linux"
+	local DIR="IPMIView_${PV_MAIN}_build.${PV_PTCH}_bundleJRE_Linux"
 	if use x86; then
-		DIR+="_x32_${PV_PTCH}"
+		DIR+="_x32"
 	elif use amd64; then
-		DIR+="_x64_${PV_PTCH}"
+		DIR+="_x64"
 	else
 		die "unknown ARCH"
 	fi
