@@ -4,12 +4,12 @@
 
 EAPI=5
 
-inherit eutils bash-completion-r1
+inherit eutils bash-completion-r1 unpacker
 
 DESCRIPTION="manage files with git, without checking their contents into git"
 HOMEPAGE="http://git-annex.branchable.com/"
-SRC_URI="x86? ( http://ftp.sh.cvut.cz/arch/community/os/i686/${PN%-bin}-${PV/_p/-}-i686.pkg.tar.xz )
-	amd64? ( http://ftp.sh.cvut.cz/arch/community/os/x86_64/${PN%-bin}-${PV/_p/-}-x86_64.pkg.tar.xz )"
+SRC_URI="x86? ( mirror://debian/pool/main/${PN:0:1}/${PN%-bin}/${PN%-bin}_${PV/_p/-}_i386.deb )
+	amd64? ( mirror://debian/pool/main/${PN:0:1}/${PN%-bin}/${PN%-bin}_${PV/_p/-}_amd64.deb )"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -17,14 +17,14 @@ KEYWORDS="~amd64 ~x86 ~amd64-linux"
 RESTRICT="mirror"
 
 DEPEND="!dev-vcs/git-annex"
-RDEPEND="net-libs/libgsasl
-	net-dns/libidn
-	sys-apps/file
-	net-libs/gnutls:0/30
+RDEPEND="dev-libs/gmp
+	virtual/libffi
 	dev-libs/libxml2
-	sys-libs/zlib
-	dev-libs/gmp
-	dev-libs/libffi"
+	net-dns/libidn
+	net-libs/gnutls:0/30
+	net-libs/libgsasl
+	sys-apps/file
+	sys-libs/zlib"
 
 S="${WORKDIR}"
 
@@ -33,7 +33,10 @@ src_install() {
 	dosym git-annex /usr/bin/git-annex-shell
 	newbashcomp usr/share/bash-completion/completions/git-annex "${PN%-bin}"
 	doman usr/share/man/man1/*.1.*
-	doicon "${FILESDIR}/${PN%-bin}.xpm"
+	for I in usr/share/icons/hicolor/*; do
+		local BASENAME="${I##*/}"
+		doicon -s "${BASENAME%x*}" ${I}/apps/git-annex.*
+	done
 	make_desktop_entry "${PN%-bin} webapp" "git-annex" "${PN%-bin}" "Office"
 }
 

@@ -8,8 +8,8 @@ HOMEPAGE="http://gohugo.io https://github.com/spf13/hugo/releases/tag/v${PV}"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86 arm"
-SRC_URI="x86? ( https://github.com/spf13/hugo/releases/download/v${PV}/hugo_${PV}_linux_386.tar.gz )
-	amd64? ( https://github.com/spf13/hugo/releases/download/v${PV}/hugo_${PV}_linux_amd64.tar.gz )
+SRC_URI="x86? ( https://github.com/spf13/hugo/releases/download/v${PV}/hugo_${PV}_Linux-32bit.tar.gz )
+	amd64? ( https://github.com/spf13/hugo/releases/download/v${PV}/hugo_${PV}_Linux-64bit.tar.gz )
 	arm? ( https://github.com/spf13/hugo/releases/download/v${PV}/hugo_${PV}_linux_arm.tar.gz )"
 
 RESTRICT="mirror"
