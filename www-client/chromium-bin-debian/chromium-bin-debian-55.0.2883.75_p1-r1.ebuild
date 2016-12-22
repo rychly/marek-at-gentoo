@@ -1,6 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
+# based on https://github.com/posativ/overlay/blob/master/www-client/chromium-bin-debian/chromium-bin-debian-55.0.2883.75_p1-r1.ebuild
 
 EAPI="5"
 
@@ -12,7 +13,7 @@ MY_PN=${PN%%-bin-debian}
 
 DESCRIPTION="Chromium build from Debian unstable"
 HOMEPAGE="http://packages.debian.org/sid/chromium"
-SRC_URI="mirror://debian/pool/main/${PN:0:1}/${PN:0:8}-browser/${PN:0:8}_${MY_PV}~${MY_R}_amd64.deb"
+SRC_URI="http://security.debian.org/pool/updates/main/${PN:0:1}/${PN:0:8}-browser/${PN:0:8}_${MY_PV}~${MY_R}_amd64.deb"
 
 LICENSE="BSD"
 SLOT="0"
@@ -36,6 +37,7 @@ RDEPEND="
 	media-libs/freetype
 	>=media-libs/libjpeg-turbo-1.3.1
 	media-libs/harfbuzz
+	media-libs/libpng:1.2
 	media-libs/libvpx
 	media-libs/speex
 	>=media-sound/pulseaudio-2.0
