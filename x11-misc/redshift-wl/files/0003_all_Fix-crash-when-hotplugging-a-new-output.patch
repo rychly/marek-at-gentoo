@@ -1,0 +1,66 @@
+From d786f8bb549ad1bbf445d7fab32b5b011b34537e Mon Sep 17 00:00:00 2001
+From: Giulio Camuffo <giuliocamuffo@gmail.com>
+Date: Sun, 3 May 2015 17:46:19 +0300
+Subject: [PATCH 3/4] Fix crash when hotplugging a new output
+
+---
+ src/gamma-wl.c | 22 ++++++++++++++--------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
+
+diff --git a/src/gamma-wl.c b/src/gamma-wl.c
+index ffba67d..22a6130 100644
+--- a/src/gamma-wl.c
++++ b/src/gamma-wl.c
+@@ -76,6 +76,7 @@ registry_global(void *data, struct wl_registry *registry, uint32_t id, const cha
+ 		struct output *output = &state->outputs[state->num_outputs - 1];
+ 		output->global_id = id;
+ 		output->output = wl_registry_bind(registry, id, &wl_output_interface, 1);
++		output->gamma_control = NULL;
+ 	}
+ }
+ 
+@@ -139,13 +140,6 @@ wayland_start(wayland_state_t *state)
+ 		return -1;
+ 	}
+ 
+-	for (int i = 0; i < state->num_outputs; ++i) {
+-		struct output *output = &state->outputs[i];
+-		output->gamma_control = gamma_control_manager_get_gamma_control(state->gamma_control_manager, output->output);
+-		gamma_control_add_listener(output->gamma_control, &gamma_control_listener, output);
+-	}
+-	wl_display_roundtrip(state->display);
+-
+ 	return 0;
+ }
+ 
+@@ -204,7 +198,7 @@ static const struct wl_callback_listener callback_listener = {
+ int
+ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
+ {
+-	int ret = 0;
++	int ret = 0, roundtrip = 0;
+ 	struct wl_array red;
+ 	struct wl_array green;
+ 	struct wl_array blue;
+@@ -224,6 +218,18 @@ wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
+ 		return ret;
+ 	}
+ 
++	for (int i = 0; i < state->num_outputs; ++i) {
++		struct output *output = &state->outputs[i];
++		if (!output->gamma_control) {
++			output->gamma_control = gamma_control_manager_get_gamma_control(state->gamma_control_manager, output->output);
++			gamma_control_add_listener(output->gamma_control, &gamma_control_listener, output);
++			roundtrip = 1;
++		}
++	}
++	if (roundtrip) {
++		wl_display_roundtrip(state->display);
++	}
++
+ 	wl_array_init(&red);
+ 	wl_array_init(&green);
+ 	wl_array_init(&blue);
+-- 
+2.10.2
+

@@ -1,0 +1,4 @@
+https://github.com/SirCmpwn/sway/pull/1019
+https://github.com/jonls/redshift/issues/55#issuecomment-269658460
+https://github.com/giucam/redshift/commit/b3fbc67c9e19672c58e95d7f3387b3d1cdc9aab9
+https://github.com/jonls/redshift/issues/55#issuecomment-269658460

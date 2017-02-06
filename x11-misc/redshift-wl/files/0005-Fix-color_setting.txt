@@ -1,0 +1,4 @@
+const color_setting_t *setting
+in *_set_temperature and colorramp_fill has been replaced by
+int temp, float brightness, float gamma[3]
+for redshift-1.8

@@ -1,0 +1,540 @@
+From b3fbc67c9e19672c58e95d7f3387b3d1cdc9aab9 Mon Sep 17 00:00:00 2001
+From: Giulio Camuffo <giuliocamuffo@gmail.com>
+Date: Fri, 1 May 2015 23:56:03 +0300
+Subject: [PATCH 1/4] Add support for some wayland compositors
+
+This uses a protocol extension, not in core Wayland.
+---
+ configure.ac          |  31 +++++++
+ po/POTFILES.in        |   1 +
+ src/Makefile.am       |  22 +++++
+ src/gamma-control.xml |  57 ++++++++++++
+ src/gamma-wl.c        | 246 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ src/gamma-wl.h        |  51 +++++++++++
+ src/redshift.c        |  19 ++++
+ 7 files changed, 427 insertions(+)
+ create mode 100644 src/gamma-control.xml
+ create mode 100644 src/gamma-wl.c
+ create mode 100644 src/gamma-wl.h
+
+diff -urN a/configure.ac b/configure.ac
+--- a/configure.ac	2013-12-11 05:04:43.000000000 +0100
++++ b/configure.ac	2017-02-06 07:59:40.177765480 +0100
+@@ -21,6 +21,12 @@
+ PKG_CHECK_MODULES([XCB], [xcb], [have_xcb=yes], [have_xcb=no])
+ PKG_CHECK_MODULES([XCB_RANDR], [xcb-randr],
+ 	[have_xcb_randr=yes], [have_xcb_randr=no])
++PKG_CHECK_MODULES([WAYLAND], [wayland-client wayland-scanner], [have_wayland=yes], [have_wayland=no])
++AC_PATH_PROG([wayland_scanner], [wayland-scanner])
++if test x$wayland_scanner = x; then
++	PKG_CHECK_MODULES(WAYLAND_SCANNER, [wayland-scanner])
++	wayland_scanner=`$PKG_CONFIG --variable=wayland_scanner wayland-scanner`
++fi
+ 
+ PKG_CHECK_MODULES([GLIB], [glib-2.0 gobject-2.0], [have_glib=yes], [have_glib=no])
+ PKG_CHECK_MODULES([GCONF], [gconf-2.0], [have_gconf=yes], [have_gconf=no])
+@@ -31,6 +37,30 @@
+ # Check for Python
+ AM_PATH_PYTHON([2.6], [have_python=yes], [have_python=no])
+ 
++# Check Wayland method
++AC_MSG_CHECKING([whether to enable Wayland method])
++AC_ARG_ENABLE([wayland], [AC_HELP_STRING([--enable-wayland],
++	[enable Wayland method])],
++	[enable_wayland=$enableval],[enable_wayland=maybe])
++AS_IF([test "x$enable_wayland" != xno], [
++	AS_IF([test $have_wayland = yes], [
++		AC_DEFINE([ENABLE_WAYLAND], 1,
++			[Define to 1 to enable Wayland method])
++		AC_MSG_RESULT([yes])
++		enable_wayland=yes
++	], [
++		AC_MSG_RESULT([missing dependencies])
++		AS_IF([test "x$enable_wayland" = xyes], [
++			AC_MSG_ERROR([missing dependencies for Wayland method])
++		])
++		enable_wayland=no
++	])
++], [
++	AC_MSG_RESULT([no])
++	enable_wayland=no
++])
++AM_CONDITIONAL([ENABLE_WAYLAND], [test "x$enable_wayland" = xyes])
++
+ # Check RANDR method
+ AC_MSG_CHECKING([whether to enable RANDR method])
+ AC_ARG_ENABLE([randr], [AC_HELP_STRING([--enable-randr],
+@@ -218,6 +248,7 @@
+     ldflags:		${LDFLAGS}
+ 
+     Adjustment methods:
++    Wayland:		${enable_wayland}
+     RANDR:		${enable_randr}
+     VidMode:		${enable_vidmode}
+     WinGDI:		${enable_wingdi}
+diff -urN a/po/POTFILES.in b/po/POTFILES.in
+--- a/po/POTFILES.in	2013-12-11 04:00:06.000000000 +0100
++++ b/po/POTFILES.in	2017-02-06 08:00:32.728124907 +0100
+@@ -4,6 +4,7 @@
+ 
+ src/config-ini.c
+ 
++src/gamma-wl.c
+ src/gamma-randr.c
+ src/gamma-vidmode.c
+ src/gamma-w32gdi.c
+diff -urN a/src/gamma-control.xml b/src/gamma-control.xml
+--- a/src/gamma-control.xml	1970-01-01 01:00:00.000000000 +0100
++++ b/src/gamma-control.xml	2017-02-06 07:57:58.938137838 +0100
+@@ -0,0 +1,57 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<protocol name="gamma_control">
++
++    <copyright>
++        Copyright © 2015 Giulio camuffo
++
++        Permission to use, copy, modify, distribute, and sell this
++        software and its documentation for any purpose is hereby granted
++        without fee, provided that the above copyright notice appear in
++        all copies and that both that copyright notice and this permission
++        notice appear in supporting documentation, and that the name of
++        the copyright holders not be used in advertising or publicity
++        pertaining to distribution of the software without specific,
++        written prior permission.  The copyright holders make no
++        representations about the suitability of this software for any
++        purpose.  It is provided "as is" without express or implied
++        warranty.
++
++        THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS
++        SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
++        FITNESS, IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
++        SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
++        WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
++        AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
++        ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
++        THIS SOFTWARE.
++    </copyright>
++
++    <interface name="gamma_control_manager" version="1">
++        <request name="destroy" type="destructor"/>
++
++        <request name="get_gamma_control">
++            <arg name="id" type="new_id" interface="gamma_control"/>
++            <arg name="output" type="object" interface="wl_output"/>
++        </request>
++    </interface>
++
++    <interface name="gamma_control" version="1">
++        <enum name="error">
++            <entry name="invalid_gamma" value="0"/>
++        </enum>
++
++        <request name="destroy" type="destructor"/>
++
++        <request name="set_gamma">
++            <arg name="red" type="array"/>
++            <arg name="green" type="array"/>
++            <arg name="blue" type="array"/>
++        </request>
++
++        <request name="reset_gamma"/>
++
++        <event name="gamma_size">
++            <arg name="size" type="uint"/>
++        </event>
++    </interface>
++</protocol>
+diff -urN a/src/gamma-wl.c b/src/gamma-wl.c
+--- a/src/gamma-wl.c	1970-01-01 01:00:00.000000000 +0100
++++ b/src/gamma-wl.c	2017-02-06 07:57:58.938137838 +0100
+@@ -0,0 +1,246 @@
++/* gamma-wl.c -- Wayland gamma adjustment header
++   This file is part of Redshift.
++
++   Redshift is free software: you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation, either version 3 of the License, or
++   (at your option) any later version.
++
++   Redshift is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with Redshift.  If not, see <http://www.gnu.org/licenses/>.
++
++   Copyright (c) 2015  Giulio Camuffo <giuliocamuffo@gmail.com>
++*/
++
++#include <stdio.h>
++#include <stdlib.h>
++#include <stdint.h>
++#include <string.h>
++#include <alloca.h>
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <fcntl.h>
++#include <unistd.h>
++
++#ifdef ENABLE_NLS
++# include <libintl.h>
++# define _(s) gettext(s)
++#else
++# define _(s) s
++#endif
++
++#include "gamma-wl.h"
++#include "colorramp.h"
++
++#include "gamma-control-client-protocol.h"
++
++struct output {
++	uint32_t global_id;
++	struct wl_output *output;
++	struct gamma_control *gamma_control;
++	uint32_t gamma_size;
++};
++
++int
++wayland_init(wayland_state_t *state)
++{
++	/* Initialize state. */
++	memset(state, 0, sizeof *state);
++	return 0;
++}
++
++static void
++registry_global(void *data, struct wl_registry *registry, uint32_t id, const char *interface, uint32_t version)
++{
++	wayland_state_t *state = data;
++
++	if (strcmp(interface, "gamma_control_manager") == 0) {
++		state->gamma_control_manager_id = id;
++		state->gamma_control_manager = wl_registry_bind(registry, id, &gamma_control_manager_interface, 1);
++	} else if (strcmp(interface, "wl_output") == 0) {
++		if (state->num_outputs++ == 0) {
++			state->outputs = malloc(sizeof(struct output));
++		} else {
++			state->outputs = realloc(state->outputs, state->num_outputs * sizeof(struct output));
++		}
++		if (!state->outputs) {
++			fprintf(stderr, _("Failed to allcate memory\n"));
++			return;
++		}
++
++		struct output *output = &state->outputs[state->num_outputs - 1];
++		output->global_id = id;
++		output->output = wl_registry_bind(registry, id, &wl_output_interface, 1);
++	}
++}
++
++static void
++registry_global_remove(void *data, struct wl_registry *registry, uint32_t id)
++{
++	wayland_state_t *state = data;
++
++	if (state->gamma_control_manager_id == id) {
++		fprintf(stderr, _("The gamma_control_manager was removed\n"));
++		exit(EXIT_FAILURE);
++	}
++
++	for (int i = 0; i < state->num_outputs; ++i) {
++		struct output *output = &state->outputs[i];
++		if (output->global_id == id) {
++			gamma_control_destroy(output->gamma_control);
++			wl_output_destroy(output->output);
++
++			/* If the removed output is not the last one in the array move the last one
++			 * in the now empty slot. Then shrink the array */
++			if (i < --state->num_outputs) {
++				memcpy(output, &state->outputs[state->num_outputs], sizeof(struct output));
++			}
++			state->outputs = realloc(state->outputs, state->num_outputs * sizeof(struct output));
++
++			return;
++		}
++	}
++}
++
++static const struct wl_registry_listener registry_listener = {
++	registry_global,
++	registry_global_remove
++};
++
++static void
++gamma_control_gamma_size(void *data, struct gamma_control *control, uint32_t size)
++{
++	struct output *output = data;
++	output->gamma_size = size;
++}
++
++static const struct gamma_control_listener gamma_control_listener = {
++	gamma_control_gamma_size
++};
++
++int
++wayland_start(wayland_state_t *state)
++{
++	state->display = wl_display_connect(NULL);
++	state->registry = wl_display_get_registry(state->display);
++
++	wl_registry_add_listener(state->registry, &registry_listener, state);
++
++	wl_display_roundtrip(state->display);
++	if (!state->gamma_control_manager) {
++		return -1;
++	}
++	if (state->num_outputs > 0 && !state->outputs) {
++		return -1;
++	}
++
++	for (int i = 0; i < state->num_outputs; ++i) {
++		struct output *output = &state->outputs[i];
++		output->gamma_control = gamma_control_manager_get_gamma_control(state->gamma_control_manager, output->output);
++		gamma_control_add_listener(output->gamma_control, &gamma_control_listener, output);
++	}
++	wl_display_roundtrip(state->display);
++
++	return 0;
++}
++
++void
++wayland_restore(wayland_state_t *state)
++{
++	for (int i = 0; i < state->num_outputs; ++i) {
++		struct output *output = &state->outputs[i];
++		gamma_control_reset_gamma(output->gamma_control);
++	}
++	wl_display_flush(state->display);
++}
++
++void
++wayland_free(wayland_state_t *state)
++{
++	for (int i = 0; i < state->num_outputs; ++i) {
++		struct output *output = &state->outputs[i];
++		gamma_control_destroy(output->gamma_control);
++		wl_output_destroy(output->output);
++	}
++
++	gamma_control_manager_destroy(state->gamma_control_manager);
++	wl_registry_destroy(state->registry);
++	wl_display_disconnect(state->display);
++}
++
++void
++wayland_print_help(FILE *f)
++{
++	fputs(_("Adjust gamma ramps with a Wayland compositor.\n"), f);
++	fputs("\n", f);
++}
++
++int
++wayland_set_option(wayland_state_t *state, const char *key, const char *value)
++{
++	return 0;
++}
++
++int
++wayland_set_temperature(wayland_state_t *state, const color_setting_t *setting)
++{
++	struct wl_array red;
++	struct wl_array green;
++	struct wl_array blue;
++	uint16_t *r_gamma = NULL;
++	uint16_t *g_gamma = NULL;
++	uint16_t *b_gamma = NULL;
++
++	wl_array_init(&red);
++	wl_array_init(&green);
++	wl_array_init(&blue);
++
++	for (int i = 0; i < state->num_outputs; ++i) {
++		struct output *output = &state->outputs[i];
++		int size = output->gamma_size;
++		size_t byteSize = size * sizeof(uint16_t);
++
++		if (red.size < byteSize) {
++			wl_array_add(&red, byteSize - red.size);
++		}
++		if (green.size < byteSize) {
++			wl_array_add(&green, byteSize - green.size);
++		}
++		if (blue.size < byteSize) {
++			wl_array_add(&blue, byteSize - blue.size);
++		}
++
++		r_gamma = red.data;
++		g_gamma = green.data;
++		b_gamma = blue.data;
++
++		if (!r_gamma || !g_gamma || !b_gamma) {
++			return -1;
++		}
++
++		/* Initialize gamma ramps to pure state */
++		for (int i = 0; i < size; i++) {
++			uint16_t value = (double)i / size * (UINT16_MAX+1);
++			r_gamma[i] = value;
++			g_gamma[i] = value;
++			b_gamma[i] = value;
++		}
++
++		colorramp_fill(r_gamma, g_gamma, b_gamma, size, setting);
++
++		gamma_control_set_gamma(output->gamma_control, &red, &green, &blue);
++	}
++
++	wl_display_flush(state->display);
++
++	wl_array_release(&red);
++	wl_array_release(&green);
++	wl_array_release(&blue);
++
++	return 0;
++}
+diff -urN a/src/gamma-wl.h b/src/gamma-wl.h
+--- a/src/gamma-wl.h	1970-01-01 01:00:00.000000000 +0100
++++ b/src/gamma-wl.h	2017-02-06 07:57:58.938137838 +0100
+@@ -0,0 +1,51 @@
++/* gamma-wl.h -- Wayland gamma adjustment header
++   This file is part of Redshift.
++
++   Redshift is free software: you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation, either version 3 of the License, or
++   (at your option) any later version.
++
++   Redshift is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with Redshift.  If not, see <http://www.gnu.org/licenses/>.
++
++   Copyright (c) 2015  Giulio Camuffo <giuliocamuffo@gmail.com>
++*/
++
++#ifndef REDSHIFT_GAMMA_WAYLAND_H
++#define REDSHIFT_GAMMA_WAYLAND_H
++
++#include <stdint.h>
++
++#include <wayland-client.h>
++
++#include "redshift.h"
++
++typedef struct {
++	struct wl_display *display;
++	struct wl_registry *registry;
++	uint32_t gamma_control_manager_id;
++	struct gamma_control_manager *gamma_control_manager;
++	int num_outputs;
++	struct output *outputs;
++} wayland_state_t;
++
++
++int wayland_init(wayland_state_t *state);
++int wayland_start(wayland_state_t *state);
++void wayland_free(wayland_state_t *state);
++
++void wayland_print_help(FILE *f);
++int wayland_set_option(wayland_state_t *state, const char *key, const char *value);
++
++void wayland_restore(wayland_state_t *state);
++int wayland_set_temperature(wayland_state_t *state,
++			const color_setting_t *setting);
++
++
++#endif /* ! REDSHIFT_GAMMA_DRM_H */
+diff -urN a/src/Makefile.am b/src/Makefile.am
+--- a/src/Makefile.am	2013-12-11 05:04:43.000000000 +0100
++++ b/src/Makefile.am	2017-02-06 08:02:18.502912489 +0100
+@@ -17,16 +17,32 @@
+ 	systemtime.c systemtime.h
+ 
+ EXTRA_redshift_SOURCES = \
++	gamma-wl.c gamma-wl.h \
++	gamma-control-protocol.c \
++	gamma-control-client-protocol.h \
+ 	gamma-randr.c gamma-randr.h \
+ 	gamma-vidmode.c gamma-vidmode.h \
+ 	gamma-w32gdi.c gamma-w32gdi.h \
+ 	location-gnome-clock.c location-gnome-clock.h \
+ 	location-geoclue.c location-geoclue.h
+ 
++BUILT_SOURCES = \
++	gamma-control-protocol.c \
++	gamma-control-client-protocol.h
++
+ AM_CFLAGS =
+ redshift_LDADD = @LIBINTL@
+ EXTRA_DIST =
+ 
++if ENABLE_WAYLAND
++redshift_SOURCES += gamma-wl.c gamma-wl.h \
++	gamma-control-client-protocol.h \
++	gamma-control-protocol.c
++AM_CFLAGS += $(WAYLAND_CFLAGS)
++redshift_LDADD += \
++	$(WAYLAND_LIBS) $(WAYLAND_CFLAGS)
++endif
++
+ if ENABLE_RANDR
+ redshift_SOURCES += gamma-randr.c gamma-randr.h
+ AM_CFLAGS += $(XCB_CFLAGS) $(XCB_RANDR_CFLAGS)
+@@ -62,3 +78,9 @@
+ redshift_LDADD += \
+ 	$(GEOCLUE_LIBS) $(GEOCLUE_CFLAGS)
+ endif
++
++%-protocol.c : $(srcdir)/%.xml
++	$(AM_V_GEN)$(MKDIR_P) $(dir $@) && $(wayland_scanner) code < $< > $@
++
++%-client-protocol.h : $(srcdir)/%.xml
++	$(AM_V_GEN)$(MKDIR_P) $(dir $@) && $(wayland_scanner) client-header < $< > $@
+diff -urN a/src/redshift.c b/src/redshift.c
+--- a/src/redshift.c	2013-12-11 05:04:43.000000000 +0100
++++ b/src/redshift.c	2017-02-06 08:04:59.294257584 +0100
+@@ -57,6 +57,10 @@
+ # error "At least one of RANDR, VidMode or WinGDI must be enabled."
+ #endif
+ 
++#ifdef ENABLE_WAYLAND
++# include "gamma-wl.h"
++#endif
++
+ #ifdef ENABLE_RANDR
+ # include "gamma-randr.h"
+ #endif
+@@ -83,6 +87,9 @@
+ 
+ /* Union of state data for gamma adjustment methods */
+ typedef union {
++#ifdef ENABLE_WAYLAND
++	wayland_state_t wayland;
++#endif
+ #ifdef ENABLE_RANDR
+ 	randr_state_t randr;
+ #endif
+@@ -97,6 +104,18 @@
+ 
+ /* Gamma adjustment method structs */
+ static const gamma_method_t gamma_methods[] = {
++#ifdef ENABLE_WAYLAND
++	{
++		"wayland",
++		(gamma_method_init_func *)wayland_init,
++		(gamma_method_start_func *)wayland_start,
++		(gamma_method_free_func *)wayland_free,
++		(gamma_method_print_help_func *)wayland_print_help,
++		(gamma_method_set_option_func *)wayland_set_option,
++		(gamma_method_restore_func *)wayland_restore,
++		(gamma_method_set_temperature_func *)wayland_set_temperature
++	},
++#endif
+ #ifdef ENABLE_RANDR
+ 	{
+ 		"randr",

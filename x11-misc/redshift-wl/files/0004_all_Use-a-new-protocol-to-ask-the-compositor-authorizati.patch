@@ -1,0 +1,190 @@
+From 1b9c8ac11125e2df0b8f9779376dd35cd56d5951 Mon Sep 17 00:00:00 2001
+From: Giulio Camuffo <giuliocamuffo@gmail.com>
+Date: Tue, 24 Nov 2015 15:54:32 +0200
+Subject: [PATCH 4/4] Use a new protocol to ask the compositor authorization to
+ change the gamma
+
+A compositor may want to restrict the access to the gamma_control_manager
+interface, to avoid clients changing the gamma without the user knowing.
+With the new protocol extension redshift request permission to the
+compositor to bind the gamma control global, so that the compositor
+can grant/deny it, or ask the user for input.
+---
+ src/Makefile.am            | 10 ++++++--
+ src/gamma-wl.c             | 37 ++++++++++++++++++++++++++++
+ src/gamma-wl.h             |  1 +
+ src/orbital-authorizer.xml | 61 ++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 107 insertions(+), 2 deletions(-)
+ create mode 100644 src/orbital-authorizer.xml
+
+diff -urN a/src/gamma-wl.c b/src/gamma-wl.c
+--- a/src/gamma-wl.c	2017-02-06 08:10:34.233532267 +0100
++++ b/src/gamma-wl.c	2017-02-06 08:10:42.618621181 +0100
+@@ -38,6 +38,7 @@
+ #include "colorramp.h"
+ 
+ #include "gamma-control-client-protocol.h"
++#include "orbital-authorizer-client-protocol.h"
+ 
+ struct output {
+ 	uint32_t global_id;
+@@ -55,6 +56,25 @@
+ }
+ 
+ static void
++authorizer_feedback_granted(void *data, struct orbital_authorizer_feedback *feedback)
++{
++	wayland_state_t *state = data;
++	state->authorized = 1;
++}
++
++static void
++authorizer_feedback_denied(void *data, struct orbital_authorizer_feedback *feedback)
++{
++	fprintf(stderr, _("Fatal: redshift was not authorized to bind the 'gamma_control_manager' interface.\n"));
++	exit(EXIT_FAILURE);
++}
++
++static const struct orbital_authorizer_feedback_listener authorizer_feedback_listener = {
++	authorizer_feedback_granted,
++	authorizer_feedback_denied
++};
++
++static void
+ registry_global(void *data, struct wl_registry *registry, uint32_t id, const char *interface, uint32_t version)
+ {
+ 	wayland_state_t *state = data;
+@@ -77,6 +97,23 @@
+ 		output->global_id = id;
+ 		output->output = wl_registry_bind(registry, id, &wl_output_interface, 1);
+ 		output->gamma_control = NULL;
++	} else if (strcmp(interface, "orbital_authorizer") == 0) {
++		struct wl_event_queue *queue = wl_display_create_queue(state->display);
++
++		struct orbital_authorizer *auth = wl_registry_bind(registry, id, &orbital_authorizer_interface, 1u);
++		wl_proxy_set_queue((struct wl_proxy *)auth, queue);
++
++		struct orbital_authorizer_feedback *feedback = orbital_authorizer_authorize(auth, "gamma_control_manager");
++		orbital_authorizer_feedback_add_listener(feedback, &authorizer_feedback_listener, state);
++
++		int ret = 0;
++		while (!state->authorized && ret >= 0) {
++			ret = wl_display_dispatch_queue(state->display, queue);
++		}
++
++		orbital_authorizer_feedback_destroy(feedback);
++		orbital_authorizer_destroy(auth);
++		wl_event_queue_destroy(queue);
+ 	}
+ }
+ 
+diff -urN a/src/gamma-wl.h b/src/gamma-wl.h
+--- a/src/gamma-wl.h	2017-02-06 08:10:34.233532267 +0100
++++ b/src/gamma-wl.h	2017-02-06 08:10:42.618621181 +0100
+@@ -34,6 +34,7 @@
+ 	struct gamma_control_manager *gamma_control_manager;
+ 	int num_outputs;
+ 	struct output *outputs;
++	int authorized;
+ } wayland_state_t;
+ 
+ 
+diff -urN a/src/Makefile.am b/src/Makefile.am
+--- a/src/Makefile.am	2017-02-06 08:10:34.232532256 +0100
++++ b/src/Makefile.am	2017-02-06 08:10:42.618621181 +0100
+@@ -20,6 +20,8 @@
+ 	gamma-wl.c gamma-wl.h \
+ 	gamma-control-protocol.c \
+ 	gamma-control-client-protocol.h \
++	orbital-authorizer-protocol.c \
++	orbital-authorizer-client-protocol.h \
+ 	gamma-randr.c gamma-randr.h \
+ 	gamma-vidmode.c gamma-vidmode.h \
+ 	gamma-w32gdi.c gamma-w32gdi.h \
+@@ -28,7 +30,9 @@
+ 
+ BUILT_SOURCES = \
+ 	gamma-control-protocol.c \
+-	gamma-control-client-protocol.h
++	gamma-control-client-protocol.h \
++	orbital-authorizer-protocol.c \
++	orbital-authorizer-client-protocol.h
+ 
+ AM_CFLAGS =
+ redshift_LDADD = @LIBINTL@
+@@ -37,7 +41,9 @@
+ if ENABLE_WAYLAND
+ redshift_SOURCES += gamma-wl.c gamma-wl.h \
+ 	gamma-control-client-protocol.h \
+-	gamma-control-protocol.c
++	gamma-control-protocol.c \
++	orbital-authorizer-protocol.c \
++	orbital-authorizer-client-protocol.h
+ AM_CFLAGS += $(WAYLAND_CFLAGS)
+ redshift_LDADD += \
+ 	$(WAYLAND_LIBS) $(WAYLAND_CFLAGS)
+diff -urN a/src/orbital-authorizer.xml b/src/orbital-authorizer.xml
+--- a/src/orbital-authorizer.xml	1970-01-01 01:00:00.000000000 +0100
++++ b/src/orbital-authorizer.xml	2017-02-06 08:10:42.618621181 +0100
+@@ -0,0 +1,61 @@
++<protocol name="orbital_authorizer">
++
++    <interface name="orbital_authorizer" version="1">
++        <description summary="authorize clients to use certain interfaces">
++            The orbital_authorizer global interface allows clients to
++            ask the compositor the authorization to bind certain restricted
++            global interfaces.
++            Any client that aims to bind restricted interfaces should first
++            request the authorization by using this interface. Failing to do
++            so will result in the compositor sending a protocol error to the
++            client when it binds the restricted interface.
++
++            The list of restricted interfaces is compositor dependant, but must
++            not include the core interfaces defined in wayland.xml.
++        </description>
++
++        <request name="destroy" type="destructor">
++            <description summary="destroy this orbital_authorizer object"/>
++        </request>
++
++        <request name="authorize">
++            <description summary="authorize a global interface">
++                The authorize request allows the client to ask the compositor the
++                authorization to bind a restricted global interface. The newly
++                created orbital_authorizer_feedback will be invalid after the
++                compositor send either the granted or denied event so the client
++                must destroy it immediately after.
++            </description>
++            <arg name="id" type="new_id" interface="orbital_authorizer_feedback" summary="the new feedback object"/>
++            <arg name="global" type="string" summary="the global interface the client wants to bind"/>
++        </request>
++    </interface>
++
++    <interface name="orbital_authorizer_feedback" version="1">
++        <description summary="feedback for an authorization request">
++            The orbital_authorizer_feedback interface is used by requesting
++            an authorization with the orbital_authorizer.authorize request.
++            The compositor will send either the granted or denied event based
++            on the system and user configuration. How the authorization process
++            works is compositor specific, but a compositor is allowed to ask
++            for user input, so the response for an authorization request may
++            come after some time.
++        </description>
++
++        <event name="granted">
++            <description summary="the authorization was granted">
++                The authorization was granted. The client can now bind the restricted
++                interface.
++            </description>
++        </event>
++
++        <event name="denied">
++            <description summary="the authorization was denied">
++                The authorization was denied. The client is not allowed to bind the
++                restricted interface and trying to do so will trigger a protocol
++                error killing the client.
++            </description>
++        </event>
++    </interface>
++
++</protocol>
