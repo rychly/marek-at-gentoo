@@ -4,12 +4,14 @@
 
 EAPI=5
 
+MY_PV_SUFFIX="+b1"
+
 inherit eutils bash-completion-r1 unpacker
 
 DESCRIPTION="manage files with git, without checking their contents into git"
 HOMEPAGE="http://git-annex.branchable.com/"
-SRC_URI="x86? ( mirror://debian/pool/main/${PN:0:1}/${PN%-bin}/${PN%-bin}_${PV/_p/-}_i386.deb )
-	amd64? ( mirror://debian/pool/main/${PN:0:1}/${PN%-bin}/${PN%-bin}_${PV/_p/-}_amd64.deb )"
+SRC_URI="x86? ( mirror://debian/pool/main/${PN:0:1}/${PN%-bin}/${PN%-bin}_${PV/_p/-}${MY_PV_SUFFIX}_i386.deb )
+	amd64? ( mirror://debian/pool/main/${PN:0:1}/${PN%-bin}/${PN%-bin}_${PV/_p/-}${MY_PV_SUFFIX}_amd64.deb )"
 
 LICENSE="GPL-3"
 SLOT="0"

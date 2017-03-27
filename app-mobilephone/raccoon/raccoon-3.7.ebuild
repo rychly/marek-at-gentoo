@@ -17,7 +17,7 @@ if [[ "${PV}" != "9999" ]]; then
 fi
 
 LICENSE="Apache-2.0"
-SLOT="0"
+SLOT="${PV%%.*}"
 IUSE=""
 RESTRICT="mirror"
 
@@ -39,9 +39,9 @@ src_install() {
 	#local jar="target/${PN}-${PV}.jar"
 	# use jar including dependencies
 	local jar="target/${PN}-release-jar-with-dependencies.jar"
-	java-pkg_newjar "${jar}" "${PN}.jar"
-	java-pkg_dolauncher "${PN}" --jar "${PN}.jar"
-	newicon "artwork/icon.svg" "${PN}.svg"
-	make_desktop_entry "${PN}" "Raccoon" "${PN}" "Network;Java" \
+	java-pkg_newjar "${jar}" "${PN}${SLOT}.jar"
+	java-pkg_dolauncher "${PN}${SLOT}" --jar "${PN}${SLOT}.jar"
+	newicon "artwork/icon.svg" "${PN}${SLOT}.svg"
+	make_desktop_entry "${PN}${SLOT}" "Raccoon ${SLOT}" "${PN}${SLOT}" "Network;Java" \
 		"StartupWMClass=de.onyxbits.${PN}.App\nGenericName=Google Play Desktop client"
 }

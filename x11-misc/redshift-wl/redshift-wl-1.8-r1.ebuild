@@ -2,11 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=3
+EAPI=5
+PYTHON_COMPAT=( python2_7 )
 
-PYTHON_DEPEND="gtk? 2:2.6"
-
-inherit eutils gnome2-utils python autotools
+inherit eutils gnome2-utils python-single-r1 autotools
 
 DESCRIPTION="A screen color temperature adjusting software (with Wayland patches)"
 HOMEPAGE="http://jonls.dk/redshift/"
@@ -35,7 +34,7 @@ DEPEND="${COMMON_DEPEND}
 S="${WORKDIR}/${P/-wl}"
 
 pkg_setup() {
-	use gtk && python_set_active_version 2
+	use gtk && python-single-r1_pkg_setup
 }
 
 src_prepare() {
@@ -43,7 +42,7 @@ src_prepare() {
 	eautoreconf
 	if use gtk; then
 		>py-compile
-		python_convert_shebangs 2 src/redshift-gtk/redshift-gtk
+		python_fix_shebang src/redshift-gtk/redshift-gtk
 	fi
 }
 
@@ -63,6 +62,7 @@ src_configure() {
 
 src_install() {
 	emake DESTDIR="${D}" install || die
+	use gtk && python_optimize
 	dodoc AUTHORS NEWS README
 }
 
@@ -72,10 +72,8 @@ pkg_preinst() {
 
 pkg_postinst() {
 	gnome2_icon_cache_update
-	use gtk && python_mod_optimize ${PN%-wl}_gtk
 }
 
 pkg_postrm() {
 	gnome2_icon_cache_update
-	use gtk && python_mod_cleanup ${PN%-wl}_gtk
 }
