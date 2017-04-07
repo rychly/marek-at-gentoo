@@ -59,8 +59,6 @@ src_unpack() {
 src_prepare() {
 	# inicialize Vala
 	vala_src_prepare
-	local VALAVER=${VALAC##*-}
-	sed -i "s/^\\(\\s*NAMES valac\\)\\()\\)\$/\\1-${VALAVER}\\2/g" "${S}/cmake/FindVala.cmake" || die "Cannot fix valaversion in cmake/FindVala.cmake"
 	# disable dbus introspection
 	sed -i 's/^\(dbus_interface:.*\)$/#\1/g' "${S}/ktc.avprj" || die "Cannot disable dbus introspection in ktc.avprj"
 	# disable autovala icon actions
@@ -68,8 +66,11 @@ src_prepare() {
 }
 
 src_configure() {
-	# autovala
+	# run autovala to generate cmake scripts and fix them after that
 	autovala cmake
+	sed -i \
+		's|^find_program(VALA_EXECUTABLE NAMES valac)$|set(VALA_EXECUTABLE "'"${VALAC}"'")\nset(VALA_FOUND TRUE)\nset(VALA_VERSION "'"${VALAC##*-}"'")\nreturn()|g' \
+		"${S}/cmake/FindVala.cmake" || die "Cannot fix valaversion in cmake/FindVala.cmake"
 	# generate dbus bindings
 	mkdir -p "${S}/src/dbus_generated/ru.gentoo.KbddService/ru/gentoo/KbddService"
 	vala-dbus-binding-tool --gdbus --api-path=/usr/share/dbus-1/interfaces/kbdd-service-interface.xml "--directory=${S}/src/dbus_generated/ru.gentoo.KbddService/ru/gentoo/KbddService" \
