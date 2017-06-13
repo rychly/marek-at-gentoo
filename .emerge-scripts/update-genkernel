@@ -7,9 +7,13 @@ if [[ ! -f "${KERNEL_CONFIG}" ]]; then
 	exit 1
 fi
 
-## check if root is mounted by device mapper (i.e. at LVM/Luks)
-if grep -q '^/dev/mapper/[^ ]\{1,\}\s\{1,\}/\s' /etc/fstab; then
-	exec genkernel "--kernel-config=${KERNEL_CONFIG}" --luks --lvm all
-else
-	exec genkernel "--kernel-config=${KERNEL_CONFIG}" --no-luks --no-lvm all
-fi
+## check if root is mounted from LVM/Luks/etc.
+ROOT_DEV_FILE=`grep '^[^ ]*\s/\s' /proc/mounts | tail -1 | sed 's|^[^ ]*/\([^/ ]*\) .*$|\1|'`
+OPTS="$@ all"
+dmsetup status | grep -q "^${ROOT_DEV_FILE}:.*\\scrypt\\s" && OPTS="--luks ${OPTS}" || OPTS="--no-luks ${OPTS}"
+grep -q "^[^ ]*${ROOT_DEV_FILE}\\s/\\sbtrfs\\s" /proc/mounts && OPTS="--btrfs ${OPTS}" || OPTS="--no-btrfs ${OPTS}"
+lvdisplay "/dev/mapper/${ROOT_DEV_FILE}" 2>/dev/null 1>&2 && OPTS="--lvm ${OPTS}" || OPTS="--no-lvm ${OPTS}"
+
+## extra modules
+MODULES_EXTRA="serio i8042 atkbd" \
+exec genkernel "--kernel-config=${KERNEL_CONFIG}" ${OPTS}
