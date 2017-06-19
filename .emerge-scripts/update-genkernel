@@ -10,7 +10,7 @@ fi
 ## check if root is mounted from LVM/Luks/etc.
 ROOT_DEV_FILE=`grep '^[^ ]*\s/\s' /proc/mounts | tail -1 | sed 's|^[^ ]*/\([^/ ]*\) .*$|\1|'`
 OPTS="$@ all"
-dmsetup status | grep -q "^${ROOT_DEV_FILE}:.*\\scrypt\\s" && OPTS="--luks ${OPTS}" || OPTS="--no-luks ${OPTS}"
+dmsetup status | grep -q "${ROOT_DEV_FILE}:.*\\scrypt\\s" && OPTS="--luks ${OPTS}" || OPTS="--no-luks ${OPTS}"
 grep -q "^[^ ]*${ROOT_DEV_FILE}\\s/\\sbtrfs\\s" /proc/mounts && OPTS="--btrfs ${OPTS}" || OPTS="--no-btrfs ${OPTS}"
 lvdisplay "/dev/mapper/${ROOT_DEV_FILE}" 2>/dev/null 1>&2 && OPTS="--lvm ${OPTS}" || OPTS="--no-lvm ${OPTS}"
 
