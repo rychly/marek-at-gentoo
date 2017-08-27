@@ -12,12 +12,13 @@ MAJOR_MINOR_VERSION="$(get_version_component_range 1-2)"
 
 DESCRIPTION="Gaupol is a subtitle editor for text-based subtitles"
 HOMEPAGE="http://otsaloma.io/gaupol/"
-SRC_URI="http://download.gna.org/${PN}/${MAJOR_MINOR_VERSION}/${P}.tar.gz"
+SRC_URI="https://github.com/otsaloma/${PN}/archive/${MAJOR_MINOR_VERSION}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
 IUSE="spell"
+RESTRICT="mirror"
 
 RDEPEND="dev-python/chardet[${PYTHON_USEDEP}]
 	>=dev-python/pygtk-2.16[${PYTHON_USEDEP}]
@@ -29,7 +30,9 @@ DEPEND="${RDEPEND}
 	dev-util/intltool
 	sys-devel/gettext"
 
-DOCS=( AUTHORS ChangeLog CREDITS NEWS TODO README )
+DOCS=( AUTHORS CREDITS NEWS TODO README )
+
+S="${WORKDIR}/${PN}-${MAJOR_MINOR_VERSION}"
 
 src_compile() {
 	addpredict /root/.gconf

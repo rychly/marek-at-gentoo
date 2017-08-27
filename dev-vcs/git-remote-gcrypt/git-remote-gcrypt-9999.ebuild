@@ -5,9 +5,9 @@
 inherit git-2
 
 DESCRIPTION="GNU Privacy Guard-encrypted git remote"
-HOMEPAGE="https://github.com/joeyh/git-remote-gcrypt"
-#SRC_URI="https://codeload.github.com/joeyh/${PN}/zip/master -> ${P}.zip"
-EGIT_REPO_URI="https://github.com/joeyh/${PN}.git"
+HOMEPAGE="https://spwhitton.name/tech/code/git-remote-gcrypt/"
+#SRC_URI="https://git.spwhitton.name/${PN}/snapshot/${P}.tar.gz"
+EGIT_REPO_URI="https://git.spwhitton.name/${PN}"
 
 LICENSE="GPL-3"
 SLOT="0"

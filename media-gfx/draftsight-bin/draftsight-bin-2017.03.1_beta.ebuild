@@ -7,14 +7,14 @@ EAPI=2
 
 inherit eutils
 
-PV_MAJOR="${PV%.*}"
+PV_MAJOR="${PV%%.*}"
 PV_AFTER_MAJOR="${PV#*.}" PV_MINOR="${PV_AFTER_MAJOR%_*}"
-[[ "${PV%%.*}" -gt 0 ]] && PV_SP="SP${PV_MINOR}"
+[[ "${PV%%.*}" -gt 0 ]] && PV_SP="SP${PV_MINOR//./-}"
 
 DESCRIPTION="Professional 2D CAD application, supporting DWT, DXF and DWG."
 HOMEPAGE="http://www.3ds.com/products/draftsight/free-cad-software/"
 SRC_URI_WEBPAGE="http://www.3ds.com/products-services/draftsight-cad-software/free-download/"
-SRC_URI="http://dl-ak.solidworks.com/nonsecure/draftsight/${PV_MAJOR}${PV_SP}/draftSight.deb"
+SRC_URI="http://dl-ak.solidworks.com/nonsecure/draftsight/${PV_MAJOR}${PV_SP}/draftSight.deb -> ${P}.deb"
 
 LICENSE="draftsight-eula"
 SLOT="0"
@@ -29,18 +29,9 @@ RDEPEND="sys-libs/zlib
 	dev-libs/expat
 	dev-libs/glib:2
 	media-libs/glu
-	media-libs/libpng:1.2
 	media-libs/phonon
-	dev-qt/qtcore:4
-	dev-qt/qtdbus:4
-	dev-qt/qtgui:4
-	dev-qt/qtopengl:4
-	dev-qt/qtsql:4
-	dev-qt/qtwebkit:4
-	dev-qt/qtsvg:4
 	media-libs/alsa-lib
 	media-libs/fontconfig
-	media-libs/freetype
 	x11-libs/libICE
 	x11-libs/libSM
 	x11-libs/libX11
