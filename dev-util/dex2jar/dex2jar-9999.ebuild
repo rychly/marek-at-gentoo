@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -22,25 +22,20 @@ SLOT="0"
 IUSE=""
 RESTRICT="mirror"
 
-DEPEND=">=dev-java/maven-bin-3.0"
-RDEPEND=">=virtual/jre-1.6"
+RDEPEND="|| ( virtual/jre virtual/jdk )"
 
 #S="${WORKDIR}"
 
-src_prepare() {
-	mvn validate || die "Unable to prepare Maven environment"
-}
-
 src_compile() {
-	mvn package -Dmaven.test.skip=true || die "Unable to build a JAR package"
+	${S}/gradlew || die "Unable to build a JAR package"
 }
 
 src_install() {
 	local INSTALL_DIR="/opt/${PN}"
-	unzip dex-tools/target/dex2jar-*.zip -d target || die "Unable to unpack a distribution archive"
-	chmod 755 target/dex2jar-*/*.sh
+	unzip dex-tools/build/distributions/dex-tools-*.zip -d target || die "Unable to unpack a distribution archive"
+	chmod 755 target/dex-tools-*/*.sh
 	dodir "${INSTALL_DIR}"
-	mv target/dex2jar-*/*.txt target/dex2jar-*/*.sh target/dex2jar-*/lib "${D}${INSTALL_DIR}" || die "Unable to install files"
+	mv target/dex-tools-*/*.txt target/dex-tools-*/*.sh target/dex-tools-*/lib "${D}${INSTALL_DIR}" || die "Unable to install files"
 	for I in "${D}${INSTALL_DIR}"/d2j-*.sh; do
 		I="${I##*/}"
 		dosym "${INSTALL_DIR}/${I}" "/usr/bin/${I%.sh}"
