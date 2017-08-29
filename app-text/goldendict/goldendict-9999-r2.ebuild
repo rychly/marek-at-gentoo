@@ -30,6 +30,7 @@ RDEPEND="
 	>=dev-qt/qtcore-4.5:4=[exceptions,qt3support]
 	>=dev-qt/qtgui-4.5:4=[exceptions,qt3support]
 	>=dev-qt/qthelp-4.5:4=[exceptions]
+	>=dev-qt/qtsvg-4.5:4=
 	>=dev-qt/qtwebkit-4.5:4=[exceptions]
 	!kde? ( || (
 		>=dev-qt/qtphonon-4.5:4=[exceptions]
