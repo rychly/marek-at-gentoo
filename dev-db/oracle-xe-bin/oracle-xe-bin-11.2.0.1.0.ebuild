@@ -22,8 +22,10 @@ RESTRICT="fetch binchecks"
 S="${WORKDIR}"
 
 RDEPEND="dev-libs/libaio
+	!dev-db/oracle-instantclient
 	!dev-db/oracle-instantclient-basic
 	!dev-db/oracle-instantclient-jdbc
+	!dev-db/oracle-instantclient-odbc
 	!dev-db/oracle-instantclient-sqlplus"
 
 DEPEND="${RDEPEND}"
@@ -148,9 +150,9 @@ src_install() {
 		"${D}${ORACLE_HOME}/config/scripts/postScripts.sql"
 	# permissions and ownership set above are not sufficient, give the whole basedir to orauser
 	chown -R "${ORACLE_USER}:${ORACLE_GROUP}" "${D}${ORACLE_HOME}"
-	# environment variables
+	# environment variables (env-file prefix should be 40 to be processed before, with a lower priority than, dev-db/oracle-instantclient)
 	dodir "/etc/env.d"
-	cat > "${D}/etc/env.d/50${MY_PM}" <<END
+	cat > "${D}/etc/env.d/40${MY_PM}" <<END
 ORACLE_BASE=${ORACLE_BASE}
 ORACLE_HOME=${ORACLE_HOME}
 ORACLE_OWNER=${ORACLE_USER}
