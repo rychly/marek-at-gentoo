@@ -14,7 +14,7 @@ KEYWORDS="x86 amd64"
 LICENSE="proprietary-unspecified"
 
 DEPEND=""
-RDEPEND="app-emulation/wine"
+RDEPEND="virtual/wine"
 
 src_unpack() {
 	cp --dereference "${FILESDIR}/${PN}.png" "${WORKDIR}"
