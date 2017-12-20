@@ -9,7 +9,7 @@ inherit eutils
 MYPNMAIN="${PN%%-bin}"
 MYVERMAJ="${PV%%_p*}"
 MYVERMIN="${PV##*_p}"
-MYVERBAS=$(echo "${MYVERMAJ}" | cut -d . -f 1-2)
+MYVERBAS="${MYVERMAJ%.*}"
 
 DESCRIPTION="An open source modeling environment"
 HOMEPAGE="http://www.modelio.org/"

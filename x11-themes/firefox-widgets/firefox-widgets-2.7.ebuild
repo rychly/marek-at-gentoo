@@ -13,7 +13,6 @@ RDEPEND="www-client/firefox"
 RESTRICT="fetch"
 
 S="${WORKDIR}/${P//-/_}"
-INSTALLDIR="/usr/$(get_libdir)/firefox"
 
 pkg_nofetch() {
 	einfo
@@ -35,6 +34,7 @@ src_unpack() {
 }
 
 src_install() {
+	local INSTALLDIR="/usr/$(get_libdir)/firefox"
 	insinto "${INSTALLDIR}/res"
 	doins "${INSTALLDIR}/res/forms.css"
 	cp -v "${INSTALLDIR}/res"/forms.css.without-${PN}-* "${D}${INSTALLDIR}/res/forms.css.without-${P}" \
@@ -44,6 +44,7 @@ src_install() {
 }
 
 pkg_postinst() {
+	local INSTALLDIR="/usr/$(get_libdir)/firefox"
 	elog
 	elog  " You need to replace an old CSS code for forms with a new one"
 	ewarn "	mv ${INSTALLDIR}/res/forms.css.with-${P} ${INSTALLDIR}/res/forms.css"

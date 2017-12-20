@@ -9,7 +9,7 @@ inherit unpacker
 MYPNMAIN="${PN%%-bin}"
 MYVERMAJ="${PV%%_p*}"
 MYVERMIN="${PV##*_p}" # full version from *.deb:/control.tar.gz:/control
-MYVERBAS=$(echo "${MYVERMAJ}" | cut -d . -f 1-2)
+MYVERBAS="${MYVERMAJ%.*}"
 
 DESCRIPTION="A set of features and modules for the most advanced users of Modelio"
 HOMEPAGE="https://www.modeliosoft.com/en/products/solutions/ultimate-solution-overview.html"
