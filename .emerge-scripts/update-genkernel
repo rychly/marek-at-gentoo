@@ -10,9 +10,17 @@ fi
 ## check if root is mounted from LVM/Luks/etc.
 ROOT_DEV_FILE=`grep '^[^ ]*\s/\s' /proc/mounts | tail -1 | sed 's|^[^ ]*/\([^/ ]*\) .*$|\1|'`
 OPTS="$@ all"
-dmsetup status | grep -q "${ROOT_DEV_FILE}:.*\\scrypt\\s" && OPTS="--luks ${OPTS}" || OPTS="--no-luks ${OPTS}"
 grep -q "^[^ ]*${ROOT_DEV_FILE}\\s/\\sbtrfs\\s" /proc/mounts && OPTS="--btrfs ${OPTS}" || OPTS="--no-btrfs ${OPTS}"
-lvdisplay "/dev/mapper/${ROOT_DEV_FILE}" 2>/dev/null 1>&2 && OPTS="--lvm ${OPTS}" || OPTS="--no-lvm ${OPTS}"
+if lvdisplay -c "/dev/mapper/${ROOT_DEV_FILE}" 2>/dev/null 1>&2; then
+	OPTS="--lvm ${OPTS}"
+	# if the root is in LVM, find its PV and use it as the root device (e.g., to check its encryption etc. later)
+	ROOT_VG=$(lvdisplay -c "/dev/mapper/${ROOT_DEV_FILE}" 2>/dev/null | cut -d : -f 2)
+	ROOT_PV=$(pvdisplay -c 2>/dev/null | sed "s|\\s*\\([^\\s:]*\\):${ROOT_VG}:.*\$|\\1|") #"
+	[[ -n "${ROOT_PV}" ]] && ROOT_DEV_FILE="${ROOT_PV}"
+else
+	OPTS="--no-lvm ${OPTS}"
+fi
+dmsetup status "${ROOT_DEV_FILE}" | grep -q '\scrypt\s' && OPTS="--luks ${OPTS}" || OPTS="--no-luks ${OPTS}"
 
 ## extra modules
 MODULES_EXTRA="serio i8042 atkbd" \
