@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -10,9 +10,8 @@ MYP="${P//-bin/}"
 MYPN="${PN//-bin/}"
 
 DESCRIPTION="A program for sending SMS over the Internet"
-HOMEPAGE="https://code.google.com/p/esmska/"
-#SRC_URI="http://esmska.googlecode.com/files/${MYP}.tar.gz"
-SRC_URI="http://ripper.profitux.cz/esmska/packages/${MYP}.tar.gz"
+HOMEPAGE="https://github.com/kparal/esmska"
+SRC_URI="https://github.com/kparal/${MYPN}/releases/download/v${PV}/${MYP}.tar.gz"
 
 LICENSE="AGPL-3"
 SLOT="0"
