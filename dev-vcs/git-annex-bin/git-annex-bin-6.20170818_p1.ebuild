@@ -4,9 +4,9 @@
 
 EAPI=5
 
-#MY_DEB_POOL="mirror://debian/pool/main"
-MY_DEB_POOL="http://security.debian.org/debian-security/pool/updates/main"
-MY_PV_SUFFIX="+deb9u1"
+MY_DEB_POOL="mirror://debian/pool/main"
+#MY_DEB_POOL="http://security.debian.org/debian-security/pool/updates/main"
+MY_PV_SUFFIX=""
 
 inherit eutils bash-completion-r1 unpacker
 
