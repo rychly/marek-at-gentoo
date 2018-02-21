@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -9,17 +9,18 @@ inherit unpacker
 MYPNMAIN="${PN%%-bin}"
 MYVERMAJ="${PV%%_p*}"
 MYVERMIN="${PV##*_p}" # full version from *.deb:/control.tar.gz:/control
-MYVERBAS=$(echo "${MYVERMAJ}" | cut -d . -f 1-2)
+MYVERBAS="${MYVERMAJ%.*}"
 
 DESCRIPTION="A modeling environment supporting a wide range of UML/BPMN models and diagrams"
 HOMEPAGE="https://www.modeliosoft.com/en/modules/modelio-modeler.html"
-DOWNLOAD_PAGE="http://www.modeliosoft.com/en/download/dl-modelio.html"
-SRC_URI_PREFIX="http://www.modeliosoft.com/en/component/docman/doc_download"
+DOWNLOAD_PAGE="https://www.modeliosoft.com/en/download/download-products.html"
+SRC_URI_PREFIX="https://www.modeliosoft.com/en/downloads/modeliosoft-products"
 SRC_URI="\
-	x86?	( ${SRC_URI_PREFIX}/944-solution-modelio-${MYVERMAJ//./}-debian-32-bit.html -> modelio-modeler-${MYVERMAJ}-i386.deb )
-	amd64?	( ${SRC_URI_PREFIX}/945-solution-modelio-${MYVERMAJ//./}-debian-64-bit.html -> modelio-modeler-${MYVERMAJ}-amd64.deb )"
+	x86?	( ${SRC_URI_PREFIX}/modelio-${MYVERBAS//./-}-x/22-modelio-${MYVERMAJ//./-}-debian-32-bit/file.html -> modelio-${MYVERMAJ}-modeler-i386.deb )
+	amd64?	( ${SRC_URI_PREFIX}/modelio-${MYVERBAS//./-}-x/22-modelio-${MYVERMAJ//./-}-debian-64-bit/file.html -> modelio-${MYVERMAJ}-modeler-amd64.deb )"
+
 LICENSE="modeliosoft"
-SLOT="0"
+SLOT="${MYVERBAS}"
 IUSE="-systemjre"
 RESTRICT="fetch"
 KEYWORDS="x86 amd64"
