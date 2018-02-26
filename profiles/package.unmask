@@ -1,0 +1,13 @@
+# Marek Rychly <marek.rychly@gmail.com> (26 Feb 2018)
+# We neet old net-libs/webkit-gtk SLOTs for gtk2 only
+# dev-util/modelio-modeler-bin with its XUL component which has not
+# been ported to gtk3 yet (TODO check it).
+# Mart Raudsepp <leio@gentoo.org> (23 Feb 2018)
+# Old net-libs/webkit-gtk SLOTs have hundreds of known security issues.
+# Use the security safe net-libs webkit-gtk SLOT=4 instead via
+# libraries and applications ported to gtk3 and webkit2gtk API.
+# Masked for removal in 30 days. Bug #577068.
+# Please keep this package.mask entry until at least 25th May 2018 for
+# extra notification of the security vulnerabilities.
+net-libs/webkit-gtk:2
+net-libs/webkit-gtk:3
