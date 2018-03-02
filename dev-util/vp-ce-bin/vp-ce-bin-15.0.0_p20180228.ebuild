@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -20,16 +20,15 @@ SRC_URI_PREFIX="http://${VP_MIRROR}.visual-paradigm.com/${VP_SRCD}/vpce${VP_MAIN
 SRC_URI_PGKPREFIX="Visual_Paradigm_CE_${VP_MAIN//./_}_${VP_SPREFIX}${VP_PTCH}"
 SRC_URI_HLPFILE="Visual_Paradigm_CE_${VP_MAIN//./_}_${VP_SPREFIX}${VP_PTCH}_Help.jar"
 SRC_URI="\
-	x86?	( ${SRC_URI_PREFIX}/${SRC_URI_PGKPREFIX}_Linux32_InstallFree.tar.gz )
 	amd64?	( ${SRC_URI_PREFIX}/${SRC_URI_PGKPREFIX}_Linux64_InstallFree.tar.gz )
 	help?	( ${SRC_URI_PREFIX//vpce/vp}/Update/lib/vp-help.jar -> ${SRC_URI_HLPFILE} )"
 LICENSE="visual-paradigm-evaluation"
 SLOT="0"
 RESTRICT="mirror"
-KEYWORDS="x86 amd64"
+KEYWORDS="amd64"
 IUSE="+help"
 DEPEND=""
-RDEPEND=">=virtual/jre-1.5"
+RDEPEND=">=virtual/jre-1.8"
 
 S="${WORKDIR}/Visual_Paradigm_CE_${VP_MAIN}"
 INSTALLDIR="/opt/${PN}"
