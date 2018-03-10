@@ -21,9 +21,14 @@ LICENSE="GPL-3 APL-1.0"
 SLOT="0"
 RESTRICT="mirror"
 KEYWORDS="x86 amd64"
+
 # https://www.modelio.org/documentation/installation/12-installation.html
-DEPEND="net-libs/webkit-gtk:2" # for org.eclipse.swt.SWTError: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]
 RDEPEND=">=virtual/jre-1.8"
+
+# org.eclipse.swt.SWTError: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]
+# FIXED: 1.9.2.x XULRunner releases provide require API (not available in later versions of XULRunner)
+RDEPEND="${RDEPEND}
+    net-libs/xulrunner-bin:1.9.2"
 
 S="${WORKDIR}/Modelio ${MYVERBAS}"
 INSTALLDIR="/opt/${PN}"

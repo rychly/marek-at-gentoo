@@ -4,12 +4,11 @@
 
 EAPI=3
 
-inherit unpacker
+inherit versionator unpacker
 
-MYPNMAIN="${PN%%-bin}"
-MYVERMAJ="${PV%%_p*}"
-MYVERMIN="${PV##*_p}" # full version from *.deb:/control.tar.gz:/control
-MYVERBAS="${MYVERMAJ%.*}"
+# full version (ebuild patch version) from *.deb:/control.tar.gz:/control
+MYVERBAS="$(get_version_component_range 1-2)"
+MYVERMAJ="$(get_version_component_range 1-3)"
 
 DESCRIPTION="A modeling environment supporting a wide range of UML/BPMN models and diagrams"
 HOMEPAGE="https://www.modeliosoft.com/en/modules/modelio-modeler.html"
@@ -20,7 +19,7 @@ SRC_URI="\
 	amd64?	( ${SRC_URI_PREFIX}/modelio-${MYVERBAS//./-}-x/22-modelio-${MYVERMAJ//./-}-debian-64-bit/file.html -> modelio-${MYVERMAJ}-modeler-amd64.deb )"
 
 LICENSE="modeliosoft"
-SLOT="${MYVERBAS}"
+SLOT="$(get_version_component_range 1-2)"
 IUSE="-systemjre"
 RESTRICT="fetch"
 KEYWORDS="x86 amd64"
@@ -29,7 +28,9 @@ RDEPEND="systemjre? ( >=virtual/jre-1.8 )"
 # GTK+2 for org.eclipse.swt.SWTError: No more handles [Unknown Mozilla path (MOZILLA_FIVE_HOME not set)]
 # and set env variable SWT_GTK3=0 in ${MODELIO_PATH}/modelio.sh to use GTK+2 instead of GTK+3
 # for org.eclipse.e4.core.di.InjectionException: org.eclipse.swt.SWTError: No more handles [Browser style SWT.MOZILLA and Java system property org.eclipse.swt.browser.DefaultType=mozilla are not supported with GTK 3 as XULRunner is not ported for GTK 3 yet] org.eclipse.swt.SWTError: No more handles [Browser style SWT.MOZILLA and Java system property org.eclipse.swt.browser.DefaultType=mozilla are not supported with GTK 3 as XULRunner is not ported for GTK 3 yet]
-DEPEND="net-libs/webkit-gtk:2"
+# FIXED: 1.9.2.x XULRunner releases provide require API (not available in later versions of XULRunner)
+RDEPEND="${RDEPEND}
+	net-libs/xulrunner-bin:1.9.2"
 
 pkg_nofetch() {
 	einfo
