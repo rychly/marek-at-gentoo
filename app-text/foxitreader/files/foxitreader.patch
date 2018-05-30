@@ -1,0 +1,31 @@
+diff -Naur foxitreader.orig/usr/lib/foxitreader/FoxitReader.desktop foxitreader/usr/lib/foxitreader/FoxitReader.desktop
+--- foxitreader.orig/usr/lib/foxitreader/FoxitReader.desktop	2017-02-28 02:59:33.000000000 +0100
++++ foxitreader/usr/lib/foxitreader/FoxitReader.desktop	2017-04-21 01:46:30.036707144 +0200
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Name=Foxit Reader
+-Comment=View pdf documents
+-Keywords=pdf;octet-stream;
++Comment=View PDF documents
++Keywords=pdf;
+ StartupNotify=true
+ Terminal=false
+ Type=Application
+-Categories=Application;Office;Viewer;X-Red-Hat-Base;
++Categories=Office;Viewer;X-Red-Hat-Base;
+-MimeType=application/pdf;application/octet-stream;
+-Icon=FoxitReader
++MimeType=application/pdf;
++Icon=foxitreader
++Exec=foxitreader %F
+diff -Naur foxitreader.orig/usr/lib/foxitreader/FoxitReader.sh foxitreader/usr/lib/foxitreader/FoxitReader.sh
+--- foxitreader.orig/usr/lib/foxitreader/FoxitReader.sh	2017-02-28 02:58:36.000000000 +0100
++++ foxitreader/usr/lib/foxitreader/FoxitReader.sh	2017-04-21 01:46:01.919583196 +0200
+@@ -1,3 +1,5 @@
+ #!/bin/sh
+- appname="FoxitReader"
+-
++appname="FoxitReader"
++selfpath="$(dirname $(readlink -f "$0"))"
++export LD_LIBRARY_PATH="${selfpath}/lib:${selfpath}/platforms:${selfpath}/printsupport:${selfpath}/rmssdk:${selfpath}/sensors:${selfpath}/imageformats:${selfpath}/platforminputcontexts"
++exec "${selfpath}/${appname}" "$@"

@@ -1,0 +1,29 @@
+# glib2
+lib/libglib-2.0.so.0
+lib/libgobject-2.0.so.0
+lib/libgthread-2.0.so.0
+
+# gcc-libs
+lib/libstdc++.so.6
+
+# libgcrypt
+lib/libgcrypt.so.11
+
+# openssl
+## (/opt/foxitreader/fxplugins/libFRMS.so requires libssl.so.10 and libcrypto.so.10 while installed versions are *.0.9.8 and *.1.0.0)
+##lib/libcrypto.so.10
+##lib/libssl.so.10
+
+## libffi
+## (ABI v5 is not provided by >=virtual/libffi-3 anymore, it provides ABI v6)
+#lib/libffi.so.5
+
+# libxkbcommon
+lib/libxkbcommon.so.0
+lib/libxkbcommon.so.0.0.0
+
+# libxslt
+lib/libxslt.so.1
+lib/libxslt.so.1.1
+lib/libxslt.so.1.1.26
+

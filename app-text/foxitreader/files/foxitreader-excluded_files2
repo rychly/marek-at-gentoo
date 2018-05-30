@@ -1,0 +1,21 @@
+# gstreamer0.10-base
+lib/libgstapp-0.10.so.0
+lib/libgstapp-0.10.so.0.25.0
+lib/libgstbase-0.10.so.0
+lib/libgstinterfaces-0.10.so.0
+lib/libgstinterfaces-0.10.so.0.25.0
+lib/libgstpbutils-0.10.so.0
+lib/libgstpbutils-0.10.so.0.25.0
+lib/libgstvideo-0.10.so.0
+
+# gst-plugins-base-libs
+lib/libgstpbutils-1.0.so.0
+lib/libgstpbutils-1.0.so.0.403.0
+
+# gstreamer0.10
+lib/libgstreamer-0.10.so.0
+lib/libgstreamer-0.10.so.0.30.0
+
+# libsecret
+lib/libsecret-1.so
+lib/libsecret-1.so.0
