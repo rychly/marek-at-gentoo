@@ -1,5 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# adopted from https://data.gpo.zugaina.org/voyageur/app-editors/texworks/texworks-0.6.2.ebuild
 
 EAPI=6
 
@@ -17,11 +18,11 @@ IUSE="lua python"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="app-text/hunspell
-	app-text/poppler[qt4]
-	dev-qt/qtcore:4
-	dev-qt/qtdbus:4
-	dev-qt/qtgui:4
-	dev-qt/designer:4
+	app-text/poppler[qt5]
+	dev-qt/qtcore:5
+	dev-qt/qtdbus:5
+	dev-qt/qtgui:5
+	dev-qt/qtscript:5[scripttools]
 	lua? ( dev-lang/lua:0 )
 	python? ( ${PYTHON_DEPS} ) "
 DEPEND="${RDEPEND}
@@ -39,7 +40,7 @@ src_configure() {
 		-DWITH_PYTHON=$(usex python ON OFF)
 		-DTeXworks_PLUGIN_DIR="/usr/$(get_libdir)/texworks"
 		-DTeXworks_DOCS_DIR="/share/doc/${PF}"
-		-DDESIRED_QT_VERSION=4
+		-DDESIRED_QT_VERSION=5
 		-DQTPDF_VIEWER=ON
 
 	)
